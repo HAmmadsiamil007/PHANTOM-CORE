@@ -85,6 +85,64 @@
     "slideshow": {
       "play_slideshow": "Juego de diapositivas",
       "pause_slideshow": "diapositivas pausa"
+    },
+    "urgency_bar": {
+      "name": "Barra de urgencia",
+      "close": "Cerrar",
+      "settings": {
+        "show_close": "Mostrar bot\u00f3n de cierre",
+        "notification_interval": "Intervalo de notificaci\u00f3n",
+        "max_notifications": "M\u00e1x. notificaciones simult\u00e1neas",
+        "position": {
+          "label": "Posici\u00f3n",
+          "options": {
+            "bottom_left": "Abajo a la izquierda",
+            "bottom_center": "Abajo al centro",
+            "bottom_right": "Abajo a la derecha"
+          }
+        },
+        "header_colors": "Colores",
+        "background_color": "Fondo",
+        "text_color": "Texto",
+        "accent_color": "Acento"
+      },
+      "blocks": {
+        "purchase": {
+          "name": "Compra reciente",
+          "settings": {
+            "text_template": "Texto de notificaci\u00f3n",
+            "text_template_info": "Use {{ name }}, {{ product }}, {{ time }} como marcadores de posici\u00f3n",
+            "names": "Nombres de clientes (separados por comas)",
+            "names_info": "Se elegir\u00e1 un nombre aleatorio de esta lista",
+            "products": "Nombres de productos (separados por comas)",
+            "delay_min": "Retardo m\u00ednimo (segundos)",
+            "delay_max": "Retardo m\u00e1ximo (segundos)"
+          }
+        },
+        "low_stock": {
+          "name": "Alerta de stock bajo",
+          "settings": {
+            "text_template": "Texto de notificaci\u00f3n",
+            "text_template_info": "Use {{ product }} y {{ time }} como marcadores de posici\u00f3n",
+            "products": "Nombres de productos (separados por comas)",
+            "delay_min": "Retardo m\u00ednimo (segundos)",
+            "delay_max": "Retardo m\u00e1ximo (segundos)"
+          }
+        },
+        "viewing": {
+          "name": "Visualizaci\u00f3n en vivo",
+          "settings": {
+            "text_template": "Texto de notificaci\u00f3n",
+            "text_template_info": "Use {{ name }}, {{ product }}, {{ time }} como marcadores de posici\u00f3n",
+            "names": "Nombres de clientes (separados por comas)",
+            "names_info": "Se elegir\u00e1 un nombre aleatorio de esta lista",
+            "products": "Nombres de productos (separados por comas)",
+            "delay_min": "Retardo m\u00ednimo (segundos)",
+            "delay_max": "Retardo m\u00e1ximo (segundos)"
+          }
+        }
+      },
+      "presets": { "name": "Barra de urgencia" }
     }
   },
   "blogs": {

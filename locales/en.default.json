@@ -85,6 +85,64 @@
     "slideshow": {
       "play_slideshow": "Play slideshow",
       "pause_slideshow": "Pause slideshow"
+    },
+    "urgency_bar": {
+      "name": "Urgency Bar",
+      "close": "Close",
+      "settings": {
+        "show_close": "Show close button",
+        "notification_interval": "Notification interval",
+        "max_notifications": "Max notifications at once",
+        "position": {
+          "label": "Position",
+          "options": {
+            "bottom_left": "Bottom left",
+            "bottom_center": "Bottom center",
+            "bottom_right": "Bottom right"
+          }
+        },
+        "header_colors": "Colors",
+        "background_color": "Background",
+        "text_color": "Text",
+        "accent_color": "Accent"
+      },
+      "blocks": {
+        "purchase": {
+          "name": "Recent Purchase",
+          "settings": {
+            "text_template": "Notification text",
+            "text_template_info": "Use {{ name }}, {{ product }}, {{ time }} as placeholders",
+            "names": "Customer names (comma-separated)",
+            "names_info": "Random name will be picked from this list",
+            "products": "Product names (comma-separated)",
+            "delay_min": "Min delay (seconds)",
+            "delay_max": "Max delay (seconds)"
+          }
+        },
+        "low_stock": {
+          "name": "Low Stock Alert",
+          "settings": {
+            "text_template": "Notification text",
+            "text_template_info": "Use {{ product }} and {{ time }} as placeholders",
+            "products": "Product names (comma-separated)",
+            "delay_min": "Min delay (seconds)",
+            "delay_max": "Max delay (seconds)"
+          }
+        },
+        "viewing": {
+          "name": "Live Viewing",
+          "settings": {
+            "text_template": "Notification text",
+            "text_template_info": "Use {{ name }}, {{ product }}, {{ time }} as placeholders",
+            "names": "Customer names (comma-separated)",
+            "names_info": "Random name will be picked from this list",
+            "products": "Product names (comma-separated)",
+            "delay_min": "Min delay (seconds)",
+            "delay_max": "Max delay (seconds)"
+          }
+        }
+      },
+      "presets": { "name": "Urgency Bar" }
     }
   },
   "blogs": {

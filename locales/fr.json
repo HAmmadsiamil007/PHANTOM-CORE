@@ -85,6 +85,64 @@
     "slideshow": {
       "play_slideshow": "Lire le diaporama",
       "pause_slideshow": "Diaporama Pause"
+    },
+    "urgency_bar": {
+      "name": "Barre d'urgence",
+      "close": "Fermer",
+      "settings": {
+        "show_close": "Afficher le bouton de fermeture",
+        "notification_interval": "Intervalle de notification",
+        "max_notifications": "Max. notifications simultan\u00e9es",
+        "position": {
+          "label": "Position",
+          "options": {
+            "bottom_left": "En bas \u00e0 gauche",
+            "bottom_center": "En bas au centre",
+            "bottom_right": "En bas \u00e0 droite"
+          }
+        },
+        "header_colors": "Couleurs",
+        "background_color": "Arri\u00e8re-plan",
+        "text_color": "Texte",
+        "accent_color": "Accent"
+      },
+      "blocks": {
+        "purchase": {
+          "name": "Achat r\u00e9cent",
+          "settings": {
+            "text_template": "Texte de notification",
+            "text_template_info": "Utilisez {{ name }}, {{ product }}, {{ time }} comme espaces r\u00e9serv\u00e9s",
+            "names": "Noms des clients (s\u00e9par\u00e9s par des virgules)",
+            "names_info": "Un nom al\u00e9atoire sera choisi dans cette liste",
+            "products": "Noms des produits (s\u00e9par\u00e9s par des virgules)",
+            "delay_min": "D\u00e9lai min (secondes)",
+            "delay_max": "D\u00e9lai max (secondes)"
+          }
+        },
+        "low_stock": {
+          "name": "Alerte de stock faible",
+          "settings": {
+            "text_template": "Texte de notification",
+            "text_template_info": "Utilisez {{ product }} et {{ time }} comme espaces r\u00e9serv\u00e9s",
+            "products": "Noms des produits (s\u00e9par\u00e9s par des virgules)",
+            "delay_min": "D\u00e9lai min (secondes)",
+            "delay_max": "D\u00e9lai max (secondes)"
+          }
+        },
+        "viewing": {
+          "name": "Visualisation en direct",
+          "settings": {
+            "text_template": "Texte de notification",
+            "text_template_info": "Utilisez {{ name }}, {{ product }}, {{ time }} comme espaces r\u00e9serv\u00e9s",
+            "names": "Noms des clients (s\u00e9par\u00e9s par des virgules)",
+            "names_info": "Un nom al\u00e9atoire sera choisi dans cette liste",
+            "products": "Noms des produits (s\u00e9par\u00e9s par des virgules)",
+            "delay_min": "D\u00e9lai min (secondes)",
+            "delay_max": "D\u00e9lai max (secondes)"
+          }
+        }
+      },
+      "presets": { "name": "Barre d'urgence" }
     }
   },
   "blogs": {

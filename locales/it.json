@@ -85,6 +85,64 @@
     "slideshow": {
       "play_slideshow": "Avvia presentazione",
       "pause_slideshow": "Metti in pausa presentazione"
+    },
+    "urgency_bar": {
+      "name": "Barra di urgenza",
+      "close": "Chiudi",
+      "settings": {
+        "show_close": "Mostra pulsante di chiusura",
+        "notification_interval": "Intervallo notifiche",
+        "max_notifications": "Max notifiche simultanee",
+        "position": {
+          "label": "Posizione",
+          "options": {
+            "bottom_left": "In basso a sinistra",
+            "bottom_center": "In basso al centro",
+            "bottom_right": "In basso a destra"
+          }
+        },
+        "header_colors": "Colori",
+        "background_color": "Sfondo",
+        "text_color": "Testo",
+        "accent_color": "Accento"
+      },
+      "blocks": {
+        "purchase": {
+          "name": "Acquisto recente",
+          "settings": {
+            "text_template": "Testo notifica",
+            "text_template_info": "Usa {{ name }}, {{ product }}, {{ time }} come segnaposto",
+            "names": "Nomi clienti (separati da virgole)",
+            "names_info": "Un nome casuale verr\u00e0 scelto da questo elenco",
+            "products": "Nomi prodotti (separati da virgole)",
+            "delay_min": "Ritardo min (secondi)",
+            "delay_max": "Ritardo max (secondi)"
+          }
+        },
+        "low_stock": {
+          "name": "Avviso scorte basse",
+          "settings": {
+            "text_template": "Testo notifica",
+            "text_template_info": "Usa {{ product }} e {{ time }} come segnaposto",
+            "products": "Nomi prodotti (separati da virgole)",
+            "delay_min": "Ritardo min (secondi)",
+            "delay_max": "Ritardo max (secondi)"
+          }
+        },
+        "viewing": {
+          "name": "Visualizzazione dal vivo",
+          "settings": {
+            "text_template": "Testo notifica",
+            "text_template_info": "Usa {{ name }}, {{ product }}, {{ time }} come segnaposto",
+            "names": "Nomi clienti (separati da virgole)",
+            "names_info": "Un nome casuale verr\u00e0 scelto da questo elenco",
+            "products": "Nomi prodotti (separati da virgole)",
+            "delay_min": "Ritardo min (secondi)",
+            "delay_max": "Ritardo max (secondi)"
+          }
+        }
+      },
+      "presets": { "name": "Barra di urgenza" }
     }
   },
   "blogs": {

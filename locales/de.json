@@ -85,6 +85,64 @@
     "slideshow": {
       "play_slideshow": "Diashow abspielen",
       "pause_slideshow": "Pause Diashow"
+    },
+    "urgency_bar": {
+      "name": "Dringlichkeitsleiste",
+      "close": "Schlie\u00dfen",
+      "settings": {
+        "show_close": "Schlie\u00dfen-Button anzeigen",
+        "notification_interval": "Benachrichtigungsintervall",
+        "max_notifications": "Max. gleichzeitige Benachrichtigungen",
+        "position": {
+          "label": "Position",
+          "options": {
+            "bottom_left": "Unten links",
+            "bottom_center": "Unten Mitte",
+            "bottom_right": "Unten rechts"
+          }
+        },
+        "header_colors": "Farben",
+        "background_color": "Hintergrund",
+        "text_color": "Text",
+        "accent_color": "Akzent"
+      },
+      "blocks": {
+        "purchase": {
+          "name": "Letzter Kauf",
+          "settings": {
+            "text_template": "Benachrichtigungstext",
+            "text_template_info": "Verwenden Sie {{ name }}, {{ product }}, {{ time }} als Platzhalter",
+            "names": "Kundennamen (kommagetrennt)",
+            "names_info": "Ein zuf\u00e4lliger Name wird aus dieser Liste ausgew\u00e4hlt",
+            "products": "Produktnamen (kommagetrennt)",
+            "delay_min": "Min. Verz\u00f6gerung (Sekunden)",
+            "delay_max": "Max. Verz\u00f6gerung (Sekunden)"
+          }
+        },
+        "low_stock": {
+          "name": "Niedriger Lagerbestand",
+          "settings": {
+            "text_template": "Benachrichtigungstext",
+            "text_template_info": "Verwenden Sie {{ product }} und {{ time }} als Platzhalter",
+            "products": "Produktnamen (kommagetrennt)",
+            "delay_min": "Min. Verz\u00f6gerung (Sekunden)",
+            "delay_max": "Max. Verz\u00f6gerung (Sekunden)"
+          }
+        },
+        "viewing": {
+          "name": "Live-Ansicht",
+          "settings": {
+            "text_template": "Benachrichtigungstext",
+            "text_template_info": "Verwenden Sie {{ name }}, {{ product }}, {{ time }} als Platzhalter",
+            "names": "Kundennamen (kommagetrennt)",
+            "names_info": "Ein zuf\u00e4lliger Name wird aus dieser Liste ausgew\u00e4hlt",
+            "products": "Produktnamen (kommagetrennt)",
+            "delay_min": "Min. Verz\u00f6gerung (Sekunden)",
+            "delay_max": "Max. Verz\u00f6gerung (Sekunden)"
+          }
+        }
+      },
+      "presets": { "name": "Dringlichkeitsleiste" }
     }
   },
   "blogs": {
