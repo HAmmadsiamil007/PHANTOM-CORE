@@ -1134,6 +1134,26 @@
         "label": "t:settings_schema.ph_motion.settings.ph_motion_skeletons_enable.label",
         "default": false,
         "info": "t:settings_schema.ph_motion.settings.ph_motion_skeletons_enable.info"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.ph_motion.settings.header_stagger"
+      },
+      {
+        "type": "checkbox",
+        "id": "ph_motion_stagger_enable",
+        "label": "t:settings_schema.ph_motion.settings.ph_motion_stagger_enable.label",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "ph_motion_stagger_amount",
+        "label": "t:settings_schema.ph_motion.settings.ph_motion_stagger_amount.label",
+        "default": 100,
+        "min": 50,
+        "max": 300,
+        "step": 10,
+        "unit": "ms"
       }
     ]
   },

@@ -323,6 +323,8 @@
       window.phMotionSettings = {
         entranceSpeed: {{ settings.ph_motion_entrance_speed | default: 0.7 }},
         entranceDefault: "{{ settings.ph_motion_entrance_default | default: 'ph-fade-up' }}",
+        staggerEnabled: {{ settings.ph_motion_stagger_enable | default: true }},
+        staggerAmount: {{ settings.ph_motion_stagger_amount | default: 100 }},
         viewTransitionsEnabled: {{ settings.ph_motion_viewtransitions_enable | default: false }},
         skeletonsEnabled: {{ settings.ph_motion_skeletons_enable | default: false }}
       };
