@@ -12,6 +12,24 @@
     document.documentElement.style.setProperty('--ph-duration', speed + 's');
   }
 
+  /* ── Stagger: compute and apply delays ── */
+  var staggerEnabled = settings.staggerEnabled;
+  var staggerAmount = settings.staggerAmount || 100;
+
+  var applyStagger = function() {
+    if (!staggerEnabled) return;
+    var containers = document.querySelectorAll('.grid, .grid--uniform, .grid-overflow-wrapper');
+    for (var c = 0; c < containers.length; c++) {
+      var items = containers[c].querySelectorAll('.grid__item[data-aos^="ph-"]');
+      if (items.length < 2) continue;
+      for (var i = 0; i < items.length; i++) {
+        if (items[i].hasAttribute('data-aos-delay')) continue;
+        var delay = Math.min(i * staggerAmount, 600);
+        items[i].setAttribute('data-aos-delay', delay.toString());
+      }
+    }
+  };
+
   var oldClasses = [
     'overflow__animation',
     'hero__animation',
@@ -26,10 +44,11 @@
       var els = document.querySelectorAll(selector);
       for (var j = 0; j < els.length; j++) {
         els[j].setAttribute('data-aos', defaultAnim);
-        if (typeof AOS !== 'undefined' && AOS) {
-          AOS.refreshHard();
-        }
       }
+    }
+    applyStagger();
+    if (typeof AOS !== 'undefined' && AOS) {
+      AOS.refreshHard();
     }
   };
 
