@@ -1,0 +1,33 @@
+{%- case illustration -%}
+  {%- when 'empty-cart' -%}
+    <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 32 88 L 32 52 C 32 38 38 34 50 34 L 70 34 C 82 34 88 38 88 52 L 88 88 C 88 96 84 98 76 98 L 44 98 C 36 98 32 96 32 88 Z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M 46 34 C 46 18 74 18 74 34" stroke="var(--ph-color-border)" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <circle cx="40" cy="100" r="7" stroke="var(--ph-color-border)" stroke-width="2" fill="none"/>
+      <circle cx="80" cy="100" r="7" stroke="var(--ph-color-border)" stroke-width="2" fill="none"/>
+      <line x1="60" y1="55" x2="60" y2="77" stroke="var(--ph-color-icon)" stroke-width="2" stroke-linecap="round"/>
+      <line x1="49" y1="66" x2="71" y2="66" stroke="var(--ph-color-icon)" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  {%- when 'empty-orders' -%}
+    <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <rect x="32" y="28" width="56" height="76" rx="6" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/>
+      <circle cx="60" cy="28" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+      <rect x="54" y="24" width="12" height="8" rx="2" fill="var(--ph-color-icon)"/>
+      <line x1="40" y1="52" x2="80" y2="52" stroke="var(--ph-color-border)" stroke-width="2" stroke-linecap="round"/>
+      <line x1="40" y1="66" x2="72" y2="66" stroke="var(--ph-color-border)" stroke-width="2" stroke-linecap="round"/>
+      <line x1="40" y1="80" x2="62" y2="80" stroke="var(--ph-color-border)" stroke-width="2" stroke-linecap="round"/>
+      <path d="M 66 76 L 72 82 L 80 72" stroke="var(--ph-color-icon)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="32" y1="88" x2="88" y2="88" stroke="var(--ph-color-border)" stroke-width="1" stroke-dasharray="2 2"/>
+    </svg>
+  {%- when 'no-results' -%}
+    <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="48" cy="48" r="28" stroke="currentColor" stroke-width="2" fill="none"/>
+      <line x1="69" y1="69" x2="96" y2="96" stroke="var(--ph-color-border)" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="39" cy="39" r="2.5" fill="var(--ph-color-icon)"/>
+      <circle cx="57" cy="39" r="2.5" fill="var(--ph-color-icon)"/>
+      <circle cx="39" cy="57" r="2.5" fill="var(--ph-color-icon)"/>
+      <circle cx="57" cy="57" r="2.5" fill="var(--ph-color-icon)"/>
+      <path d="M 85 28 C 85 16 100 14 103 22 C 106 30 98 34 96 38 C 94 42 94 44 94 46" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <circle cx="94" cy="54" r="2.5" fill="var(--ph-color-icon)"/>
+    </svg>
+{%- endcase -%}
