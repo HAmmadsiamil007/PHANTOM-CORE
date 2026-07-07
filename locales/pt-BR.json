@@ -81,6 +81,122 @@
     "slideshow": {
       "play_slideshow": "Reproduzir de slides",
       "pause_slideshow": "slideshow pausa"
+    },
+    "urgency_bar": {
+      "name": "Urgency Bar",
+      "close": "Close",
+      "settings": {
+        "show_close": "Show close button",
+        "notification_interval": "Notification interval",
+        "max_notifications": "Max notifications at once",
+        "position": {
+          "label": "Position",
+          "options": {
+            "bottom_left": "Bottom left",
+            "bottom_center": "Bottom center",
+            "bottom_right": "Bottom right"
+          }
+        },
+        "header_colors": "Colors",
+        "background_color": "Background",
+        "text_color": "Text",
+        "accent_color": "Accent"
+      },
+      "blocks": {
+        "purchase": {
+          "name": "Recent Purchase",
+          "settings": {
+            "text_template": "Notification text",
+            "text_template_info": "Use {{ name }}, {{ product }}, {{ time }} as placeholders",
+            "names": "Customer names (comma-separated)",
+            "names_info": "Random name will be picked from this list",
+            "products": "Product names (comma-separated)",
+            "delay_min": "Min delay (seconds)",
+            "delay_max": "Max delay (seconds)"
+          }
+        },
+        "low_stock": {
+          "name": "Low Stock Alert",
+          "settings": {
+            "text_template": "Notification text",
+            "text_template_info": "Use {{ product }} and {{ time }} as placeholders",
+            "products": "Product names (comma-separated)",
+            "delay_min": "Min delay (seconds)",
+            "delay_max": "Max delay (seconds)"
+          }
+        },
+        "viewing": {
+          "name": "Live Viewing",
+          "settings": {
+            "text_template": "Notification text",
+            "text_template_info": "Use {{ name }}, {{ product }}, {{ time }} as placeholders",
+            "names": "Customer names (comma-separated)",
+            "names_info": "Random name will be picked from this list",
+            "products": "Product names (comma-separated)",
+            "delay_min": "Min delay (seconds)",
+            "delay_max": "Max delay (seconds)"
+          }
+        }
+      },
+      "presets": {
+        "name": "Urgency Bar"
+      }
+    },
+    "size_guide": {
+      "name": "Size Guide",
+      "close": "Close",
+      "trigger_label": "Size Guide",
+      "chest": "Chest (cm)",
+      "waist": "Waist (cm)",
+      "hip": "Hip (cm)",
+      "table": {
+        "size": "Size",
+        "chest": "Chest",
+        "waist": "Waist",
+        "hip": "Hip"
+      },
+      "settings": {
+        "heading": "Heading",
+        "intro_text": "Intro text",
+        "header_colors": "Colors",
+        "bg_color": "Background",
+        "text_color": "Text",
+        "accent_color": "Accent"
+      },
+      "blocks": {
+        "size": {
+          "name": "Size Row",
+          "settings": {
+            "label": "Size label",
+            "chest_min": "Chest min",
+            "chest_max": "Chest max",
+            "waist_min": "Waist min",
+            "waist_max": "Waist max",
+            "hip_min": "Hip min",
+            "hip_max": "Hip max",
+            "recommendation": "Recommendation text"
+          }
+        }
+      },
+      "presets": {
+        "name": "Size Guide"
+      }
+    },
+    "common": {
+      "settings": {
+        "entrance_animation": {
+          "label": "Entrance animation",
+          "options": {
+            "existing": { "label": "Existing" },
+            "ph-fade-up": { "label": "Fade up" },
+            "ph-scale-in": { "label": "Scale in" },
+            "ph-blur-in": { "label": "Blur in" },
+            "ph-slide-left": { "label": "Slide left" },
+            "ph-slide-right": { "label": "Slide right" },
+            "ph-rotate-in": { "label": "Rotate in" }
+          }
+        }
+      }
     }
   },
   "blogs": {
@@ -282,12 +398,9 @@
       "log_out": "Sair",
       "log_in": "Entrar",
       "create_account": "Criar conta"
-    },
-    "footer": {
-      "social_platform": "{{ name }} em {{ platform }}"
     }
   },
-  "products": {
+    "products": {
     "general": {
       "color_swatch_trigger": "Cor",
       "size_trigger": "Tamanho",

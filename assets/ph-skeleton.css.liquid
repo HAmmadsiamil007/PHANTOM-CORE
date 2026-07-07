@@ -19,7 +19,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255,255,255,0.4) 50%,
+    var(--ph-shimmer-color, rgba(255,255,255,0.4)) 50%,
     transparent
   );
   transform: translateX(-100%);
@@ -66,6 +66,34 @@
   flex-direction: column;
   gap: 1rem;
   padding: 2rem;
+}
+
+.ph-skeleton--avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.ph-skeleton--button {
+  width: 120px;
+  height: 40px;
+  border-radius: var(--btn-radius, 4px);
+}
+
+.ph-skeleton--table-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.ph-skeleton--table-row .ph-skeleton--text {
+  flex: 1;
+}
+
+.ph-skeleton--table-row .ph-skeleton--text-short {
+  flex: 0 0 60px;
 }
 
 @media (prefers-reduced-motion: reduce) {

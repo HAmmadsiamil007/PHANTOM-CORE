@@ -342,7 +342,8 @@
                     class="quiz-option"
                     data-quiz-option
                     data-product-handles="{{ clean_handles }}"
-                    data-weight="{{ block.settings.option_{{ i }}_weight }}"
+                    {%- capture weight_key -%}option_{{ i }}_weight{%- endcapture -%}
+                    data-weight="{{ block.settings[weight_key] }}"
                     {% if forloop.last and forloop.parentloop.last %}data-last-question{% endif %}>
                     {%- if opt_image != blank -%}
                       <span class="quiz-option__image">
