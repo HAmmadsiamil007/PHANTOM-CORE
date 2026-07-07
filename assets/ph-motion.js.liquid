@@ -2,8 +2,15 @@
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if (document.documentElement.dataset.disableAnimations === 'true') return;
 
-  var defaultAnim = (window.phMotionSettings || {}).entranceDefault || 'ph-fade-up';
+  var settings = window.phMotionSettings || {};
+  var defaultAnim = settings.entranceDefault || 'ph-fade-up';
   if (!defaultAnim) return;
+
+  /* ── Speed: set CSS custom property from settings ── */
+  var speed = settings.entranceSpeed;
+  if (speed && typeof speed === 'number') {
+    document.documentElement.style.setProperty('--ph-duration', speed + 's');
+  }
 
   var oldClasses = [
     'overflow__animation',
