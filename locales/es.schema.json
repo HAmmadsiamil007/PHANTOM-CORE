@@ -2978,93 +2978,93 @@
     "colors": {
       "name": "Colores",
       "settings": {"header_general": "General",
-        "color_body_bg": {
+        "ph_color_body_bg": {
           "label": "Historial"
         },
-        "color_body_text": {
+        "ph_color_body_text": {
           "label": "Texto"
         },
-        "color_price": {
+        "ph_color_price": {
           "label": "Precio"
         },
-        "color_savings_text": {
+        "ph_color_savings_text": {
           "label": "Guardar precio"
         },
-        "color_borders": {
+        "ph_color_borders": {
           "label": "LÃ­neas y bordes"
         },
-        "color_button": {
+        "ph_color_button": {
           "label": "Botones"
         },
-        "color_button_text": {
+        "ph_color_button_text": {
           "label": "Texto del botÃ³n"
         },
-        "color_sale_tag": {
+        "ph_color_sale_tag": {
           "label": "Etiquetas de venta"
         },
-        "color_sale_tag_text": {
+        "ph_color_sale_tag_text": {
           "label": "Texto de la etiqueta de venta"
         },
-        "color_cart_dot": {
+        "ph_color_cart_dot": {
           "label": "Punto de la cesta"
         },
-        "color_small_image_bg": {
+        "ph_color_small_image_bg": {
           "label": "Fondo de la imagen"
         },
-        "color_large_image_bg": {
+        "ph_color_large_image_bg": {
           "label": "Fondo de la secciÃ³n de imÃ¡genes"
         },
         "header_header": "Encabezado",
-        "color_header": {
+        "ph_color_header": {
           "label": "Historial"
         },
-        "color_header_text": {
+        "ph_color_header_text": {
           "label": "Texto"
         },
-        "color_announcement": {
+        "ph_color_announcement": {
           "label": "Barra de anuncios"
         },
-        "color_announcement_text": {
+        "ph_color_announcement_text": {
           "label": "Texto de la barra de anuncio"
         },
         "header_footer": "Pie de pÃ¡gina",
-        "color_footer": {
+        "ph_color_footer": {
           "label": "Historial"
         },
-        "color_footer_text": {
+        "ph_color_footer_text": {
           "label": "Texto"
         },
         "header_menu_and_cart_drawers": "MenÃº y cesta de la compra",
-        "color_drawer_background": {
+        "ph_color_drawer_background": {
           "label": "Historial"
         },
-        "color_drawer_text": {
+        "ph_color_drawer_text": {
           "label": "Texto"
         },
-        "color_drawer_border": {
+        "ph_color_drawer_border": {
           "label": "LÃ­neas y bordes"
         },
-        "color_drawer_button": {
+        "ph_color_drawer_button": {
           "label": "Botones"
         },
-        "color_drawer_button_text": {
+        "ph_color_drawer_button_text": {
           "label": "Texto del botÃ³n"
         },
-        "color_modal_overlays": {
+        "ph_color_modal_overlays": {
           "label": "Superposiciones"
         },
         "header_image_treatment": "Tratamiento de la imagen",
         "content": "Se utiliza en presentaciones de diapositivas, hÃ©roes de vÃ­deo, rejilla de promociÃ³n y cabeceras de colecciones",
-        "color_image_text": {
+        "ph_color_image_text": {
           "label": "Texto"
         },
-        "color_image_overlay": {
+        "ph_color_image_overlay": {
           "label": "SuperposiciÃ³n"
         },
-        "color_image_overlay_opacity": {
+        "ph_color_image_overlay_opacity": {
           "label": "Opacidad de la superposiciÃ³n"
         },
-        "color_image_overlay_text_shadow": {
+        "ph_color_image_overlay_text_shadow": {
           "label": "Cantidad de sombra de texto"
         }
       }

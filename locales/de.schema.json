@@ -2978,93 +2978,93 @@
     "colors": {
       "name": "Farben",
       "settings": {"header_general": "Allgemein",
-        "color_body_bg": {
+        "ph_color_body_bg": {
           "label": "Hintergrund"
         },
-        "color_body_text": {
+        "ph_color_body_text": {
           "label": "Text"
         },
-        "color_price": {
+        "ph_color_price": {
           "label": "Preis"
         },
-        "color_savings_text": {
+        "ph_color_savings_text": {
           "label": "Preis speichern"
         },
-        "color_borders": {
+        "ph_color_borders": {
           "label": "Linien und RÃ¤nder"
         },
-        "color_button": {
+        "ph_color_button": {
           "label": "SchaltflÃ¤chen"
         },
-        "color_button_text": {
+        "ph_color_button_text": {
           "label": "SchaltflÃ¤chentext"
         },
-        "color_sale_tag": {
+        "ph_color_sale_tag": {
           "label": "Sale-Tags"
         },
-        "color_sale_tag_text": {
+        "ph_color_sale_tag_text": {
           "label": "Sale-Tag-Text"
         },
-        "color_cart_dot": {
+        "ph_color_cart_dot": {
           "label": "Warenkorbpunkt"
         },
-        "color_small_image_bg": {
+        "ph_color_small_image_bg": {
           "label": "Bildhintergrund"
         },
-        "color_large_image_bg": {
+        "ph_color_large_image_bg": {
           "label": "Hintergrund des Bildausschnitts"
         },
         "header_header": "Header",
-        "color_header": {
+        "ph_color_header": {
           "label": "Hintergrund"
         },
-        "color_header_text": {
+        "ph_color_header_text": {
           "label": "Text"
         },
-        "color_announcement": {
+        "ph_color_announcement": {
           "label": "AnkÃ¼ndigungsleiste"
         },
-        "color_announcement_text": {
+        "ph_color_announcement_text": {
           "label": "Text der AnkÃ¼ndigungsleiste"
         },
         "header_footer": "FuÃŸzeile",
-        "color_footer": {
+        "ph_color_footer": {
           "label": "Hintergrund"
         },
-        "color_footer_text": {
+        "ph_color_footer_text": {
           "label": "Text"
         },
         "header_menu_and_cart_drawers": "MenÃ¼ und Cart Drawers",
-        "color_drawer_background": {
+        "ph_color_drawer_background": {
           "label": "Hintergrund"
         },
-        "color_drawer_text": {
+        "ph_color_drawer_text": {
           "label": "Text"
         },
-        "color_drawer_border": {
+        "ph_color_drawer_border": {
           "label": "Linien und RÃ¤nder"
         },
-        "color_drawer_button": {
+        "ph_color_drawer_button": {
           "label": "SchaltflÃ¤chen"
         },
-        "color_drawer_button_text": {
+        "ph_color_drawer_button_text": {
           "label": "SchaltflÃ¤chentext"
         },
-        "color_modal_overlays": {
+        "ph_color_modal_overlays": {
           "label": "Overlays"
         },
         "header_image_treatment": "Bildbearbeitung",
         "content": "Verwendet fÃ¼r Slideshows, Video-Heroes, Promo-Raster und Kategorie-Header",
-        "color_image_text": {
+        "ph_color_image_text": {
           "label": "Text"
         },
-        "color_image_overlay": {
+        "ph_color_image_overlay": {
           "label": "Overlay"
         },
-        "color_image_overlay_opacity": {
+        "ph_color_image_overlay_opacity": {
           "label": "Overlay-OpazitÃ¤t"
         },
-        "color_image_overlay_text_shadow": {
+        "ph_color_image_overlay_text_shadow": {
           "label": "Textschattenmenge"
         }
       }

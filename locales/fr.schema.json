@@ -2972,93 +2972,93 @@
     "colors": {
       "name": "Couleurs",
       "settings": {"header_general": "GÃ©nÃ©ral",
-        "color_body_bg": {
+        "ph_color_body_bg": {
           "label": "ArriÃ¨re-plan"
         },
-        "color_body_text": {
+        "ph_color_body_text": {
           "label": "Texte"
         },
-        "color_price": {
+        "ph_color_price": {
           "label": "Prix"
         },
-        "color_savings_text": {
+        "ph_color_savings_text": {
           "label": "Sauvegarde du prix"
         },
-        "color_borders": {
+        "ph_color_borders": {
           "label": "Lignes et bordures"
         },
-        "color_button": {
+        "ph_color_button": {
           "label": "Boutons"
         },
-        "color_button_text": {
+        "ph_color_button_text": {
           "label": "Texte du bouton"
         },
-        "color_sale_tag": {
+        "ph_color_sale_tag": {
           "label": "Balises de vente"
         },
-        "color_sale_tag_text": {
+        "ph_color_sale_tag_text": {
           "label": "Texte de la balise de vente"
         },
-        "color_cart_dot": {
+        "ph_color_cart_dot": {
           "label": "Point de panier"
         },
-        "color_small_image_bg": {
+        "ph_color_small_image_bg": {
           "label": "Fond d'image"
         },
-        "color_large_image_bg": {
+        "ph_color_large_image_bg": {
           "label": "Fond de section d'image"
         },
         "header_header": "En-tÃªte",
-        "color_header": {
+        "ph_color_header": {
           "label": "ArriÃ¨re-plan"
         },
-        "color_header_text": {
+        "ph_color_header_text": {
           "label": "Texte"
         },
-        "color_announcement": {
+        "ph_color_announcement": {
           "label": "Barre d'annonces"
         },
-        "color_announcement_text": {
+        "ph_color_announcement_text": {
           "label": "Texte de la barre d'annonce"
         },
         "header_footer": "Pied de page",
-        "color_footer": {
+        "ph_color_footer": {
           "label": "ArriÃ¨re-plan"
         },
-        "color_footer_text": {
+        "ph_color_footer_text": {
           "label": "Texte"
         },
         "header_menu_and_cart_drawers": "Menu et panier dÃ©roulants",
-        "color_drawer_background": {
+        "ph_color_drawer_background": {
           "label": "ArriÃ¨re-plan"
         },
-        "color_drawer_text": {
+        "ph_color_drawer_text": {
           "label": "Texte"
         },
-        "color_drawer_border": {
+        "ph_color_drawer_border": {
           "label": "Lignes et bordures"
         },
-        "color_drawer_button": {
+        "ph_color_drawer_button": {
           "label": "Boutons"
         },
-        "color_drawer_button_text": {
+        "ph_color_drawer_button_text": {
           "label": "Texte du bouton"
         },
-        "color_modal_overlays": {
+        "ph_color_modal_overlays": {
           "label": "Superpositions"
         },
         "header_image_treatment": "Traitement dâ€™image",
         "content": "UtilisÃ© sur les diaporamas, les hero vidÃ©o, la grille de promotion et les en-tÃªtes de collection.",
-        "color_image_text": {
+        "ph_color_image_text": {
           "label": "Texte"
         },
-        "color_image_overlay": {
+        "ph_color_image_overlay": {
           "label": "Superposition"
         },
-        "color_image_overlay_opacity": {
+        "ph_color_image_overlay_opacity": {
           "label": "OpacitÃ© de la superposition"
         },
-        "color_image_overlay_text_shadow": {
+        "ph_color_image_overlay_text_shadow": {
           "label": "IntensitÃ© de l'ombre du texte"
         }
       }

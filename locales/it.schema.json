@@ -2978,93 +2978,93 @@
     "colors": {
       "name": "Colori",
       "settings": {"header_general": "Generale",
-        "color_body_bg": {
+        "ph_color_body_bg": {
           "label": "Sfondo"
         },
-        "color_body_text": {
+        "ph_color_body_text": {
           "label": "Testo"
         },
-        "color_price": {
+        "ph_color_price": {
           "label": "Prezzo"
         },
-        "color_savings_text": {
+        "ph_color_savings_text": {
           "label": "Salva prezzo"
         },
-        "color_borders": {
+        "ph_color_borders": {
           "label": "Linee e bordi"
         },
-        "color_button": {
+        "ph_color_button": {
           "label": "Pulsanti"
         },
-        "color_button_text": {
+        "ph_color_button_text": {
           "label": "Testo del pulsante"
         },
-        "color_sale_tag": {
+        "ph_color_sale_tag": {
           "label": "Tag di vendita"
         },
-        "color_sale_tag_text": {
+        "ph_color_sale_tag_text": {
           "label": "Testo del cartellino di vendita"
         },
-        "color_cart_dot": {
+        "ph_color_cart_dot": {
           "label": "Punto del carrello"
         },
-        "color_small_image_bg": {
+        "ph_color_small_image_bg": {
           "label": "Sfondo immagine"
         },
-        "color_large_image_bg": {
+        "ph_color_large_image_bg": {
           "label": "Sfondo sezione immagine"
         },
         "header_header": "Header",
-        "color_header": {
+        "ph_color_header": {
           "label": "Sfondo"
         },
-        "color_header_text": {
+        "ph_color_header_text": {
           "label": "Testo"
         },
-        "color_announcement": {
+        "ph_color_announcement": {
           "label": "Barra degli annunci"
         },
-        "color_announcement_text": {
+        "ph_color_announcement_text": {
           "label": "Testo della barra degli annunci"
         },
         "header_footer": "Footer",
-        "color_footer": {
+        "ph_color_footer": {
           "label": "Sfondo"
         },
-        "color_footer_text": {
+        "ph_color_footer_text": {
           "label": "Testo"
         },
         "header_menu_and_cart_drawers": "Menu e cassetti del carrello",
-        "color_drawer_background": {
+        "ph_color_drawer_background": {
           "label": "Sfondo"
         },
-        "color_drawer_text": {
+        "ph_color_drawer_text": {
           "label": "Testo"
         },
-        "color_drawer_border": {
+        "ph_color_drawer_border": {
           "label": "Linee e bordi"
         },
-        "color_drawer_button": {
+        "ph_color_drawer_button": {
           "label": "Pulsanti"
         },
-        "color_drawer_button_text": {
+        "ph_color_drawer_button_text": {
           "label": "Testo del pulsante"
         },
-        "color_modal_overlays": {
+        "ph_color_modal_overlays": {
           "label": "Sovrapposizioni"
         },
         "header_image_treatment": "Trattamento immagine",
         "content": "Usato sulla diapositiva, sugli hero del video, sulla griglia promozionale e sulle intestazioni delle collezioni",
-        "color_image_text": {
+        "ph_color_image_text": {
           "label": "Testo"
         },
-        "color_image_overlay": {
+        "ph_color_image_overlay": {
           "label": "Sovrapposizione"
         },
-        "color_image_overlay_opacity": {
+        "ph_color_image_overlay_opacity": {
           "label": "OpacitÃ  della sovrapposizione"
         },
-        "color_image_overlay_text_shadow": {
+        "ph_color_image_overlay_text_shadow": {
           "label": "QuantitÃ  di ombra del testo"
         }
       }
