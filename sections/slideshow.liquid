@@ -1,7 +1,8 @@
 <div
   data-section-id="{{ section.id }}"
   data-section-type="slideshow-section"
-  {% if section.settings.parallax %}data-parallax="true"{% endif %}>
+  {% if section.settings.parallax %}data-parallax="true"{% endif %}
+  data-aos="{% if section.settings.entrance_animation and section.settings.entrance_animation != 'existing' %}{{ section.settings.entrance_animation }}{% else %}hero__animation{% endif %}">
 
   {%- if section.blocks.size > 0 -%}
     <div class="slideshow-wrapper">
@@ -291,6 +292,21 @@
   "class": "index-section--hero",
   "max_blocks": 5,
   "settings": [
+    {
+      "type": "select",
+      "id": "entrance_animation",
+      "label": "t:sections.common.settings.entrance_animation.label",
+      "default": "ph-fade-up",
+      "options": [
+        { "value": "existing", "label": "t:sections.common.settings.entrance_animation.options.existing.label" },
+        { "value": "ph-fade-up", "label": "ph-fade-up" },
+        { "value": "ph-scale-in", "label": "ph-scale-in" },
+        { "value": "ph-blur-in", "label": "ph-blur-in" },
+        { "value": "ph-slide-left", "label": "ph-slide-left" },
+        { "value": "ph-slide-right", "label": "ph-slide-right" },
+        { "value": "ph-rotate-in", "label": "ph-rotate-in" }
+      ]
+    },
     {
       "type": "select",
       "id": "section_height",
