@@ -138,8 +138,8 @@
       {%- endstyle -%}
 
       {%- liquid
-        assign blockWidth = block.settings.width | times: 1
-        if forloop.index == 1 and blockWidth >= 50
+        assign block_width = block.settings.width | times: 1
+        if forloop.index == 1 and block_width >= 50
           assign loading = section.settings.lazyload_images
         else
           assign loading = true
@@ -251,10 +251,10 @@
 
                     {%- liquid
                       if block.settings.width == '50'
-                        assign sizeVariable = '25vw'
+                        assign size_variable = '25vw'
                         assign fallback = '25vw'
                       else
-                        assign sizeVariable = '50vw'
+                        assign size_variable = '50vw'
                         assign fallback = '25vw'
                       endif
                     -%}
@@ -266,7 +266,7 @@
                             img: collection_image_1,
                             loading: loading,
                             widths: '360, 540, 720, 900, 1080, 1600',
-                            sizeVariable: sizeVariable,
+                            sizeVariable: size_variable,
                             fallback: fallback,
                           -%}
                         </div>
@@ -280,7 +280,7 @@
                             img: collection_image_2,
                             loading: loading,
                             widths: '360, 540, 720, 900, 1080, 1600',
-                            sizeVariable: sizeVariable,
+                            sizeVariable: size_variable,
                             fallback: fallback,
                           -%}
                         </div>
@@ -464,17 +464,17 @@
                               <a href="{{ product.url }}">
                                 {%- liquid
                                   if forloop.index == 1
-                                    assign sizeVariable = 'calc(0.75 * 50vw)'
+                                    assign size_variable = 'calc(0.75 * 50vw)'
                                     assign fallback = '75vw'
                                   else
-                                    assign sizeVariable = 'calc(0.30 * 50vw)'
+                                    assign size_variable = 'calc(0.30 * 50vw)'
                                     assign fallback = '30vw'
                                   endif
                                 -%}
                                 {%- render 'image-element',
                                   img: image,
                                   loading: loading,
-                                  sizeVariable: sizeVariable,
+                                  sizeVariable: size_variable,
                                   fallback: fallback,
                                   widths: '360, 540, 720, 900, 1080, 1600',
                                 -%}

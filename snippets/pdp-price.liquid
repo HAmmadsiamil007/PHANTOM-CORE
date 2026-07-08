@@ -17,9 +17,9 @@
 {% enddoc %}
 
 {%- liquid
-  assign superscript_decimals = superscript_decimals | default: block.settings.superscript_decimals, allow_false: true | default: settings.superscript_decimals, allow_false: true | default: true, allow_false: true
-  assign product_save_amount = product_save_amount | default: block.settings.product_save_amount, allow_false: true | default: true, allow_false: true
-  assign product_save_type = product_save_type | default: block.settings.product_save_type | default: 'dollar'
+  assign superscript_decimals = superscript_decimals | default: settings.superscript_decimals, allow_false: true | default: true, allow_false: true
+  assign product_save_amount = product_save_amount | default: true, allow_false: true
+  assign product_save_type = product_save_type | default: 'dollar'
 -%}
 
 {% capture product_price_content %}

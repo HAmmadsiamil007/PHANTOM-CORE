@@ -15,7 +15,7 @@
   {%  liquid
     assign current_variant = current_variant | default: product.selected_or_first_available_variant
     assign inventory_threshold = inventory_threshold | default: 10
-    
+    assign inventory_transfers_enable = inventory_transfers_enable | default: false
     
     assign show_low_inventory_message = false
     
@@ -43,7 +43,7 @@
 
     assign show_incoming_inventory_message = false
 
-    if block.settings.inventory_transfers_enable and current_variant.incoming and show_low_inventory_message == false and current_variant.available == false and oos_and_continue_selling
+    if inventory_transfers_enable and current_variant.incoming and show_low_inventory_message == false and current_variant.available == false and oos_and_continue_selling
       assign show_incoming_inventory_message = true
     endif
   %}
@@ -52,7 +52,7 @@
     {%- if show_low_inventory_message -%}
       {% assign info_low_stock_count = 'info.low_stock_count' | t: count: current_variant.inventory_quantity %}
       {% capture fallback_info_low_stock_count %}
-        Low stock - {{ current_variant.inventory_quantity }} item{% if coucurrent_variant.inventory_quantity != 1 %}s{% endif %} left
+        Low stock - {{ current_variant.inventory_quantity }} item{% if current_variant.inventory_quantity != 1 %}s{% endif %} left
       {% endcapture %}
       {% render 'theme-translate', t: info_low_stock_count, fallback: fallback_info_low_stock_count %}
     {%- endif -%}

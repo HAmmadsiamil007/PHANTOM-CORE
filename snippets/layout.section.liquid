@@ -28,9 +28,9 @@
   assign slot = slot | default: ''
   assign style = style | default: ''
   assign classlist = classlist | default: ''
-  assign color_scheme = color_scheme | default: section.settings.ph_color_scheme | default: 'none'
-  assign full_width = full_width | default: section.settings.full_width, allow_false: true | default: false, allow_false: true
-  assign padding = padding | default: section.settings.padding | default: 'both'
+  assign color_scheme = color_scheme | default: 'none'
+  assign full_width = full_width | default: false, allow_false: true
+  assign padding = padding | default: 'both'
 
   if padding == 'top'
     assign classlist = classlist | append: ' layout-section--padding-top' | strip

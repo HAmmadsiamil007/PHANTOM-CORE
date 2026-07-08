@@ -6,8 +6,8 @@
   @param {string} [loading] - image loading state
   @param {boolean} [preload] - preload image
   @param {string} [sizes] - image sizes (default: '100vw')
-  @param {string} [sizeVariable] - image size variable used in image size calculations
   @param {string} [fallback] - fallback used in image size calculations when first condition is not met
+  @param {string} [size_variable] - size variable for generating image sizes attribute
   @param {string} [animation] - image animation style (default: 'fadein')
   @param {string} [type] - image type, can be blank, photoswipe, or asset
   @param {string} [widths] - image widths
@@ -62,14 +62,14 @@
 
   # Image sizes https: //developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/sizes
   # Can explicitly pass in sizes. For example: sizes: '200px' or '(min-width: 769px) 400px, 30vw'
-  # Can pass in only a sizeVariable
+  # Can pass in only a size_variable
   # This can represent a setting like products per row which means each grid item has a width that can vary
   # Can pass in an explicit value
   # Can also pass in an optional fallback size which is only used when the first condition passed to sizes is not true.
-  # If sizes and sizeVariable is blank we output a default value for sizes which is 100vw
-  if sizes == blank and sizeVariable != blank
+  # If sizes and size_variable is blank we output a default value for sizes which is 100vw
+  if sizes == blank and size_variable != blank
     capture sizes
-      render 'ui-image-sizes', sizeVariable: sizeVariable, fallback: fallback
+      render 'ui-image-sizes', size_variable: size_variable, fallback: fallback
     endcapture
   endif
 
@@ -161,13 +161,13 @@
 
   {% comment %} Photoswipe images {% endcomment %}
   {% if type == 'photoswipe' %}
-    {% assign widthsArray = widths | split: ',' %}
+    {% assign widths_array = widths | split: ',' %}
     {% capture img_widths %}
-      {% for width in widthsArray %}
+      {% for width in widths_array %}
        {{ media | image_url: width: width }} {{ width | append: 'w' }},
       {% endfor %}
     {% endcapture %}
-    {% assign img_width = widthsArray | last | strip %}
+    {% assign img_width = widths_array | last | strip %}
     {% assign img_height = img_width | divided_by: img.aspect_ratio %}
     {% assign photoswipe_src = img | image_url: width: product_zoom_size, format: format %}
 

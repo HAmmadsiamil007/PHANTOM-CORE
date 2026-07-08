@@ -29,7 +29,7 @@
       assign product_image_size = '740x'
   endcase
 
-  assign product_img_structure = product.featured_media | img_url: '1x1' | replace: '_1x1.', '_{width}x.'
+  assign product_img_structure = product.featured_media | image_url: '1x1' | replace: '_1x1.', '_{width}x.'
 -%}
 
 {%- liquid
@@ -66,10 +66,10 @@
   data-product-url="{{ product.url | within: collection }}"
   data-aspect-ratio="{{ 100 | divided_by: product.featured_media.aspect_ratio }}"
   data-img-url="{{ product_img_structure }}"
-  {% unless isModal %}
+  {% unless is_modal %}
     data-history="true"
   {% endunless %}
-  data-modal="{{ isModal }}">
+  data-modal="{{ is_modal }}">
 
   {%- render 'product-template-variables', product: product, current_variant: current_variant -%}
 
@@ -82,7 +82,7 @@
             {%- render 'product-images',
               section_id: section_id,
               product: product,
-              isModal: isModal,
+              is_modal: is_modal,
               image_position: image_position,
               product_zoom_enable: product_zoom_enable,
               product_zoom_size: product_zoom_size,
@@ -105,7 +105,7 @@
 
           <div class="product-single__meta">
             <div class="product-block product-block--header">
-              {%- if settings.show_breadcrumbs and isModal != true -%}
+              {%- if settings.show_breadcrumbs and is_modal != true -%}
                 {%- render 'breadcrumbs' -%}
               {%- endif -%}
 
@@ -122,7 +122,7 @@
                 </div>
               {%- endif -%}
 
-              {%- if isModal -%}
+              {%- if is_modal -%}
                 <p class="h2 product-single__title">
                   {{ product.title }}
                 </p>
@@ -428,7 +428,7 @@
             {%- render 'product-images',
               section_id: section_id,
               product: product,
-              isModal: isModal,
+              is_modal: is_modal,
               image_position: image_position,
               product_zoom_enable: product_zoom_enable,
               product_zoom_size: product_zoom_size,

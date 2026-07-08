@@ -2,7 +2,7 @@
   assign per_row = section.settings.grid
   assign paginate_by = per_row | times: 7
 
-  capture gridView
+  capture grid_view
     assign per_row = per_row | times: 1
     if section.settings.display_type == 'selected' and section.blocks.size < per_row
       assign products_per_row = section.blocks.size
@@ -39,8 +39,8 @@
         {%- for collection in collections -%}
           {%- render 'collection-grid-item',
               collection: collection,
-              gridView: gridView,
-              sizeVariable: gridView,
+              grid_view: grid_view,
+              sizeVariable: grid_view,
               fallback: 'variable',
           -%}
         {%- endfor -%}
@@ -48,8 +48,8 @@
         {%- for collection in collections reversed -%}
           {%- render 'collection-grid-item',
               collection: collection,
-              gridView: gridView,
-              sizeVariable: gridView,
+              grid_view: grid_view,
+              sizeVariable: grid_view,
               fallback: 'variable',
           -%}
         {%- endfor -%}
@@ -59,9 +59,9 @@
         {%- assign collection = collections[block.settings.collection] -%}
         {%- render 'collection-grid-item',
           collection: collection,
-          gridView: gridView,
+          grid_view: grid_view,
           block: block,
-          sizeVariable: gridView,
+          sizeVariable: grid_view,
           fallback: 'variable',
         -%}
       {%- endfor -%}

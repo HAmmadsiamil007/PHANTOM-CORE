@@ -18,9 +18,9 @@
 {% enddoc %}
 
 {% liquid
-  assign image_aspect_ratio = image_aspect_ratio | default: block.settings.image_aspect_ratio | default: '1/1'
-  assign autoplay = autoplay | default: block.settings.enable_video_autoplay, allow_false: true | default: false, allow_false: true
-  assign loop = loop | default: block.settings.enable_video_looping, allow_false: true | default: false, allow_false: true
+  assign image_aspect_ratio = image_aspect_ratio | default: '1/1'
+  assign autoplay = autoplay | default: false, allow_false: true
+  assign loop = loop | default: false, allow_false: true
 
   if image_aspect_ratio == '1/1'
     assign video_aspect_ratio = 'square'

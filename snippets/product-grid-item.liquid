@@ -11,12 +11,12 @@ Arguments
     assign per_row = 4
   endunless
 
-  capture gridView
+  capture grid_view
     render 'products_per_row', products_per_row: per_row, style: 'fractions'
   endcapture
 
   # These assignments have no effect if a sizes parameter is passed in
-  assign sizeVariable = gridView
+  assign size_variable = grid_view
   if fallback != blank
     assign fallback = fallback
   else
@@ -46,7 +46,7 @@ Arguments
   endif
 -%}
 
-<div class="grid__item grid-product {{ gridView }} {% if quick_shop_enable %} grid-product__has-quick-shop{% endif %}" data-aos="row-of-{{ per_row }}" data-product-handle="{{ product.handle }}" data-product-id="{{ product.id }}">
+<div class="grid__item grid-product {{ grid_view }} {% if quick_shop_enable %} grid-product__has-quick-shop{% endif %}" data-aos="row-of-{{ per_row }}" data-product-handle="{{ product.handle }}" data-product-id="{{ product.id }}">
   <div class="grid-product__content">
     {%- if has_custom_label -%}
       <div class="grid-product__tag grid-product__tag--custom">
@@ -66,15 +66,15 @@ Arguments
     {%- endif -%}
 
     {%- liquid
-      assign imageRatio = settings.product_grid_image_size
+      assign image_ratio = settings.product_grid_image_size
       assign fixed_aspect_ratio = false
-      unless imageRatio == 'natural'
+      unless image_ratio == 'natural'
         assign fixed_aspect_ratio = true
       endunless
 
       if image_style == 'circle'
         assign fixed_aspect_ratio = true
-        assign imageRatio = 'square'
+        assign image_ratio = 'square'
       endif
 
       assign preview_image = product.featured_media.preview_image
@@ -93,7 +93,7 @@ Arguments
                 img: preview_image,
                 classes: image_classes,
                 sizes: sizes,
-                sizeVariable: sizeVariable,
+                sizeVariable: size_variable,
                 fallback: fallback,
                 widths: '360, 540, 720, 900, 1080',
               -%}
@@ -116,7 +116,7 @@ Arguments
                 img: preview_image,
                 classes: image_classes,
                 sizes: sizes,
-                sizeVariable: sizeVariable,
+                sizeVariable: size_variable,
                 fallback: fallback,
                 widths: '360, 540, 720, 900, 1080',
               -%}
@@ -139,7 +139,7 @@ Arguments
               img: second_image,
               classes: image_classes,
               sizes: sizes,
-              sizeVariable: sizeVariable,
+              sizeVariable: size_variable,
               fallback: fallback,
               widths: '360, 540, 720, 1000',
             -%}
@@ -271,7 +271,7 @@ Arguments
                         class="color-swatch color-swatch--small color-swatch--{{ value | handle }}{% if variant.image %} color-swatch--with-image{% endif %}"
                         {% if variant.image %}
                           data-variant-id="{{ variant.id }}"
-                          data-variant-image="{{ variant.image | img_url: '400x' }}"
+                          data-variant-image="{{ variant.image | image_url: '400x' }}"
                         {% endif %}
                         aria-label="{{ product.title }} - {{ value }}"
                         style="background-color: {{ color_swatch_fallback }};{% if images[color_file_name] != blank %}  background-image: url({{ color_image }});{% endif %}">
@@ -332,7 +332,7 @@ Arguments
                 class="color-swatch color-swatch--small color-swatch--{{ value | handle }}{% if variant.image %} color-swatch--with-image{% endif %}"
                 {% if variant.image %}
                   data-variant-id="{{ variant.id }}"
-                  data-variant-image="{{ variant.image | img_url: '400x' }}"
+                  data-variant-image="{{ variant.image | image_url: '400x' }}"
                 {% endif %}
                 aria-label="{{ product.title }} - {{ value }}"
                 style="background-color: {{ color_swatch_fallback }};{% if images[color_file_name] != blank %}  background-image: url({{ color_image }});{% endif %}">

@@ -10,6 +10,7 @@
   @param {object} product - A product object
   @param {string} [slot_gallery] - The slot for the gallery
   @param {string} [slot_details] - The slot for the details
+  @param {object} [section] - The section object for settings and ID
   @param {string} [color_scheme] - The color scheme to apply to the section
   @param {string} [padding] ('top', 'bottom', 'both', 'none') - The padding to apply to the section
 
@@ -31,10 +32,10 @@
     {% render 'pdp-price', product: product %}
     {% render 'pdp-installments', product: product %}
     {% render 'pdp-divider' %}
-    {% render 'pdp-variant-picker', product: product %}
+    {% render 'pdp-variant-picker', product: product, section: section %}
     {% render 'pdp-quantity-picker', product: product %}
-    {% render 'pdp-gift-recipient', product: product %}
-    {% render 'pdp-buy-buttons', product: product %}
+    {% render 'pdp-gift-recipient', product: product, section: section %}
+    {% render 'pdp-buy-buttons', product: product, section: section %}
     {% render 'pdp-policies', product: product %}
     {% render 'pdp-pick-up', product: product %}
     {% render 'pdp-description', product: product %}
@@ -74,7 +75,7 @@
 {% endcapture %}
 
 {% capture section_layout %}
-  {% render 'layout.section', slot: grid_layout %}
+  {% render 'layout.section', slot: grid_layout, section: section %}
 {% endcapture %}
 
 {% render 'variant-swap', section: section, product: product, slot: section_layout %}

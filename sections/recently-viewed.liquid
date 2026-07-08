@@ -1,13 +1,13 @@
 {%- liquid
   assign row_of = section.settings.recent_count
 
-  capture gridView
+  capture grid_view
     render 'products_per_row', products_per_row: row_of, style: 'fractions'
   endcapture
 
   # On smaller screen sizes, 39vw is used for grid items in the CSS
   capture sizes
-    render 'sizes-explicit', sizeVariable: gridView, fallback: '39vw'
+    render 'sizes-explicit', size_variable: grid_view, fallback: '39vw'
   endcapture
 -%}
 
@@ -17,7 +17,7 @@
   data-section-type="recently-viewed"
   data-product-handle="{{ product.handle }}"
   data-recent-count="{{ section.settings.recent_count }}"
-  data-grid-item-class="{{ gridView }}"
+  data-grid-item-class="{{ grid_view }}"
   data-row-of="{{ row_of }}"
   data-image-sizes="{{ sizes }}"
 >
@@ -34,7 +34,7 @@
         <div id="RecentlyViewed-{{ section.id }}" class="grid grid--uniform" data-aos="{% if section.settings.entrance_animation and section.settings.entrance_animation != 'existing' %}{{ section.settings.entrance_animation }}{% else %}overflow__animation{% endif %}">
           {%- if settings.ph_motion_skeletons_enable -%}
             {%- for i in (1..section.settings.recent_count) -%}
-              <div class="grid__item {{ gridView }}">
+              <div class="grid__item {{ grid_view }}">
                 {%- render 'ph-skeleton-product' -%}
               </div>
             {%- endfor -%}

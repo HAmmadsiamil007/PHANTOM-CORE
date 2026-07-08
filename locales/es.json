@@ -1,568 +1,576 @@
 {
-    "general":  {
-                    "accessibility":  {
-                                          "skip_to_content":  "Ir directamente al contenido",
-                                          "close_modal":  "Cerrar (esc)",
-                                          "close":  "Cerrar",
-                                          "learn_more":  "Aprende mÃƒÂ¡s"
-                                      },
-                    "meta":  {
-                                 "tags":  "Etiquetado \"{{ tags }}\"",
-                                 "page":  "PÃƒÂ¡gina {{ page }}"
-                             },
-                    "404":  {
-                                "title":  "404 PÃƒÂ¡gina no encontrada",
-                                "subtext_html":  "La pÃƒÂ¡gina que ha solicitado no existe. Haga clic \u003ca href=\u0027{{ url }}\u0027\u003eaquÃƒÂ­\u003c/a\u003e para continuar la compra."
-                            },
-                    "pagination":  {
-                                       "previous":  "Anterior",
-                                       "next":  "Siguiente"
-                                   },
-                    "password_page":  {
-                                          "login_form_heading":  "Entrar a la tienda usando contraseÃƒÂ±a:",
-                                          "login_form_password_label":  "ContraseÃƒÂ±a",
-                                          "login_form_password_placeholder":  "Tu contraseÃƒÂ±a",
-                                          "login_form_submit":  "Ingresar",
-                                          "signup_form_email_label":  "Correo ElectrÃƒÂ³nico",
-                                          "signup_form_success":  "Ã‚Â¡Te enviaremos un correo electrÃƒÂ³nico antes de inaugurar!",
-                                          "admin_link_html":  "Ã‚Â¿Eres el dueÃƒÂ±o de la tienda? \u003ca href=\"/admin\" class=\"text-link\"\u003eRegÃƒÂ­strate aquÃƒÂ­\u003c/a\u003e",
-                                          "password_link":  "ContraseÃƒÂ±a",
-                                          "powered_by_shopify_html":  "Esta tienda estarÃƒÂ¡ impulsada por {{ shopify }}"
-                                      },
-                    "breadcrumbs":  {
-                                        "home":  "Inicio",
-                                        "home_link_title":  "Volver a la portada"
-                                    },
-                    "social":  {
-                                   "share_on_facebook":  "Compartir",
-                                   "share_on_x":  "Compartir",
-                                   "share_on_pinterest":  "Hacer pin",
-                                   "alt_text":  {
-                                                    "share_on_facebook":  "Compartir en Facebook",
-                                                    "share_on_x":  "Tuitear en X",
-                                                    "share_on_pinterest":  "Pinear en Pinterest"
-                                                }
-                               },
-                    "newsletter_form":  {
-                                            "newsletter_email":  "SuscrÃƒÂ­bete a nuestra lista de correo",
-                                            "newsletter_confirmation":  "Gracias por suscribirse",
-                                            "submit":  "Suscribir"
-                                        },
-                    "search":  {
-                                   "view_more":  "Mostrar todos los resultados para \"{{ terms }}\"",
-                                   "products":  "Productos",
-                                   "suggestions":  "Sugerencias",
-                                   "collections":  "Colecciones",
-                                   "pages":  "PÃƒÂ¡ginas",
-                                   "articles":  "ArtÃƒÂ­culos",
-                                   "no_results_html":  "BÃƒÂºsqueda de \"{{ terms }}\"",
-                                   "results_for_html":  "Su bÃƒÂºsqueda de \"{{ terms }}\" muestra lo siguiente:",
-                                   "title":  "Buscar",
-                                   "placeholder":  "Buscar",
-                                   "submit":  "Buscar",
-                                   "cancel":  "Cancelar",
-                                   "search_title":  "MÃƒÂ¡s buscadas",
-                                   "result_count":  {
-                                                        "one":  "{{ count }} resultado",
-                                                        "other":  "{{ count }} resultados"
-                                                    }
-                               },
-                    "drawers":  {
-                                    "navigation":  "NavegaciÃƒÂ³n",
-                                    "close_menu":  "Cerrar menÃƒÂº",
-                                    "expand_submenu":  "Expandir menÃƒÂº",
-                                    "collapse_submenu":  "Colapsar menÃƒÂº"
-                                }
-                },
-    "sections":  {
-                     "map":  {
-                                 "get_directions":  "Obtener las direcciones",
-                                 "address_error":  "No se puede encontrar esa direcciÃƒÂ³n",
-                                 "address_no_results":  "No results for that address",
-                                 "address_query_limit_html":  "Se ha excedido el lÃƒÂ­mite de uso de la API de Google . Considere la posibilidad de actualizar a un \u003ca href=\"https://developers.google.com/maps/premium/usage-limits\"\u003ePlan Premium\u003c/a\u003e.",
-                                 "auth_error_html":  "Hubo un problema de autenticaciÃƒÂ³n con su cuenta de Google Maps. Crear y habilitar la \u003ca href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\"\u003eAPI de JavaScript\u003c/a\u003e y \u003ca href=\"https://developers.google.com/maps/documentation/geocoding/get-api-key\"\u003eAPI de geocodificaciÃƒÂ³n\u003c/a\u003e permiso para su aplicaciÃƒÂ³n."
-                             },
-                     "slideshow":  {
-                                       "play_slideshow":  "Juego de diapositivas",
-                                       "pause_slideshow":  "diapositivas pausa"
-                                   },
-                     "urgency_bar":  {
-                                         "name":  "Barra de urgencia",
-                                         "close":  "Cerrar",
-                                         "settings":  {
-                                                          "show_close":  "Mostrar botón de cierre",
-                                                          "notification_interval":  "Intervalo de notificación",
-                                                          "max_notifications":  "Máx. notificaciones simultáneas",
-                                                          "position":  {
-                                                                           "label":  "Posición",
-                                                                           "options":  {
-                                                                                           "bottom_left":  "Abajo a la izquierda",
-                                                                                           "bottom_center":  "Abajo al centro",
-                                                                                           "bottom_right":  "Abajo a la derecha"
-                                                                                       }
-                                                                       },
-                                                          "header_colors":  "Colores",
-                                                          "background_color":  "Fondo",
-                                                          "text_color":  "Texto",
-                                                          "accent_color":  "Acento"
-                                                      },
-                                         "blocks":  {
-                                                        "purchase":  {
-                                                                         "name":  "Compra reciente",
-                                                                         "settings":  {
-                                                                                          "text_template":  "Texto de notificación",
-                                                                                          "text_template_info":  "Use {{ name }}, {{ product }}, {{ time }} como marcadores de posición",
-                                                                                          "names":  "Nombres de clientes (separados por comas)",
-                                                                                          "names_info":  "Se elegirá un nombre aleatorio de esta lista",
-                                                                                          "products":  "Nombres de productos (separados por comas)",
-                                                                                          "delay_min":  "Retardo mínimo (segundos)",
-                                                                                          "delay_max":  "Retardo máximo (segundos)"
-                                                                                      }
-                                                                     },
-                                                        "low_stock":  {
-                                                                          "name":  "Alerta de stock bajo",
-                                                                          "settings":  {
-                                                                                           "text_template":  "Texto de notificación",
-                                                                                           "text_template_info":  "Use {{ product }} y {{ time }} como marcadores de posición",
-                                                                                           "products":  "Nombres de productos (separados por comas)",
-                                                                                           "delay_min":  "Retardo mínimo (segundos)",
-                                                                                           "delay_max":  "Retardo máximo (segundos)"
-                                                                                       }
-                                                                      },
-                                                        "viewing":  {
-                                                                        "name":  "Visualización en vivo",
-                                                                        "settings":  {
-                                                                                         "text_template":  "Texto de notificación",
-                                                                                         "text_template_info":  "Use {{ name }}, {{ product }}, {{ time }} como marcadores de posición",
-                                                                                         "names":  "Nombres de clientes (separados por comas)",
-                                                                                         "names_info":  "Se elegirá un nombre aleatorio de esta lista",
-                                                                                         "products":  "Nombres de productos (separados por comas)",
-                                                                                         "delay_min":  "Retardo mínimo (segundos)",
-                                                                                         "delay_max":  "Retardo máximo (segundos)"
-                                                                                     }
-                                                                    }
-                                                    },
-                                         "presets":  {
-                                                         "name":  "Barra de urgencia"
-                                                     }
-                                     },
-                     "size_guide":  {
-                                        "name":  "Guía de tallas",
-                                        "close":  "Cerrar",
-                                        "trigger_label":  "Guía de tallas",
-                                        "chest":  "Pecho (cm)",
-                                        "waist":  "Cintura (cm)",
-                                        "hip":  "Cadera (cm)",
-                                        "table":  {
-                                                      "size":  "Talla",
-                                                      "chest":  "Pecho",
-                                                      "waist":  "Cintura",
-                                                      "hip":  "Cadera"
-                                                  },
-                                        "settings":  {
-                                                         "heading":  "Título",
-                                                         "intro_text":  "Texto de introducción",
-                                                         "header_colors":  "Colores",
-                                                         "bg_color":  "Fondo",
-                                                         "text_color":  "Texto",
-                                                         "accent_color":  "Acento"
-                                                     },
-                                        "blocks":  {
-                                                       "size":  {
-                                                                    "name":  "Fila de talla",
-                                                                    "settings":  {
-                                                                                     "label":  "Etiqueta de talla",
-                                                                                     "chest_min":  "Pecho mín",
-                                                                                     "chest_max":  "Pecho máx",
-                                                                                     "waist_min":  "Cintura mín",
-                                                                                     "waist_max":  "Cintura máx",
-                                                                                     "hip_min":  "Cadera mín",
-                                                                                     "hip_max":  "Cadera máx",
-                                                                                     "recommendation":  "Texto de recomendación"
-                                                                                 }
-                                                                }
-                                                   },
-                                        "presets":  {
-                                                        "name":  "Guía de tallas"
-                                                    }
-                                    },
-                     "common":  {
-                                    "settings":  {
-                                                     "entrance_animation":  {
-                                                                                "label":  "Entrance animation",
-                                                                                "options":  {
-                                                                                                "existing":  {
-                                                                                                                 "label":  "Existing"
-                                                                                                             },
-                                                                                                "ph-fade-up":  {
-                                                                                                                   "label":  "Fade up"
-                                                                                                               },
-                                                                                                "ph-scale-in":  {
-                                                                                                                    "label":  "Scale in"
-                                                                                                                },
-                                                                                                "ph-blur-in":  {
-                                                                                                                   "label":  "Blur in"
-                                                                                                               },
-                                                                                                "ph-slide-left":  {
-                                                                                                                      "label":  "Slide left"
-                                                                                                                  },
-                                                                                                "ph-slide-right":  {
-                                                                                                                       "label":  "Slide right"
-                                                                                                                   },
-                                                                                                "ph-rotate-in":  {
-                                                                                                                     "label":  "Rotate in"
-                                                                                                                 }
-                                                                                            }
-                                                                            }
-                                                 }
-                                 },
-                      "free_shipping_bar":  {
-                                                "name":  "Barra de envÃ­o gratis",
-                                                "settings":  {
-                                                                  "enable":  "Habilitar barra de envÃ­o gratis",
-                                                                  "display_mode":  "Modo de visualizaciÃ³n",
-                                                                  "animation_style":  "Estilo de animaciÃ³n",
-                                                                  "floating_position":  "PosiciÃ³n flotante",
-                                                                  "header_colors":  "Colores",
-                                                                  "bg_color":  "Fondo",
-                                                                  "text_color":  "Texto",
-                                                                  "empty_bar_color":  "Color de barra vacÃ­a",
-                                                                  "header_text":  "Plantillas de texto",
-                                                                  "empty_text":  "Texto del carrito vacÃ­o",
-                                                                  "empty_text_info":  "Se muestra cuando el carrito estÃ¡ vacÃ­o. Use {{ threshold }} como marcador de posiciÃ³n.",
-                                                                  "progress_text":  "Texto de progreso",
-                                                                  "progress_text_info":  "Se muestra al progresar al siguiente nivel. Use {{ amount }}, {{ reward }} como marcadores de posiciÃ³n.",
-                                                                  "unlocked_text":  "Texto de desbloqueo",
-                                                                  "unlocked_text_info":  "Se muestra cuando se desbloquea un nivel. Use {{ reward }}, {{ amount }}, {{ next_reward }} como marcadores de posiciÃ³n.",
-                                                                  "complete_text":  "Texto completo",
-                                                                  "complete_text_info":  "Se muestra cuando todos los niveles estÃ¡n desbloqueados. Use {{ max_reward }} como marcador de posiciÃ³n."
-                                                              },
-                                                "blocks":  {
-                                                               "tier":  {
-                                                                            "name":  "Nivel",
-                                                                            "settings":  {
-                                                                                             "threshold":  "Umbral ($)",
-                                                                                             "label":  "Etiqueta",
-                                                                                             "description":  "DescripciÃ³n",
-                                                                                             "fill_color":  "Color de relleno de la barra"
-                                                                                         }
-                                                                        }
-                                                           },
-                                                "presets":  {
-                                                                "name":  "Barra de envÃ­o gratis"
-                                                            }
-                                            },
-                  },
-     "blogs":  {
-                  "article":  {
-                                  "view_all":  "Ver todo",
-                                  "tags":  "Etiquetas",
-                                  "read_more":  "Leer mÃƒÂ¡s",
-                                  "back_to_blog":  "Volver a {{ title }}"
-                              },
-                  "comments":  {
-                                   "title":  "Dejar un comentario",
-                                   "name":  "Nombre",
-                                   "email":  "Correo electrÃƒÂ³nico",
-                                   "message":  "Mensaje",
-                                   "post":  "Publicar comentario",
-                                   "moderated":  "Por favor tenga en cuenta que los comentarios deben ser aprobados antes de ser publicados",
-                                   "success_moderated":  "Su comentario se ha compartido con ÃƒÂ©xito. Lo publicaremos en un momento, en tanto nuestro blog sea moderado.",
-                                   "success":  "Ã‚Â¡Su comentario se ha compartido con ÃƒÂ©xito! Ã‚Â¡Gracias!",
-                                   "with_count":  {
-                                                      "one":  "{{ count }} comentario",
-                                                      "other":  "{{ count }} comentarios"
-                                                  }
-                               }
-              },
-    "cart":  {
-                 "general":  {
-                                 "title":  "Carrito de compra",
-                                 "remove":  "Quitar",
-                                 "note":  "Instrucciones especiales para el vendedor",
-                                 "subtotal":  "Subtotal",
-                                 "discounts":  "Descuentos",
-                                 "shipping_at_checkout":  "Los cÃƒÂ³digos de descuento, los costes de envÃƒÂ­o y los impuestos se aÃƒÂ±aden durante el pago.",
-                                 "update":  "Actualizar carrito",
-                                 "checkout":  "Finalizar pedido",
-                                 "empty":  "Su carrito actualmente estÃƒÂ¡ vacÃƒÂ­o.",
-                                 "continue_browsing_html":  "ContinÃƒÂºe explorando \u003ca href=\u0027{{ url }}\u0027\u003eaquÃƒÂ­\u003c/a\u003e.",
-                                 "close_cart":  "Cerrar carrito",
-                                 "reduce_quantity":  "Quitar uno a la cantidad de artÃƒÂ­culos",
-                                 "increase_quantity":  "Aumentar uno a la cantidad de artÃƒÂ­culos",
-                                 "terms":  "Acepto los tÃƒÂ©rminos y condiciones",
-                                 "terms_html":  "Acepto los \u003ca href=\u0027{{ url }}\u0027 target=\u0027_blank\u0027\u003etÃƒÂ©rminos y condiciones\u003c/a\u003e",
-                                 "terms_confirm":  "Debe aceptar los tÃƒÂ©rminos y condiciones de venta para pagar",
-                                 "max_quantity":  "Solo puedes tener {{ quantity }} de {{ title }} en tu carrito."
-                             },
-                 "label":  {
-                               "price":  "Precio",
-                               "quantity":  "Cantidad",
-                               "total":  "Total"
-                           }
-             },
-    "collections":  {
-                        "general":  {
-                                        "catalog_title":  "CatÃƒÂ¡logo",
-                                        "all_of_collection":  "Todos",
-                                        "view_all_products_html":  "ver los\u003cbr\u003e{{ count }} productos",
-                                        "see_more":  "Mostrar mÃƒÂ¡s",
-                                        "see_less":  "Muestra menos",
-                                        "no_matches":  "Lo sentimos, no hay productos que coincidan con su bÃƒÂºsqueda.",
-                                        "items_with_count":  {
-                                                                 "one":  "{{ count }} artÃƒÂ­culo",
-                                                                 "other":  "{{ count }} artÃƒÂ­culos"
-                                                             }
-                                    },
-                        "sorting":  {
-                                        "title":  "Ordenar"
-                                    },
-                        "filters":  {
-                                        "title_tags":  "Filtrar",
-                                        "all_tags":  "Todos los productos",
-                                        "categories_title":  "CategorÃƒÂ­as"
-                                    }
-                    },
-    "contact":  {
-                    "form":  {
-                                 "name":  "Nombre",
-                                 "email":  "Correo electrÃƒÂ³nico",
-                                 "phone":  "NÃƒÂºmero de telÃƒÂ©fono",
-                                 "message":  "Mensaje",
-                                 "send":  "Enviar",
-                                 "post_success":  "Gracias por contactarnos. Le responderemos lo antes posible."
-                             }
-                },
-    "customer":  {
-                     "account":  {
-                                     "title":  "Mi cuenta",
-                                     "details":  "Detalles de la cuenta",
-                                     "view_addresses":  "Ver direcciones",
-                                     "return":  "Volver a detalles de la cuenta"
-                                 },
-                     "activate_account":  {
-                                              "title":  "Activar cuenta",
-                                              "subtext":  "Cree su contraseÃƒÂ±a para activar su cuenta.",
-                                              "password":  "ContraseÃƒÂ±a",
-                                              "password_confirm":  "Confirmar contraseÃƒÂ±a",
-                                              "submit":  "Activar cuenta",
-                                              "cancel":  "Rechazar invitaciÃƒÂ³n"
-                                          },
-                     "addresses":  {
-                                       "title":  "Sus direcciones",
-                                       "default":  "Por defecto",
-                                       "add_new":  "Agregar una nueva direcciÃƒÂ³n",
-                                       "edit_address":  "Editar direcciÃƒÂ³n",
-                                       "first_name":  "Nombre",
-                                       "last_name":  "Apellido",
-                                       "company":  "CompaÃƒÂ±ÃƒÂ­a",
-                                       "address1":  "DirecciÃƒÂ³n1",
-                                       "address2":  "DirecciÃƒÂ³n2",
-                                       "city":  "Ciudad",
-                                       "country":  "PaÃƒÂ­s",
-                                       "province":  "Provincia",
-                                       "zip":  "CÃƒÂ³digo postal",
-                                       "phone":  "TelÃƒÂ©fono",
-                                       "set_default":  "Fijar como direcciÃƒÂ³n por defecto",
-                                       "add":  "Agregar direcciÃƒÂ³n",
-                                       "update":  "Actualizar direcciÃƒÂ³n",
-                                       "cancel":  "Cancelar",
-                                       "edit":  "Editar",
-                                       "delete":  "Eliminar",
-                                       "delete_confirm":  "Ã‚Â¿EstÃƒÂ¡ seguro de que desea eliminar esta direcciÃƒÂ³n?"
-                                   },
-                     "login":  {
-                                   "title":  "Ingresar",
-                                   "email":  "Correo electrÃƒÂ³nico",
-                                   "password":  "ContraseÃƒÂ±a",
-                                   "forgot_password":  "Ã‚Â¿OlvidÃƒÂ³ su contraseÃƒÂ±a?",
-                                   "sign_in":  "Registrarse",
-                                   "cancel":  "Volver a la tienda",
-                                   "guest_title":  "Continuar como invitado",
-                                   "guest_continue":  "Continuar"
-                               },
-                     "orders":  {
-                                    "title":  "Historial de pedidos",
-                                    "order_number":  "Pedido",
-                                    "date":  "Fecha",
-                                    "payment_status":  "Estado del pago",
-                                    "fulfillment_status":  "Estado de finalizaciÃƒÂ³n",
-                                    "total":  "Total",
-                                    "none":  "No ha realizado algÃƒÂºn pedido aÃƒÂºn."
-                                },
-                     "order":  {
-                                   "title":  "Pedido {{ name }}",
-                                   "date_html":  "Realizado en {{ date }}",
-                                   "cancelled_html":  "Pedido cancelado en {{ date }}",
-                                   "cancelled_reason":  "Motivo: {{ reason }}",
-                                   "billing_address":  "DirecciÃƒÂ³n de facturaciÃƒÂ³n",
-                                   "payment_status":  "Estado del pago",
-                                   "shipping_address":  "DirecciÃƒÂ³n de envÃƒÂ­o",
-                                   "fulfillment_status":  "Estado de finalizaciÃƒÂ³n",
-                                   "discount":  "Descuento",
-                                   "shipping":  "EnvÃƒÂ­o",
-                                   "tax":  "Impuesto",
-                                   "product":  "Producto",
-                                   "sku":  "SKU",
-                                   "price":  "Precio",
-                                   "quantity":  "Cantidad",
-                                   "total":  "Total",
-                                   "fulfilled_at_html":  "Finalizado {{ date }}",
-                                   "subtotal":  "Subtotal"
-                               },
-                     "recover_password":  {
-                                              "title":  "Restablecer su contraseÃƒÂ±a",
-                                              "email":  "Correo electrÃƒÂ³nico",
-                                              "submit":  "Enviar",
-                                              "cancel":  "Cancelar",
-                                              "subtext":  "Le enviaremos un correo electrÃƒÂ³nico para restablecer su contraseÃƒÂ±a.",
-                                              "success":  "Hemos enviado un correo electrÃƒÂ³nico con un enlace para actualizar su contraseÃƒÂ±a."
-                                          },
-                     "reset_password":  {
-                                            "title":  "Restablecer contraseÃƒÂ±a de cuenta",
-                                            "subtext":  "Ingrese una nueva contraseÃƒÂ±a para {{ email }}",
-                                            "password":  "ContraseÃƒÂ±a",
-                                            "password_confirm":  "Confirmar contraseÃƒÂ±a",
-                                            "submit":  "Restablecer contraseÃƒÂ±a"
-                                        },
-                     "register":  {
-                                      "title":  "Crear cuenta",
-                                      "first_name":  "Nombre",
-                                      "last_name":  "Apellido",
-                                      "email":  "Correo electrÃƒÂ³nico",
-                                      "password":  "ContraseÃƒÂ±a",
-                                      "submit":  "Crear",
-                                      "cancel":  "Volver a la tienda"
-                                  }
-                 },
-    "home_page":  {
-                      "onboarding":  {
-                                         "product_title":  "TÃƒÂ­tulo del producto",
-                                         "product_description":  "Un producto diseÃƒÂ±ado con cuidado, fabricado con materiales de calidad y atenciÃƒÂ³n al detalle. VersÃƒÂ¡til, fiable y hecho para durar, se integra perfectamente en tu dÃƒÂ­a a dÃƒÂ­a.",
-                                         "collection_title":  "ColecciÃƒÂ³n",
-                                         "no_content":  "Esta secÃƒÂ§ÃƒÂ£o nÃƒÂ£o inclui de momento qualquer conteÃƒÂºdo. Adicione conteÃƒÂºdo a esta secÃƒÂ§ÃƒÂ£o atravÃƒÂ©s da barra lateral."
-                                     }
-                  },
-    "layout":  {
-                   "cart":  {
-                                "title":  "Carrito"
-                            },
-                   "customer":  {
-                                    "account":  "Cuenta",
-                                    "log_out":  "Cerrar sesiÃƒÂ³n",
-                                    "log_in":  "Ingresar",
-                                    "create_account":  "Crear cuenta"
-                                },
-                   "footer":  {
-                                  "social_platform":  "{{ name }} en {{ platform }}"
-                              }
-               },
-    "products":  {
-                     "general":  {
-                                     "color_swatch_trigger":  "Color",
-                                     "size_trigger":  "TamaÃƒÂ±o",
-                                     "size_chart":  "Tabla de tallas",
-                                     "save_html":  "Guardar {{ saved_amount }}",
-                                     "collection_return":  "Volver a {{ collection }}",
-                                     "next_product":  "Siguiente: {{ title }}",
-                                     "sale":  "Venta",
-                                     "sale_price":  "Precio de oferta",
-                                     "regular_price":  "Precio habitual",
-                                     "from_text_html":  "De {{ price }}",
-                                     "recent_products":  "Visto recientemente",
-                                     "reviews":  "Comentarios"
-                                 },
-                     "product":  {
-                                     "description":  "DescripciÃƒÂ³n",
-                                     "in_stock_label":  "En stock",
-                                     "stock_label":  "{{ count }} en stock",
-                                     "sold_out":  "Agotado",
-                                     "unavailable":  "No disponible",
-                                     "quantity":  "Cantidad",
-                                     "add_to_cart":  "Agregar al carrito",
-                                     "preorder":  "Hacer un pedido",
-                                     "include_taxes":  "Impuesto incluido.",
-                                     "shipping_policy_html":  "Los \u003ca href=\u0027{{ link }}\u0027\u003egastos de envÃƒÂ­o\u003c/a\u003e se calculan en la pantalla de pagos.",
-                                     "will_not_ship_until":  "SerÃƒÂ¡ enviado despuÃƒÂ©s {{ date }}",
-                                     "will_be_in_stock_after":  "EstarÃƒÂ¡ disponible despuÃƒÂ©s {{ date }}",
-                                     "waiting_for_stock":  "Pedido pendiente, envÃƒÂ­o pronto",
-                                     "view_in_space":  "Ver en tu espacio",
-                                     "view_in_space_label":  "Ver en tu espacio, carga el artÃƒÂ­culo en la ventana de realidad aumentada"
-                                 }
-                 },
-    "store_availability":  {
-                               "general":  {
-                                               "view_store_info":  "InformaciÃƒÂ³n de la tienda",
-                                               "check_other_stores":  "Consulte la disponibilidad en otras tiendas",
-                                               "pick_up_available":  "Recogida en la",
-                                               "pick_up_currently_unavailable":  "Recogida disponible en este momento",
-                                               "pick_up_available_at_html":  "Recogida disponible en \u003cstrong\u003e {{location_name}} \u003c/strong\u003e",
-                                               "pick_up_unavailable_at_html":  "Recogida estÃƒÂ¡ disponible en \u003cstrong\u003e {{location_name}} \u003c/strong\u003e"
-                                           }
-                           },
-    "gift_cards":  {
-                       "issued":  {
-                                      "title_html":  "Ã‚Â¡AquÃƒÂ­ estÃƒÂ¡ su tarjeta de regalo de {{ value }} para {{ shop }}!",
-                                      "subtext":  "Ã‚Â¡AquÃƒÂ­ estÃƒÂ¡ su tarjeta de regalo!",
-                                      "disabled":  "Inhabilitada",
-                                      "expired":  "ExpirÃƒÂ³ en {{ expiry }}",
-                                      "active":  "Expira en {{ expiry }}",
-                                      "redeem":  "Use este cÃƒÂ³digo al terminar la comprar para canjear su tarjeta de regalo",
-                                      "shop_link":  "Empezar a comprar",
-                                      "print":  "Imprimir",
-                                      "add_to_apple_wallet":  "AÃƒÂ±adir a Apple Wallet"
-                                  }
-                   },
-    "recipient":  {
-                      "form":  {
-                                   "checkbox":  "Quiero enviar esto como un regalo.",
-                                   "email_label":  "Correo electrÃƒÂ³nico de la persona destinataria",
-                                   "email":  "Correo electrÃƒÂ³nico",
-                                   "name_label":  "Nombre de la persona destinataria (opcional)",
-                                   "name":  "Nombre",
-                                   "message_label":  "Mensaje (opcional)",
-                                   "message":  "Mensaje",
-                                   "max_characters":  "{{ max_chars }} caracteres mÃƒÂ¡x.",
-                                   "send_on_label":  "Enviar (opcional)"
-                               }
-                  },
-    "date_formats":  {
-                         "month_day_year":  "%d de %B, %Y"
-                     },
-    "info":  {
-                 "unable_to_add_item_to_cart":  "No se puede agregar el artÃƒÂ­culo al carrito",
-                 "item_added_to_cart_html":  "Ã‚Â¡{{ product_title }} agregado al carrito!",
-                 "low_stock_count":  {
-                                         "one":  "Stock bajo - {{ count }} artÃƒÂ­culo restante",
-                                         "other":  "Stock bajo - {{ count }} artÃƒÂ­culos restantes"
-                                     },
-                 "back_in_stock_on":  "De vuelta en stock {{ date }}",
-                 "backordered":  "Pedido pendiente, envÃƒÂ­o pronto",
-                 "in_stock":  "En stock",
-                 "sold_out":  "Agotado",
-                 "tax_included":  "Impuestos incluidos.",
-                 "shipping_policy_html":  "\u003ca href=\u0027{{ link }}\u0027\u003eEnvÃƒÂ­o\u003c/a\u003e calculado en el checkout.",
-                 "pick_up_available":  "Recogida disponible",
-                 "pick_up_currently_unavailable":  "Recogida actualmente no disponible",
-                 "pick_up_available_at_html":  "Recogida disponible en \u003cstrong\u003e{{ location_name }}\u003c/strong\u003e",
-                 "pick_up_unavailable_at_html":  "Recogida actualmente no disponible en \u003cstrong\u003e{{ location_name }}\u003c/strong\u003e"
-             },
-    "labels":  {
-                   "quantity":  "Cantidad",
-                   "search":  "Buscar",
-                   "close":  "Cerrar",
-                   "get_directions":  "Obtener direcciones",
-                   "view_store_info":  "Ver informaciÃƒÂ³n de la tienda",
-                   "check_availability":  "Verificar disponibilidad en otras tiendas",
-                   "show_all_results":  "Mostrar todos los resultados para \"{{ terms }}\"",
-                   "from_price":  "desde {{ price }}"
-               },
-    "actions":  {
-                    "add_to_cart":  "Agregar al carrito",
-                    "close":  "Cerrar",
-                    "get_directions":  "Obtener direcciones",
-                    "view_store_info":  "Ver informaciÃƒÂ³n de la tienda",
-                    "check_availability":  "Verificar disponibilidad en otras tiendas",
-                    "show_all_results":  "Mostrar todos los resultados para \"{{ terms }}\""
-                }
+  "general": {
+    "404": {
+      "title": "404 PÃƒÂ¡gina no encontrada",
+      "subtext_html": "La pÃƒÂ¡gina que ha solicitado no existe. Haga clic <a href='{{ url }}'>aquÃƒÂ­</a> para continuar la compra."
+    },
+    "accessibility": {
+      "skip_to_content": "Ir directamente al contenido",
+      "close_modal": "Cerrar (esc)",
+      "close": "Cerrar",
+      "learn_more": "Aprende mÃƒÂ¡s"
+    },
+    "meta": {
+      "tags": "Etiquetado \"{{ tags }}\"",
+      "page": "PÃƒÂ¡gina {{ page }}"
+    },
+    "pagination": {
+      "previous": "Anterior",
+      "next": "Siguiente"
+    },
+    "password_page": {
+      "login_form_heading": "Entrar a la tienda usando contraseÃƒÂ±a:",
+      "login_form_password_label": "ContraseÃƒÂ±a",
+      "login_form_password_placeholder": "Tu contraseÃƒÂ±a",
+      "login_form_submit": "Ingresar",
+      "signup_form_email_label": "Correo ElectrÃƒÂ³nico",
+      "signup_form_success": "Ã‚Â¡Te enviaremos un correo electrÃƒÂ³nico antes de inaugurar!",
+      "admin_link_html": "Ã‚Â¿Eres el dueÃƒÂ±o de la tienda? <a href=\"/admin\" class=\"text-link\">RegÃƒÂ­strate aquÃƒÂ­</a>",
+      "password_link": "ContraseÃƒÂ±a",
+      "powered_by_shopify_html": "Esta tienda estarÃƒÂ¡ impulsada por {{ shopify }}"
+    },
+    "breadcrumbs": {
+      "home": "Inicio",
+      "home_link_title": "Volver a la portada"
+    },
+    "social": {
+      "share_on_facebook": "Compartir",
+      "share_on_x": "Compartir",
+      "share_on_pinterest": "Hacer pin",
+      "alt_text": {
+        "share_on_facebook": "Compartir en Facebook",
+        "share_on_x": "Tuitear en X",
+        "share_on_pinterest": "Pinear en Pinterest"
+      }
+    },
+    "newsletter_form": {
+      "newsletter_email": "SuscrÃƒÂ­bete a nuestra lista de correo",
+      "newsletter_confirmation": "Gracias por suscribirse",
+      "submit": "Suscribir"
+    },
+    "search": {
+      "view_more": "Mostrar todos los resultados para \"{{ terms }}\"",
+      "products": "Productos",
+      "suggestions": "Sugerencias",
+      "collections": "Colecciones",
+      "pages": "PÃƒÂ¡ginas",
+      "articles": "ArtÃƒÂ­culos",
+      "no_results_html": "BÃƒÂºsqueda de \"{{ terms }}\"",
+      "results_for_html": "Su bÃƒÂºsqueda de \"{{ terms }}\" muestra lo siguiente:",
+      "title": "Buscar",
+      "placeholder": "Buscar",
+      "submit": "Buscar",
+      "cancel": "Cancelar",
+      "search_title": "MÃƒÂ¡s buscadas",
+      "result_count": {
+        "one": "{{ count }} resultado",
+        "other": "{{ count }} resultados"
+      }
+    },
+    "drawers": {
+      "navigation": "NavegaciÃƒÂ³n",
+      "close_menu": "Cerrar menÃƒÂº",
+      "expand_submenu": "Expandir menÃƒÂº",
+      "collapse_submenu": "Colapsar menÃƒÂº"
+    },
+    "ph_loader": {
+      "loading": "Loading"
+    }
+  },
+  "sections": {
+    "map": {
+      "get_directions": "Obtener las direcciones",
+      "address_error": "No se puede encontrar esa direcciÃƒÂ³n",
+      "address_no_results": "No results for that address",
+      "address_query_limit_html": "Se ha excedido el lÃƒÂ­mite de uso de la API de Google . Considere la posibilidad de actualizar a un <a href=\"https://developers.google.com/maps/premium/usage-limits\">Plan Premium</a>.",
+      "auth_error_html": "Hubo un problema de autenticaciÃƒÂ³n con su cuenta de Google Maps. Crear y habilitar la <a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\">API de JavaScript</a> y <a href=\"https://developers.google.com/maps/documentation/geocoding/get-api-key\">API de geocodificaciÃƒÂ³n</a> permiso para su aplicaciÃƒÂ³n."
+    },
+    "slideshow": {
+      "play_slideshow": "Juego de diapositivas",
+      "pause_slideshow": "diapositivas pausa"
+    },
+    "urgency_bar": {
+      "name": "Barra de urgencia",
+      "close": "Cerrar",
+      "settings": {
+        "show_close": "Mostrar botón de cierre",
+        "notification_interval": "Intervalo de notificación",
+        "max_notifications": "Máx. notificaciones simultáneas",
+        "position": {
+          "label": "Posición",
+          "options": {
+            "bottom_left": "Abajo a la izquierda",
+            "bottom_center": "Abajo al centro",
+            "bottom_right": "Abajo a la derecha"
+          }
+        },
+        "header_colors": "Colores",
+        "background_color": "Fondo",
+        "text_color": "Texto",
+        "accent_color": "Acento"
+      },
+      "blocks": {
+        "purchase": {
+          "name": "Compra reciente",
+          "settings": {
+            "text_template": "Texto de notificación",
+            "text_template_info": "Use {{ name }}, {{ product }}, {{ time }} como marcadores de posición",
+            "names": "Nombres de clientes (separados por comas)",
+            "names_info": "Se elegirá un nombre aleatorio de esta lista",
+            "products": "Nombres de productos (separados por comas)",
+            "delay_min": "Retardo mínimo (segundos)",
+            "delay_max": "Retardo máximo (segundos)"
+          }
+        },
+        "low_stock": {
+          "name": "Alerta de stock bajo",
+          "settings": {
+            "text_template": "Texto de notificación",
+            "text_template_info": "Use {{ product }} y {{ time }} como marcadores de posición",
+            "products": "Nombres de productos (separados por comas)",
+            "delay_min": "Retardo mínimo (segundos)",
+            "delay_max": "Retardo máximo (segundos)"
+          }
+        },
+        "viewing": {
+          "name": "Visualización en vivo",
+          "settings": {
+            "text_template": "Texto de notificación",
+            "text_template_info": "Use {{ name }}, {{ product }}, {{ time }} como marcadores de posición",
+            "names": "Nombres de clientes (separados por comas)",
+            "names_info": "Se elegirá un nombre aleatorio de esta lista",
+            "products": "Nombres de productos (separados por comas)",
+            "delay_min": "Retardo mínimo (segundos)",
+            "delay_max": "Retardo máximo (segundos)"
+          }
+        }
+      },
+      "presets": {
+        "name": "Barra de urgencia"
+      }
+    },
+    "size_guide": {
+      "name": "Guía de tallas",
+      "close": "Cerrar",
+      "trigger_label": "Guía de tallas",
+      "chest": "Pecho (cm)",
+      "waist": "Cintura (cm)",
+      "hip": "Cadera (cm)",
+      "table": {
+        "size": "Talla",
+        "chest": "Pecho",
+        "waist": "Cintura",
+        "hip": "Cadera"
+      },
+      "settings": {
+        "heading": "Título",
+        "intro_text": "Texto de introducción",
+        "header_colors": "Colores",
+        "bg_color": "Fondo",
+        "text_color": "Texto",
+        "accent_color": "Acento"
+      },
+      "blocks": {
+        "size": {
+          "name": "Fila de talla",
+          "settings": {
+            "label": "Etiqueta de talla",
+            "chest_min": "Pecho mín",
+            "chest_max": "Pecho máx",
+            "waist_min": "Cintura mín",
+            "waist_max": "Cintura máx",
+            "hip_min": "Cadera mín",
+            "hip_max": "Cadera máx",
+            "recommendation": "Texto de recomendación"
+          }
+        }
+      },
+      "presets": {
+        "name": "Guía de tallas"
+      }
+    },
+    "common": {
+      "settings": {
+        "entrance_animation": {
+          "label": "Entrance animation",
+          "options": {
+            "existing": {
+              "label": "Existing"
+            },
+            "ph-fade-up": {
+              "label": "Fade up"
+            },
+            "ph-scale-in": {
+              "label": "Scale in"
+            },
+            "ph-blur-in": {
+              "label": "Blur in"
+            },
+            "ph-slide-left": {
+              "label": "Slide left"
+            },
+            "ph-slide-right": {
+              "label": "Slide right"
+            },
+            "ph-rotate-in": {
+              "label": "Rotate in"
+            }
+          }
+        }
+      }
+    },
+    "free_shipping_bar": {
+      "name": "Barra de envío gratis",
+      "settings": {
+        "enable": "Habilitar barra de envío gratis",
+        "display_mode": "Modo de visualización",
+        "animation_style": "Estilo de animación",
+        "floating_position": "Posición flotante",
+        "header_colors": "Colores",
+        "bg_color": "Fondo",
+        "text_color": "Texto",
+        "empty_bar_color": "Color de barra vacía",
+        "header_text": "Plantillas de texto",
+        "empty_text": "Texto del carrito vacío",
+        "empty_text_info": "Se muestra cuando el carrito está vacío. Usa {{ threshold }} como marcador de posición.",
+        "progress_text": "Texto de progreso",
+        "progress_text_info": "Se muestra al progresar al siguiente nivel. Usa {{ amount }}, {{ reward }} como marcadores de posición.",
+        "unlocked_text": "Texto recién desbloqueado",
+        "unlocked_text_info": "Se muestra cuando se desbloquea un nivel. Usa {{ reward }}, {{ amount }}, {{ next_reward }} como marcadores de posición.",
+        "complete_text": "Texto todo desbloqueado",
+        "complete_text_info": "Se muestra cuando todos los niveles están desbloqueados. Usa {{ max_reward }} como marcador de posición."
+      },
+      "blocks": {
+        "tier": {
+          "name": "Nivel",
+          "settings": {
+            "threshold": "Umbral ($)",
+            "label": "Etiqueta",
+            "description": "Descripción",
+            "fill_color": "Color de relleno de la barra"
+          }
+        }
+      },
+      "presets": {
+        "name": "Barra de envío gratis"
+      }
+    }
+  },
+  "blogs": {
+    "article": {
+      "view_all": "Ver todo",
+      "tags": "Etiquetas",
+      "read_more": "Leer mÃƒÂ¡s",
+      "back_to_blog": "Volver a {{ title }}"
+    },
+    "comments": {
+      "title": "Dejar un comentario",
+      "name": "Nombre",
+      "email": "Correo electrÃƒÂ³nico",
+      "message": "Mensaje",
+      "post": "Publicar comentario",
+      "moderated": "Por favor tenga en cuenta que los comentarios deben ser aprobados antes de ser publicados",
+      "success_moderated": "Su comentario se ha compartido con ÃƒÂ©xito. Lo publicaremos en un momento, en tanto nuestro blog sea moderado.",
+      "success": "Ã‚Â¡Su comentario se ha compartido con ÃƒÂ©xito! Ã‚Â¡Gracias!",
+      "with_count": {
+        "one": "{{ count }} comentario",
+        "other": "{{ count }} comentarios"
+      }
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Carrito de compra",
+      "remove": "Quitar",
+      "note": "Instrucciones especiales para el vendedor",
+      "subtotal": "Subtotal",
+      "discounts": "Descuentos",
+      "shipping_at_checkout": "Los cÃƒÂ³digos de descuento, los costes de envÃƒÂ­o y los impuestos se aÃƒÂ±aden durante el pago.",
+      "update": "Actualizar carrito",
+      "checkout": "Finalizar pedido",
+      "empty": "Su carrito actualmente estÃƒÂ¡ vacÃƒÂ­o.",
+      "continue_browsing_html": "ContinÃƒÂºe explorando <a href='{{ url }}'>aquÃƒÂ­</a>.",
+      "close_cart": "Cerrar carrito",
+      "reduce_quantity": "Quitar uno a la cantidad de artÃƒÂ­culos",
+      "increase_quantity": "Aumentar uno a la cantidad de artÃƒÂ­culos",
+      "terms": "Acepto los tÃƒÂ©rminos y condiciones",
+      "terms_html": "Acepto los <a href='{{ url }}' target='_blank'>tÃƒÂ©rminos y condiciones</a>",
+      "terms_confirm": "Debe aceptar los tÃƒÂ©rminos y condiciones de venta para pagar",
+      "max_quantity": "Solo puedes tener {{ quantity }} de {{ title }} en tu carrito."
+    },
+    "label": {
+      "price": "Precio",
+      "quantity": "Cantidad",
+      "total": "Total"
+    }
+  },
+  "collections": {
+    "general": {
+      "catalog_title": "CatÃƒÂ¡logo",
+      "all_of_collection": "Todos",
+      "view_all_products_html": "ver los<br>{{ count }} productos",
+      "see_more": "Mostrar mÃƒÂ¡s",
+      "see_less": "Muestra menos",
+      "no_matches": "Lo sentimos, no hay productos que coincidan con su bÃƒÂºsqueda.",
+      "items_with_count": {
+        "one": "{{ count }} artÃƒÂ­culo",
+        "other": "{{ count }} artÃƒÂ­culos"
+      }
+    },
+    "sorting": {
+      "title": "Ordenar"
+    },
+    "filters": {
+      "title_tags": "Filtrar",
+      "all_tags": "Todos los productos",
+      "categories_title": "CategorÃƒÂ­as"
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "Nombre",
+      "email": "Correo electrÃƒÂ³nico",
+      "phone": "NÃƒÂºmero de telÃƒÂ©fono",
+      "message": "Mensaje",
+      "send": "Enviar",
+      "post_success": "Gracias por contactarnos. Le responderemos lo antes posible."
+    }
+  },
+  "customer": {
+    "account": {
+      "title": "Mi cuenta",
+      "details": "Detalles de la cuenta",
+      "view_addresses": "Ver direcciones",
+      "return": "Volver a detalles de la cuenta"
+    },
+    "activate_account": {
+      "title": "Activar cuenta",
+      "subtext": "Cree su contraseÃƒÂ±a para activar su cuenta.",
+      "password": "ContraseÃƒÂ±a",
+      "password_confirm": "Confirmar contraseÃƒÂ±a",
+      "submit": "Activar cuenta",
+      "cancel": "Rechazar invitaciÃƒÂ³n"
+    },
+    "addresses": {
+      "title": "Sus direcciones",
+      "default": "Por defecto",
+      "add_new": "Agregar una nueva direcciÃƒÂ³n",
+      "edit_address": "Editar direcciÃƒÂ³n",
+      "first_name": "Nombre",
+      "last_name": "Apellido",
+      "company": "CompaÃƒÂ±ÃƒÂ­a",
+      "address1": "DirecciÃƒÂ³n1",
+      "address2": "DirecciÃƒÂ³n2",
+      "city": "Ciudad",
+      "country": "PaÃƒÂ­s",
+      "province": "Provincia",
+      "zip": "CÃƒÂ³digo postal",
+      "phone": "TelÃƒÂ©fono",
+      "set_default": "Fijar como direcciÃƒÂ³n por defecto",
+      "add": "Agregar direcciÃƒÂ³n",
+      "update": "Actualizar direcciÃƒÂ³n",
+      "cancel": "Cancelar",
+      "edit": "Editar",
+      "delete": "Eliminar",
+      "delete_confirm": "Ã‚Â¿EstÃƒÂ¡ seguro de que desea eliminar esta direcciÃƒÂ³n?"
+    },
+    "login": {
+      "title": "Ingresar",
+      "email": "Correo electrÃƒÂ³nico",
+      "password": "ContraseÃƒÂ±a",
+      "forgot_password": "Ã‚Â¿OlvidÃƒÂ³ su contraseÃƒÂ±a?",
+      "sign_in": "Registrarse",
+      "cancel": "Volver a la tienda",
+      "guest_title": "Continuar como invitado",
+      "guest_continue": "Continuar"
+    },
+    "orders": {
+      "title": "Historial de pedidos",
+      "order_number": "Pedido",
+      "date": "Fecha",
+      "payment_status": "Estado del pago",
+      "fulfillment_status": "Estado de finalizaciÃƒÂ³n",
+      "total": "Total",
+      "none": "No ha realizado algÃƒÂºn pedido aÃƒÂºn."
+    },
+    "order": {
+      "title": "Pedido {{ name }}",
+      "date_html": "Realizado en {{ date }}",
+      "cancelled_html": "Pedido cancelado en {{ date }}",
+      "cancelled_reason": "Motivo: {{ reason }}",
+      "billing_address": "DirecciÃƒÂ³n de facturaciÃƒÂ³n",
+      "payment_status": "Estado del pago",
+      "shipping_address": "DirecciÃƒÂ³n de envÃƒÂ­o",
+      "fulfillment_status": "Estado de finalizaciÃƒÂ³n",
+      "discount": "Descuento",
+      "shipping": "EnvÃƒÂ­o",
+      "tax": "Impuesto",
+      "product": "Producto",
+      "sku": "SKU",
+      "price": "Precio",
+      "quantity": "Cantidad",
+      "total": "Total",
+      "fulfilled_at_html": "Finalizado {{ date }}",
+      "subtotal": "Subtotal"
+    },
+    "recover_password": {
+      "title": "Restablecer su contraseÃƒÂ±a",
+      "email": "Correo electrÃƒÂ³nico",
+      "submit": "Enviar",
+      "cancel": "Cancelar",
+      "subtext": "Le enviaremos un correo electrÃƒÂ³nico para restablecer su contraseÃƒÂ±a.",
+      "success": "Hemos enviado un correo electrÃƒÂ³nico con un enlace para actualizar su contraseÃƒÂ±a."
+    },
+    "reset_password": {
+      "title": "Restablecer contraseÃƒÂ±a de cuenta",
+      "subtext": "Ingrese una nueva contraseÃƒÂ±a para {{ email }}",
+      "password": "ContraseÃƒÂ±a",
+      "password_confirm": "Confirmar contraseÃƒÂ±a",
+      "submit": "Restablecer contraseÃƒÂ±a"
+    },
+    "register": {
+      "title": "Crear cuenta",
+      "first_name": "Nombre",
+      "last_name": "Apellido",
+      "email": "Correo electrÃƒÂ³nico",
+      "password": "ContraseÃƒÂ±a",
+      "submit": "Crear",
+      "cancel": "Volver a la tienda"
+    }
+  },
+  "home_page": {
+    "onboarding": {
+      "product_title": "TÃƒÂ­tulo del producto",
+      "product_description": "Un producto diseÃƒÂ±ado con cuidado, fabricado con materiales de calidad y atenciÃƒÂ³n al detalle. VersÃƒÂ¡til, fiable y hecho para durar, se integra perfectamente en tu dÃƒÂ­a a dÃƒÂ­a.",
+      "collection_title": "ColecciÃƒÂ³n",
+      "no_content": "Esta secÃƒÂ§ÃƒÂ£o nÃƒÂ£o inclui de momento qualquer conteÃƒÂºdo. Adicione conteÃƒÂºdo a esta secÃƒÂ§ÃƒÂ£o atravÃƒÂ©s da barra lateral."
+    }
+  },
+  "layout": {
+    "cart": {
+      "title": "Carrito"
+    },
+    "customer": {
+      "account": "Cuenta",
+      "log_out": "Cerrar sesiÃƒÂ³n",
+      "log_in": "Ingresar",
+      "create_account": "Crear cuenta"
+    },
+    "footer": {
+      "social_platform": "{{ name }} en {{ platform }}"
+    }
+  },
+  "products": {
+    "general": {
+      "color_swatch_trigger": "Color",
+      "size_trigger": "TamaÃƒÂ±o",
+      "size_chart": "Tabla de tallas",
+      "save_html": "Guardar {{ saved_amount }}",
+      "collection_return": "Volver a {{ collection }}",
+      "next_product": "Siguiente: {{ title }}",
+      "sale": "Venta",
+      "sale_price": "Precio de oferta",
+      "regular_price": "Precio habitual",
+      "from_text_html": "De {{ price }}",
+      "recent_products": "Visto recientemente",
+      "reviews": "Comentarios"
+    },
+    "product": {
+      "description": "DescripciÃƒÂ³n",
+      "in_stock_label": "En stock",
+      "stock_label": {
+        "one": "{{ count }} artículo en stock",
+        "other": "{{ count }} artículos en stock"
+      },
+      "sold_out": "Agotado",
+      "unavailable": "No disponible",
+      "quantity": "Cantidad",
+      "add_to_cart": "Agregar al carrito",
+      "preorder": "Hacer un pedido",
+      "include_taxes": "Impuesto incluido.",
+      "shipping_policy_html": "Los <a href='{{ link }}'>gastos de envÃƒÂ­o</a> se calculan en la pantalla de pagos.",
+      "will_not_ship_until": "SerÃƒÂ¡ enviado despuÃƒÂ©s {{ date }}",
+      "will_be_in_stock_after": "EstarÃƒÂ¡ disponible despuÃƒÂ©s {{ date }}",
+      "waiting_for_stock": "Pedido pendiente, envÃƒÂ­o pronto",
+      "view_in_space": "Ver en tu espacio",
+      "view_in_space_label": "Ver en tu espacio, carga el artÃƒÂ­culo en la ventana de realidad aumentada"
+    }
+  },
+  "store_availability": {
+    "general": {
+      "view_store_info": "InformaciÃƒÂ³n de la tienda",
+      "check_other_stores": "Consulte la disponibilidad en otras tiendas",
+      "pick_up_available": "Recogida en la",
+      "pick_up_currently_unavailable": "Recogida disponible en este momento",
+      "pick_up_available_at_html": "Recogida disponible en <strong> {{location_name}} </strong>",
+      "pick_up_unavailable_at_html": "Recogida estÃƒÂ¡ disponible en <strong> {{location_name}} </strong>"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title_html": "Ã‚Â¡AquÃƒÂ­ estÃƒÂ¡ su tarjeta de regalo de {{ value }} para {{ shop }}!",
+      "subtext": "Ã‚Â¡AquÃƒÂ­ estÃƒÂ¡ su tarjeta de regalo!",
+      "disabled": "Inhabilitada",
+      "expired": "ExpirÃƒÂ³ en {{ expiry }}",
+      "active": "Expira en {{ expiry }}",
+      "redeem": "Use este cÃƒÂ³digo al terminar la comprar para canjear su tarjeta de regalo",
+      "shop_link": "Empezar a comprar",
+      "print": "Imprimir",
+      "add_to_apple_wallet": "AÃƒÂ±adir a Apple Wallet"
+    }
+  },
+  "recipient": {
+    "form": {
+      "checkbox": "Quiero enviar esto como un regalo.",
+      "email_label": "Correo electrÃƒÂ³nico de la persona destinataria",
+      "email": "Correo electrÃƒÂ³nico",
+      "name_label": "Nombre de la persona destinataria (opcional)",
+      "name": "Nombre",
+      "message_label": "Mensaje (opcional)",
+      "message": "Mensaje",
+      "max_characters": "{{ max_chars }} caracteres mÃƒÂ¡x.",
+      "send_on_label": "Enviar (opcional)"
+    }
+  },
+  "date_formats": {
+    "month_day_year": "%d de %B, %Y"
+  },
+  "info": {
+    "unable_to_add_item_to_cart": "No se puede agregar el artÃƒÂ­culo al carrito",
+    "item_added_to_cart_html": "Ã‚Â¡{{ product_title }} agregado al carrito!",
+    "low_stock_count": {
+      "one": "Stock bajo - {{ count }} artÃƒÂ­culo restante",
+      "other": "Stock bajo - {{ count }} artÃƒÂ­culos restantes"
+    },
+    "back_in_stock_on": "De vuelta en stock {{ date }}",
+    "backordered": "Pedido pendiente, envÃƒÂ­o pronto",
+    "in_stock": "En stock",
+    "sold_out": "Agotado",
+    "tax_included": "Impuestos incluidos.",
+    "shipping_policy_html": "<a href='{{ link }}'>EnvÃƒÂ­o</a> calculado en el checkout.",
+    "pick_up_available": "Recogida disponible",
+    "pick_up_currently_unavailable": "Recogida actualmente no disponible",
+    "pick_up_available_at_html": "Recogida disponible en <strong>{{ location_name }}</strong>",
+    "pick_up_unavailable_at_html": "Recogida actualmente no disponible en <strong>{{ location_name }}</strong>",
+    "save_amount": "Ahorra {{ saved_amount }}",
+    "max_characters": "Hasta {{ max_chars }} caracteres"
+  },
+  "labels": {
+    "quantity": "Cantidad",
+    "search": "Buscar",
+    "close": "Cerrar",
+    "get_directions": "Obtener direcciones",
+    "view_store_info": "Ver informaciÃƒÂ³n de la tienda",
+    "check_availability": "Verificar disponibilidad en otras tiendas",
+    "show_all_results": "Mostrar todos los resultados para \"{{ terms }}\"",
+    "from_price": "desde {{ price }}"
+  },
+  "actions": {
+    "add_to_cart": "Agregar al carrito",
+    "close": "Cerrar",
+    "get_directions": "Obtener direcciones",
+    "view_store_info": "Ver informaciÃƒÂ³n de la tienda",
+    "check_availability": "Verificar disponibilidad en otras tiendas",
+    "show_all_results": "Mostrar todos los resultados para \"{{ terms }}\""
+  }
 }

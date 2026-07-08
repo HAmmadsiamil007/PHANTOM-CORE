@@ -15,22 +15,22 @@ Arguments
       assign grid_item_width = ''
     when 2
       assign grid_item_width = 'medium-up--one-half'
-      assign sizeVariable = 'medium-up--one-half'
+      assign size_variable = 'medium-up--one-half'
     when 3
       assign grid_item_width = 'small--one-half medium-up--one-third'
-      assign sizeVariable = 'medium-up--one-third'
+      assign size_variable = 'medium-up--one-third'
       assign fallback = 'small--one-half'
     when 4
       assign grid_item_width = 'small--one-half medium-up--one-quarter'
-      assign sizeVariable = 'medium-up--one-quarter'
+      assign size_variable = 'medium-up--one-quarter'
       assign fallback = 'small--one-half'
     when 5
       assign grid_item_width = 'small--one-half medium-up--one-fifth'
-      assign sizeVariable = 'medium-up--one-fifth'
+      assign size_variable = 'medium-up--one-fifth'
       assign fallback = 'small--one-half'
     when 6
       assign grid_item_width = 'small--one-half medium-up--one-sixth'
-      assign sizeVariable = 'medium-up--one-sixth'
+      assign size_variable = 'medium-up--one-sixth'
       assign fallback = 'small--one-half'
   endcase
 -%}
@@ -46,7 +46,7 @@ Arguments
             classes: 'grid-product__image',
             alt: item.title,
             widths: '180, 360, 540',
-            sizeVariable: sizeVariable,
+            sizeVariable: size_variable,
             fallback: fallback,
           -%}
         {%- endif -%}

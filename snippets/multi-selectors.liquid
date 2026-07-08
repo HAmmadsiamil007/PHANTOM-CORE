@@ -1,0 +1,53 @@
+<div class="multi-selectors{% if location == 'footer' %} multi-selectors--footer{% endif %}">
+  {%- if locale_selector -%}
+    <div class="multi-selectors__item">
+      <button type="button" class="btn btn--primary" data-locale-toggle>
+        {{ form.new_locale | default: request.locale.endonym_name | capitalize }}
+        <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M5 7L1 3h8L5 7z"/>
+        </svg>
+      </button>
+      {%- form 'localization' -%}
+        <ul class="multi-selectors__list" hidden>
+          {%- for locale in localization.available_locales -%}
+            <li class="multi-selectors__item">
+              <a href="#" data-value="{{ locale.iso_code }}" class="multi-selectors__link{% if locale.iso_code == request.locale.iso_code %} multi-selectors__link--active{% endif %}">
+                {{ locale.endonym_name | capitalize }}
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+        <input type="hidden" name="locale_code" value="{{ request.locale.iso_code }}">
+      {%- endform -%}
+    </div>
+  {%- endif -%}
+
+  {%- if currency_selector -%}
+    <div class="multi-selectors__item">
+      <button type="button" class="btn btn--primary" data-currency-toggle>
+        {%- if show_currency_flags -%}
+          <span class="currency-flag" data-flag="{{ cart.currency.iso_code }}" aria-hidden="true"></span>
+        {%- endif -%}
+        {{ cart.currency.iso_code }}
+        <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M5 7L1 3h8L5 7z"/>
+        </svg>
+      </button>
+      {%- form 'currency' -%}
+        <ul class="multi-selectors__list" hidden>
+          {%- for currency in shop.enabled_currencies -%}
+            <li class="multi-selectors__item">
+              <a href="#" data-value="{{ currency.iso_code }}" class="multi-selectors__link{% if currency == cart.currency %} multi-selectors__link--active{% endif %}">
+                {%- if show_currency_flags -%}
+                  <span class="currency-flag" data-flag="{{ currency.iso_code }}" aria-hidden="true"></span>
+                {%- endif -%}
+                {{ currency.iso_code }}
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+        <input type="hidden" name="currency" value="{{ cart.currency.iso_code }}">
+      {%- endform -%}
+    </div>
+  {%- endif -%}
+</div>

@@ -18,13 +18,11 @@
 {% enddoc %}
 
 
-{% capture payment_terms_content %}
-  {% form 'product', product %}
-    {% capture payment_terms %}
-      {{ form | payment_terms }}
-    {% endcapture %}
-  {% endform %}
-{% endcapture %}
+{% form 'product', product %}
+  {% capture payment_terms %}
+    {{ form | payment_terms }}
+  {% endcapture %}
+{% endform %}
 
 {% if payment_terms != blank %}
  {% render 'ui-text', variant: 'body-sm', text: payment_terms %}

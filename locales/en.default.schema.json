@@ -4005,6 +4005,19 @@
                     "label": "Stagger delay amount",
                     "info": "Milliseconds between each item's animation start."
                 },
+                "header_loader": "Page Loader",
+                "ph_loader_enable": {
+                    "label": "Show loader"
+                },
+                "ph_loader_logo": {
+                    "label": "Logo"
+                },
+                "ph_loader_tagline": {
+                    "label": "Tagline (optional)"
+                },
+                "ph_loader_duration": {
+                    "label": "Minimum duration"
+                },
                 "header_design_tokens": "Design Tokens",
                 "ph_shadow_opacity": {
                     "label": "Shadow opacity"
@@ -5197,6 +5210,15 @@
                         }
                     }
                 }
+            }
+        },
+        "follow_on_shop": {
+            "name": "Follow on Shop",
+            "paragraph": {
+                "content": "To let customers follow your shop in the Shop app from your storefront, Shop Pay must be enabled. [Learn more](https://help.shopify.com/manual/online-store/themes/customizing-themes/follow-on-shop)"
+            },
+            "button": {
+                "label": "Enable Follow on Shop"
             }
         },
         "media_with_text": {

@@ -18,14 +18,14 @@
 {% enddoc %}
 
 {% liquid
-  assign video = video | default: section.settings.video
-  assign external_video = external_video | default: section.settings.external_video
-  assign autoplay = autoplay | default: section.settings.autoplay, allow_false: true | default: false, allow_false: true
-  assign loop = loop | default: section.settings.loop, allow_false: true | default: false, allow_false: true
-  assign show_controls = show_controls | default: section.settings.show_controls, allow_false: true | default: false, allow_false: true
-  assign muted = muted | default: section.settings.muted, allow_false: true | default: false, allow_false: true
-  assign background = background | default: section.settings.background, allow_false: true | default: false, allow_false: true
-  assign media_crop = media_crop | default: section.settings.media_crop | default: '16-9'
+  assign video = video | default: nil
+  assign external_video = external_video | default: nil
+  assign autoplay = autoplay | default: false, allow_false: true
+  assign loop = loop | default: false, allow_false: true
+  assign show_controls = show_controls | default: false, allow_false: true
+  assign muted = muted | default: false, allow_false: true
+  assign background = background | default: false, allow_false: true
+  assign media_crop = media_crop | default: '16-9'
   assign hydration = hydration | default: 'on:visible'
 
   if external_video != blank

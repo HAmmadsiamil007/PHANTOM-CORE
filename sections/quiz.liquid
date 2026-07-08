@@ -265,11 +265,8 @@
           <span class="quiz-progress__label" data-quiz-progress-label>1 / {{ section.blocks.size }}</span>
         </div>
 
-        {%- assign computed_options = false -%}
-
         {%- for block in section.blocks -%}
           {%- liquid
-            assign has_options = false
             assign opt_1_handles = ''
             assign opt_2_handles = ''
             assign opt_3_handles = ''
@@ -281,8 +278,7 @@
             assign opt_4_tag = block.settings.option_4_tag | downcase
 
             if opt_1_tag != blank or opt_2_tag != blank or opt_3_tag != blank or opt_4_tag != blank
-              assign has_options = true
-              paginate collections.all.products by 1000
+              paginate collections.all.products by 250
                 for product in collections.all.products
                   assign tags_down = product.tags | join: ',' | downcase | split: ','
 
@@ -302,7 +298,6 @@
                   endif
                 endfor
               endpaginate
-              assign computed_options = true
             endif
           -%}
 
@@ -382,6 +377,12 @@
 </div>
 
 <script src="{{ 'quiz.js' | asset_url }}" type="module" defer></script>
+
+{% stylesheet %}
+.is-hidden {
+  display: none;
+}
+{% endstylesheet %}
 
 {% schema %}
 {

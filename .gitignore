@@ -5,7 +5,9 @@ node_modules/
 .serena/
 forensic audit/
 *.original.md
-
+_scripts/
 nul
-
-nul
+nul.txt
+theme-check-output.txt
+.superpowers/
+docs/

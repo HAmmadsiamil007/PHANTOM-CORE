@@ -14,7 +14,7 @@
 {% enddoc %}
 
 {% liquid
-  assign size = size | default: block.settings.size | default: 'xl'
+  assign size = size | default: 'xl'
 %}
 
 {% render 'ui-text', as: 'h1 ', variant: 'heading', size: size, text: product.title %}

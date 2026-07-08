@@ -14,14 +14,15 @@
   adapts its UI based on the product's available options and the chosen
   selector type.
 
+  @param {object} [section] - The section object for generating unique form IDs
   @param {string} [variant_selector_type] ('radio'|'select') - The type of variant selector to render.
 
   @example
-  {% render 'pdp-variant-picker', variant_selector_type: 'radio', product: closest.product %}
+  {% render 'pdp-variant-picker', variant_selector_type: 'radio', product: closest.product, section: section %}
 {% enddoc %}
 
 {% liquid
-  assign variant_selector_type = variant_selector_type | default: block.settings.variant_selector_type | default: 'radio'
+  assign variant_selector_type = variant_selector_type | default: 'radio'
 %}
 
 {% capture variant_selector %}

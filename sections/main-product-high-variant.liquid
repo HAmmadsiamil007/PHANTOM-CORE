@@ -7,7 +7,7 @@
 {% endcapture %}
 
 <div data-aos="{% if section.settings.entrance_animation and section.settings.entrance_animation != 'existing' %}{{ section.settings.entrance_animation }}{% endif %}">
-  {%- render 'pdp-main', slot_gallery: slot_gallery, slot_details: slot_details -%}
+  {%- render 'pdp-main', slot_gallery: slot_gallery, slot_details: slot_details, section: section -%}
 </div>
 
 {% javascript %}

@@ -1,5 +1,5 @@
 {%- liquid
-  capture gridView
+  capture grid_view
     if sub_collection_links.size < per_row
       assign products_per_row = sub_collection_links.size
     else
@@ -22,10 +22,10 @@
         {%- unless parent_url == sub_collection.url -%}
           {%- render 'collection-grid-item',
             collection: sub_collection,
-            gridView: gridView,
+            grid_view: grid_view,
             collection_title: sub_collection_link.title
             per_row: per_row,
-            sizeVariable: gridView,
+            sizeVariable: grid_view,
             fallback: 'variable',
           -%}
         {%- endunless -%}

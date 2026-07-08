@@ -1,4 +1,4 @@
-﻿{%- if section.settings.divider -%}<div class="section--divider">{%- endif -%}
+﻿<div class="{% if section.settings.divider %}section--divider{% endif %}">
 <div data-aos="{% if section.settings.entrance_animation and section.settings.entrance_animation != 'existing' %}{{ section.settings.entrance_animation }}{% else %}overflow__animation{% endif %}">
 
 {%- assign product = all_products[section.settings.featured_product] -%}
@@ -18,7 +18,7 @@
   context: 'featured-product',
 -%}
 
-{%- if section.settings.divider -%}</div>{%- endif -%}
+</div>
 </div>
 
 {% schema %}

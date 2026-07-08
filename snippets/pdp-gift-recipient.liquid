@@ -37,7 +37,6 @@
 {% endstylesheet %}
 
 {%- liquid
-  assign product = section.settings.product | default: product
   assign gift_card_recipient_control_flag = 'properties[__shopify_send_gift_card_to_recipient]'
 
   capture checkbox_label
@@ -88,57 +87,56 @@
   endcapture
 -%}
 
-{%- capture input_email_attributes -%}
-  {% if form.errors contains 'email' %}
-    aria-invalid="true"
-    aria-describedby="RecipientForm-email-error-{{ section.id }}"
-  {% endif %}
-{%- endcapture -%}
+{% form 'product', product %}
+  {%- capture input_email_attributes -%}
+    {% if form.errors contains 'email' %}
+      aria-invalid="true"
+      aria-describedby="RecipientForm-email-error-{{ section.id }}"
+    {% endif %}
+  {%- endcapture -%}
 
-{%- capture input_name_attributes -%}
-  {% if form.errors contains 'name' %}
-    aria-invalid="true"
-    aria-describedby="RecipientForm-name-error-{{ section.id }}"
-  {% endif %}
-{%- endcapture -%}
+  {%- capture input_name_attributes -%}
+    {% if form.errors contains 'name' %}
+      aria-invalid="true"
+      aria-describedby="RecipientForm-name-error-{{ section.id }}"
+    {% endif %}
+  {%- endcapture -%}
 
-{%- capture input_date_attributes -%}
-  autocomplete="send_on"
-  pattern="\d{4}-\d{2}-\d{2}"
-  {% if form.errors contains 'send_on' %}
-    aria-invalid="true"
-    aria-describedby="RecipientForm-send_on-error-{{ section.id }}"
-  {% endif %}
-{%- endcapture -%}
+  {%- capture input_date_attributes -%}
+    autocomplete="send_on"
+    pattern="\d{4}-\d{2}-\d{2}"
+    {% if form.errors contains 'send_on' %}
+      aria-invalid="true"
+      aria-describedby="RecipientForm-send_on-error-{{ section.id }}"
+    {% endif %}
+  {%- endcapture -%}
 
-{%- capture input_message_attributes -%}
-  maxlength="{{ max_chars_message }}"
-  aria-label="{{ input_message_label }}"
-  {% if form.errors contains 'message' %}
-    aria-invalid="true"
-    aria-describedby="RecipientForm-message-error-{{ section.id }}"
-  {% endif %}
-{%- endcapture -%}
+  {%- capture input_message_attributes -%}
+    maxlength="{{ max_chars_message }}"
+    aria-label="{{ input_message_label }}"
+    {% if form.errors contains 'message' %}
+      aria-invalid="true"
+      aria-describedby="RecipientForm-message-error-{{ section.id }}"
+    {% endif %}
+  {%- endcapture -%}
 
-{% capture input_message_content %}
-  {%- render 'ui-input',
-    multiline: 10,
-    id: input_message_id,
-    classlist: 'gift-recipient-form__message',
-    name: 'properties[Message]',
-    placeholder: input_message_label,
-    label: input_message_label,
-    attributes: input_message_attributes,
-    value: form.message,
-    full: true
-  -%}
+  {% capture input_message_content %}
+    {%- render 'ui-input',
+      multiline: 10,
+      id: input_message_id,
+      classlist: 'gift-recipient-form__message',
+      name: 'properties[Message]',
+      placeholder: input_message_label,
+      label: input_message_label,
+      attributes: input_message_attributes,
+      value: form.message,
+      full: true
+    -%}
 
-  {%- render 'ui-text', variant: 'body-sm', text: max_chars_message_rendered, style: 'opacity: 0.7;' -%}
-{% endcapture %}
+    {%- render 'ui-text', variant: 'body-sm', text: max_chars_message_rendered, style: 'opacity: 0.7;' -%}
+  {% endcapture %}
 
-{% capture form_inputs %}
-  {% form 'product', product %}
-    {% capture form_inputs_content %}
+  {% capture form_inputs_content %}
       {%- render 'ui-input',
         classlist: 'gift-recipient-form__email',
         id: input_email_id,
@@ -178,7 +176,6 @@
       -%}
     {% endcapture %}
   {% endform %}
-{% endcapture %}
 
 {% capture main_content %}
   {%- render 'ui-checkbox',

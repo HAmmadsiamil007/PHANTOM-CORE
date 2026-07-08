@@ -15,10 +15,10 @@
 {% enddoc %}
 
 {% liquid
-  assign product = section.settings.product | default: product
+  assign product = product | default: nil
   assign media = media | default: product.media | where: 'media_type', 'model' | first
-  assign autoplay = autoplay | default: section.settings.autoplay, allow_false: true | default: true, allow_false: true
-  assign media_crop = media_crop | default: section.settings.media_crop | default: 'square'
+  assign autoplay = autoplay | default: true, allow_false: true
+  assign media_crop = media_crop | default: 'square'
   assign hydration = hydration | default: 'on:visible'
 %}
 

@@ -121,4 +121,14 @@
     id="Recipient-Control-{{ section.id }}"
     disabled
   >
-</recipient-form>
+  </recipient-form>
+
+{% stylesheet %}
+.recipient-fields {
+  display: none;
+}
+
+.recipient-form.is-active .recipient-fields {
+  display: block;
+}
+{% endstylesheet %}

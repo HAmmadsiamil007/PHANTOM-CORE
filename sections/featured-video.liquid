@@ -1,4 +1,4 @@
-{%- if section.settings.divider -%}<div class="section--divider">{%- endif -%}
+<div class="{% if section.settings.divider %}section--divider{% endif %}">
 
 <div class="page-width" data-aos="{% if section.settings.entrance_animation and section.settings.entrance_animation != 'existing' %}{{ section.settings.entrance_animation }}{% endif %}">
   {%- if section.settings.title != blank -%}
@@ -20,7 +20,26 @@
   </div>
 </div>
 
-{%- if section.settings.divider -%}</div>{%- endif -%}
+</div>
+
+{% stylesheet %}
+.video-wrapper {
+  position: relative;
+  overflow: hidden;
+  max-width: 100%;
+  padding-bottom: 56.25%;
+  height: 0;
+}
+
+.video-wrapper iframe,
+.video-wrapper video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+{% endstylesheet %}
 
 {% schema %}
 {

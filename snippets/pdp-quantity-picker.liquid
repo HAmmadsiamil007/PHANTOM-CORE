@@ -15,9 +15,9 @@
 {% enddoc %}
 
 {%- liquid
-  assign form_id = 'pdp-form-' | append: section.id
-  assign show_inventory_status = show_inventory_status | default: block.settings.show_inventory_status, allow_false: true | default: true, allow_false: true
-  assign inventory_threshold = inventory_threshold | default: block.settings.inventory_threshold | default: 10
+  assign form_id = 'pdp-form-' | append: product.id
+  assign show_inventory_status = show_inventory_status | default: true, allow_false: true
+  assign inventory_threshold = inventory_threshold | default: 10
   assign current_variant = product.selected_or_first_available_variant
 -%}
 

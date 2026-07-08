@@ -1,7 +1,7 @@
 ﻿{%- liquid
-  assign isModal = false
+  assign is_modal = false
   if template == 'product.modal'
-    assign isModal = true
+    assign is_modal = true
   endif
 -%}
 
@@ -14,7 +14,7 @@
     image_container_width: section.settings.image_size,
     product_zoom_enable: section.settings.product_zoom_enable,
     sku_enable: section.settings.sku_enable,
-    isModal: isModal,
+    is_modal: is_modal,
     thumbnail_position: section.settings.thumbnail_position,
     thumbnail_height: section.settings.thumbnail_height,
     thumbnail_arrows: section.settings.thumbnail_arrows,

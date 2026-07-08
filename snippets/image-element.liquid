@@ -73,7 +73,7 @@
    # If sizes and sizeVariable is blank we output a default value for sizes which is 100vw
   if sizes == blank and sizeVariable != blank
     capture sizes
-      render 'sizes-explicit', sizeVariable: sizeVariable, fallback: fallback
+      render 'sizes-explicit', size_variable: sizeVariable, fallback: fallback
     endcapture
   endif
 
@@ -151,13 +151,13 @@
     }}
   {% endif %}
 {% elsif type == 'photoswipe' %}
-  {% assign widthsArray = widths | split: ',' %}
+  {% assign widths_array = widths | split: ',' %}
   {%- capture img_widths -%}
-    {% for width in widthsArray %}
+    {% for width in widths_array %}
       {{ media | image_url: width: width }} {{ width | append: 'w' }},
     {% endfor %}
   {%- endcapture -%}
-  {% assign img_width = widthsArray | last | strip %}
+  {% assign img_width = widths_array | last | strip %}
   {% assign img_height = img_width | divided_by: img.aspect_ratio %}
   <img src="{{ img | image_url: width: img_width }}"
     width="{{ img_width }}"

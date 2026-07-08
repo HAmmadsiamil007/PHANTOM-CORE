@@ -58,6 +58,10 @@
       "title": "Pesquisa",
       "placeholder": "Busque em nossa loja",
       "submit": "Buscar",
+      "products": "Produtos",
+      "suggestions": "Sugestões",
+      "cancel": "Cancelar",
+      "search_title": "Mais buscados",
       "result_count": {
         "one": "{{ count }} resultado",
         "other": "{{ count }} resultados"
@@ -68,6 +72,9 @@
       "close_menu": "Fechar menu",
       "expand_submenu": "Expandir menu",
       "collapse_submenu": "Desfazer menu"
+    },
+    "ph_loader": {
+      "loading": "Loading"
     }
   },
   "sections": {
@@ -187,15 +194,65 @@
         "entrance_animation": {
           "label": "Entrance animation",
           "options": {
-            "existing": { "label": "Existing" },
-            "ph-fade-up": { "label": "Fade up" },
-            "ph-scale-in": { "label": "Scale in" },
-            "ph-blur-in": { "label": "Blur in" },
-            "ph-slide-left": { "label": "Slide left" },
-            "ph-slide-right": { "label": "Slide right" },
-            "ph-rotate-in": { "label": "Rotate in" }
+            "existing": {
+              "label": "Existing"
+            },
+            "ph-fade-up": {
+              "label": "Fade up"
+            },
+            "ph-scale-in": {
+              "label": "Scale in"
+            },
+            "ph-blur-in": {
+              "label": "Blur in"
+            },
+            "ph-slide-left": {
+              "label": "Slide left"
+            },
+            "ph-slide-right": {
+              "label": "Slide right"
+            },
+            "ph-rotate-in": {
+              "label": "Rotate in"
+            }
           }
         }
+      }
+    },
+    "free_shipping_bar": {
+      "name": "Barra de Frete Grátis",
+      "settings": {
+        "enable": "Habilitar Barra de Frete Grátis",
+        "display_mode": "Modo de exibição",
+        "animation_style": "Estilo de animação",
+        "floating_position": "Posição flutuante",
+        "header_colors": "Cores",
+        "bg_color": "Fundo",
+        "text_color": "Texto",
+        "empty_bar_color": "Cor da barra vazia",
+        "header_text": "Modelos de texto",
+        "empty_text": "Texto do carrinho vazio",
+        "empty_text_info": "Exibido quando o carrinho está vazio. Use {{ threshold }} como placeholder.",
+        "progress_text": "Texto de progresso",
+        "progress_text_info": "Exibido ao progredir para o próximo nível. Use {{ amount }}, {{ reward }} como placeholders.",
+        "unlocked_text": "Texto recém-desbloqueado",
+        "unlocked_text_info": "Exibido quando um nível é desbloqueado. Use {{ reward }}, {{ amount }}, {{ next_reward }} como placeholders.",
+        "complete_text": "Texto tudo desbloqueado",
+        "complete_text_info": "Exibido quando todos os níveis são desbloqueados. Use {{ max_reward }} como placeholder."
+      },
+      "blocks": {
+        "tier": {
+          "name": "Nível",
+          "settings": {
+            "threshold": "Limiar ($)",
+            "label": "Rótulo",
+            "description": "Descrição",
+            "fill_color": "Cor de preenchimento da barra"
+          }
+        }
+      },
+      "presets": {
+        "name": "Barra de Frete Grátis"
       }
     }
   },
@@ -398,9 +455,12 @@
       "log_out": "Sair",
       "log_in": "Entrar",
       "create_account": "Criar conta"
+    },
+    "footer": {
+      "social_platform": "{{ name }} no {{ platform }}"
     }
   },
-    "products": {
+  "products": {
     "general": {
       "color_swatch_trigger": "Cor",
       "size_trigger": "Tamanho",
@@ -418,14 +478,17 @@
     "product": {
       "description": "DescriÃ§Ã£o",
       "in_stock_label": "Em estoque",
-      "stock_label": "{{ count }} em estoque",
+      "stock_label": {
+        "one": "{{ count }} item em estoque",
+        "other": "{{ count }} itens em estoque"
+      },
       "sold_out": "Esgotado",
       "unavailable": "IndisponÃ­vel",
       "quantity": "Quantidade",
       "add_to_cart": "Adicionar ao carrinho",
       "preorder": "Pedido antecipado",
       "include_taxes": "Taxas incluÃ­das.",
-      "shipping_policy_html": "<a href='{{ link }}'>Frete<\/a> calculado no checkout.",
+      "shipping_policy_html": "<a href='{{ link }}'>Frete</a> calculado no checkout.",
       "will_not_ship_until": "Envio a partir de {{ date }}",
       "will_be_in_stock_after": "Em estoque a partir de {{ date }}",
       "waiting_for_stock": "Inventory no caminho",
@@ -433,14 +496,14 @@
       "view_in_space_label": "Ver em seu espaÃ§o, carregar item na janela de realidade aumentada"
     }
   },
-  "store_availability":{
-    "general":{
+  "store_availability": {
+    "general": {
       "view_store_info": "Exibir informaÃ§Ãµes de loja",
       "check_other_stores": "Ver disponibilidade em outras lojas",
       "pick_up_available": "transbordo",
       "pick_up_currently_unavailable": "Captador atualmente indisponÃ­vel",
-      "pick_up_available_at_html": "Captador disponÃ­vel em <strong> {{location_name}} <\/strong>",
-      "pick_up_unavailable_at_html": "Captador disponÃ­vel atualmente em <strong> {{location_name}} <\/strong>"
+      "pick_up_available_at_html": "Captador disponÃ­vel em <strong> {{location_name}} </strong>",
+      "pick_up_unavailable_at_html": "Captador disponÃ­vel atualmente em <strong> {{location_name}} </strong>"
     }
   },
   "gift_cards": {
@@ -456,7 +519,20 @@
       "add_to_apple_wallet": "Adicionar ao Apple Wallet"
     }
   },
-  "date_formats":{
+  "recipient": {
+    "form": {
+      "checkbox": "Quero enviar como presente",
+      "email_label": "E-mail do destinatário",
+      "email": "E-mail",
+      "name_label": "Nome do destinatário (opcional)",
+      "name": "Nome",
+      "message_label": "Mensagem (opcional)",
+      "message": "Mensagem",
+      "max_characters": "{{ max_chars }} caracteres no máximo",
+      "send_on_label": "Enviar em (opcional)"
+    }
+  },
+  "date_formats": {
     "month_day_year": "%d de %B de %Y"
   },
   "info": {
@@ -475,7 +551,9 @@
     "pick_up_available": "Retirada disponÃ­vel",
     "pick_up_currently_unavailable": "Retirada atualmente indisponÃ­vel",
     "pick_up_available_at_html": "Retirada disponÃ­vel em <strong>{{ location_name }}</strong>",
-    "pick_up_unavailable_at_html": "Retirada atualmente indisponÃ­vel em <strong>{{ location_name }}</strong>"
+    "pick_up_unavailable_at_html": "Retirada atualmente indisponÃ­vel em <strong>{{ location_name }}</strong>",
+    "save_amount": "Economize {{ saved_amount }}",
+    "max_characters": "Ate {{ max_chars }} caracteres"
   },
   "labels": {
     "quantity": "Quantidade",

@@ -1,0 +1,27 @@
+{%- if settings.ph_loader_enable -%}
+  {%- capture logo_img -%}{%- if settings.ph_loader_logo != blank -%}{{ settings.ph_loader_logo | image_url: width: 480 }}{%- endif -%}{%- endcapture -%}
+  {%- capture logo_alt -%}{{ shop.name | escape }}{%- endcapture -%}
+  {%- capture loader_duration -%}{{ settings.ph_loader_duration | default: 1500 }}{%- endcapture -%}
+  {%- capture loader_tagline -%}{{ settings.ph_loader_tagline | escape }}{%- endcapture -%}
+
+  <div id="ph-loader" class="ph-loader" data-duration="{{ loader_duration }}" role="status" aria-label="{{ 'general.ph_loader.loading' | t }}">
+    {%- if logo_img != blank -%}
+      <div class="ph-loader__logo">
+        <img src="{{ logo_img }}" alt="{{ logo_alt }}" width="auto" height="auto" style="max-width:var(--ph-loader-logo-max-w,240px);max-height:var(--ph-loader-logo-max-h,80px)">
+      </div>
+    {%- else -%}
+      <div class="ph-loader__logo--text">{{ shop.name }}</div>
+    {%- endif -%}
+
+    <div class="ph-loader__arc" aria-hidden="true">
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+        <circle class="ph-loader__arc-track" cx="24" cy="24" r="18"/>
+        <circle class="ph-loader__arc-progress" cx="24" cy="24" r="18"/>
+      </svg>
+    </div>
+
+    {%- if loader_tagline != blank -%}
+      <div class="ph-loader__tagline">{{ loader_tagline }}</div>
+    {%- endif -%}
+  </div>
+{%- endif -%}

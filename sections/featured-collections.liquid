@@ -9,9 +9,9 @@
 
   <div class="grid grid--uniform{% unless settings.collection_grid_gutter %} grid--no-gutters{% endunless %}">
     {%- liquid
-      assign isEmpty = true
+      assign is_empty = true
       if section.blocks.size > 0
-        assign isEmpty = false
+        assign is_empty = false
       endif
     -%}
 
@@ -20,7 +20,7 @@
         assign collection = collections[block.settings.collection]
         assign background_position = block.settings.focal_point
 
-        capture gridView
+        capture grid_view
           if section.blocks.size < section.settings.per_row
             assign products_per_row = section.blocks.size
           else
@@ -33,15 +33,15 @@
       {%- render 'collection-grid-item',
         collection: collection,
         block: block,
-        gridView: gridView,
+        grid_view: grid_view,
         background_position: background_position,
         per_row: section.settings.per_row,
-        sizeVariable: gridView,
+        sizeVariable: grid_view,
         fallback: 'variable'
       -%}
     {%- endfor -%}
 
-    {%- if isEmpty -%}
+    {%- if is_empty -%}
       <div class="page-width">
         <div class="grid">
           <div class="grid__item">

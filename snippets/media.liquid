@@ -155,7 +155,7 @@
             {% if video_looping %}loop{% endif %}
             controls
             controlsList="nodownload"
-            poster="{{ media.preview_image | img_url: product_image_size }}"
+            poster="{{ media.preview_image | image_url: product_image_size }}"
             class="hide product-video-mp4-sound">
             {%- for source in media.sources -%}
               <source src="{{ source.url }}" type="{{ source.mime_type }}">
@@ -193,7 +193,7 @@
                 {% if video_style == 'muted' %}muted{% endif %}
                 {% if video_style == 'unmuted' %}controls{% endif %}
                 controlsList="nodownload"
-                poster="{{ media.preview_image | img_url: product_image_size }}"
+                poster="{{ media.preview_image | image_url: product_image_size }}"
                 data-image-count="{{ product.media.size }}"
                 data-video-type="{{ video_type }}"
                 data-video-style="{{ video_style }}"

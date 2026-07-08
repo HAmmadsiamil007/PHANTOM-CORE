@@ -19,10 +19,10 @@
 {% enddoc %}
 
 {%  liquid
-  assign image_aspect_ratio = image_aspect_ratio | default: block.settings.image_aspect_ratio | default: '1/1'
+  assign image_aspect_ratio = image_aspect_ratio | default: '1/1'
   assign thumbnail_position = thumbnail_position | default: 'left'
-  assign autoplay = autoplay | default: block.settings.enable_video_autoplay, allow_false: true | default: false, allow_false: true
-  assign loop = loop | default: block.settings.enable_video_looping, allow_false: true | default: false, allow_false: true
+  assign autoplay = autoplay | default: false, allow_false: true
+  assign loop = loop | default: false, allow_false: true
 
   if image_aspect_ratio == '1/1'
     assign video_aspect_ratio = 'square'
@@ -37,7 +37,6 @@
 
 {%- capture id -%}{% render 'theme-id', prefix: 'media-gallery' %}{%- endcapture -%}
 
-{%- assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
 {%- assign group = 'product-gallery-' | append: id -%}
 
 {% capture main_gallery %}
@@ -101,7 +100,7 @@
         {% assign media = product.selected_or_first_available_variant.image %}
         {% assign is_active = true %}
         {% capture image_content %}
-          {{ product.selected_or_first_available_variant.image | image_url: width: 2400 | image_tag:  alt: media.alt }}
+        {{ product.selected_or_first_available_variant.image | image_url: width: 2400 | image_tag:  alt: product.selected_or_first_available_variant.image.alt }}
         {% endcapture %}
 
         <button
@@ -184,8 +183,7 @@
     assign is_reverse = true
   endif
 
-  assign gallery_classes = 'media-gallery media-gallery--' | append: thumbnail_position
-  assign gallery_attributes = 'id="' | append: id | append: '" data-media-gallery'
+
 %}
 
 {% capture gallery_content %}

@@ -8,13 +8,11 @@
   <link rel="canonical" href="{{ canonical_url }}">
   <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
   <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
-  <link rel="dns-prefetch" href="https://productreviews.shopifycdn.com">
-  <link rel="dns-prefetch" href="https://ajax.googleapis.com">
   <link rel="dns-prefetch" href="https://maps.googleapis.com">
   <link rel="dns-prefetch" href="https://maps.gstatic.com">
 
   {%- if settings.favicon != blank -%}
-    <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png" />
+    <link rel="shortcut icon" href="{{ settings.favicon | image_url: '32x32' }}" type="image/png" />
   {%- endif -%}
 
   {%- render 'seo-title' -%}
@@ -31,6 +29,7 @@
   {{ 'theme.css' | asset_url | stylesheet_tag: preload: true }}
   {{ 'ph-motion.css' | asset_url | stylesheet_tag }}
   {{ 'ph-skeleton.css' | asset_url | stylesheet_tag }}
+  {{ 'ph-loader.css' | asset_url | stylesheet_tag }}
   {{ 'ph-transitions.css' | asset_url | stylesheet_tag }}
   {{ 'ph-design-tokens.css' | asset_url | stylesheet_tag }}
   {%- render 'css-variables' -%}
@@ -330,10 +329,14 @@
         skeletonsEnabled: {{ settings.ph_motion_skeletons_enable | default: false }}
       };
     </script>
-    {{ 'ph-motion.js' | asset_url | script_tag }}
+    <script src="{{ 'ph-motion.js' | asset_url }}" defer="defer"></script>
     {%- if settings.ph_motion_viewtransitions_enable -%}
       <script src="{{ 'ph-transitions.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+  {%- endif -%}
+
+  {%- if settings.ph_loader_enable -%}
+    <script src="{{ 'ph-loader.js' | asset_url }}" defer="defer"></script>
   {%- endif -%}
 
   {%- if settings.ph_shadow_opacity or settings.ph_shadow_color or settings.ph_elevation_intensity -%}
@@ -367,6 +370,8 @@
 
 <body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if request.path == '/challenge' %} template-challenge{% endif %}" data-center-text="{{ settings.type_body_align_text }}" data-button_style="{{ settings.button_style }}" data-type_header_capitalize="{{ settings.type_header_capitalize }}" data-type_headers_align_text="{{ settings.type_headers_align_text }}" data-type_product_capitalize="{{ settings.type_product_capitalize }}" data-swatch_style="{{ settings.swatch_style }}" {% if settings.disable_animations %}data-disable-animations="true"{% endif %}>
 
+  {%- render 'ph-loader' -%}
+
   <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
 
   <div id="PageContainer" class="page-container">
@@ -398,14 +403,14 @@
   <template id="naturalImageMarkup">
     <div class="image-wrap" style="height: 0;">
       <image-element data-aos="image-fade-in" data-aos-offset="150">
-        <img class="grid-product__image image-element" width height src srcset loading="lazy" alt>
+        <img class="grid-product__image image-element" width="360" height="360" src srcset loading="lazy" alt>
       </image-element>
     </div>
   </template>
   <template id="fixedRatioImageMarkup">
     <div class="grid__image-ratio">
       <image-element data-aos="image-fade-in" data-aos-offset="150">
-        <img class="image-element" width height src srcset loading="lazy" alt>
+        <img class="image-element" width="360" height="360" src srcset loading="lazy" alt>
       </image-element>
     </div>
   </template>

@@ -1157,6 +1157,43 @@
       },
       {
         "type": "header",
+        "content": "Page Loader"
+      },
+      {
+        "type": "paragraph",
+        "content": "Show a premium brand reveal animation while the page loads."
+      },
+      {
+        "type": "checkbox",
+        "id": "ph_loader_enable",
+        "label": "Show loader",
+        "default": false
+      },
+      {
+        "type": "image_picker",
+        "id": "ph_loader_logo",
+        "label": "Logo",
+        "info": "Recommended max 240px wide. Leave blank to use store name."
+      },
+      {
+        "type": "text",
+        "id": "ph_loader_tagline",
+        "label": "Tagline",
+        "default": "Premium Quality",
+        "info": "Shown below the spinner. Leave blank in translation file to hide."
+      },
+      {
+        "type": "range",
+        "id": "ph_loader_duration",
+        "label": "Minimum duration",
+        "default": 1500,
+        "min": 500,
+        "max": 4000,
+        "step": 100,
+        "unit": "ms"
+      },
+      {
+        "type": "header",
         "content": "Design Tokens"
       },
       {

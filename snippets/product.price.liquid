@@ -12,7 +12,7 @@
 {% enddoc %}
 
 {%- liquid
-  assign product = section.settings.product | default: product
+  assign product = product
   assign use_variant = use_variant | default: true, allow_false: true
   assign target = product
 
@@ -22,7 +22,7 @@
 
   assign compare_at_price = target.compare_at_price
   assign price = target.price | default: 1999
-  assign available = target.available | default: false
+
   assign product_save_amount = product_save_amount | default: settings.product_save_amount | default: false
   assign product_save_type = product_save_type | default: settings.product_save_type | default: 'dollar'
   assign superscript_decimals = superscript_decimals | default: settings.superscript_decimals, allow_false: true | default: true, allow_false: true

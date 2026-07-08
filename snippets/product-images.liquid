@@ -41,7 +41,7 @@
               product_zoom_enable: product_zoom_enable,
               product_zoom_size: product_zoom_size,
               product_image_size: product_image_size,
-              isModal: isModal,
+              is_modal: is_modal,
               video_looping: video_looping,
               video_style: video_style,
               sizes: sizes,
@@ -103,7 +103,7 @@
                   data-group="{{image_set_full}}"
                 {% endif %}>
                 <a
-                  href="{{ media.preview_image | img_url: product_zoom_size }}"
+                  href="{{ media.preview_image | image_url: product_zoom_size }}"
                   data-product-thumb
                   class="product__thumb"
                   data-index="{{ forloop.index0 }}"
@@ -120,9 +120,6 @@
                       </span>
                     {%- endif -%}
 
-                    {%- capture image_classes -%}
-                      appear-delay-{{ forloop.index | times: 3 }}
-                    {%- endcapture -%}
                     {%- assign media_alt = media.alt | escape | split: '#' | first -%}
 
                     {%- render 'image-element',
