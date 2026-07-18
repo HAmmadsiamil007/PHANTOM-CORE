@@ -20,10 +20,70 @@ class Plugin {
 
 	public function init(): void {
 		$this->init_registries();
+		$this->register_nav_menus();
+		$this->register_widget_areas();
 		do_action( 'phantom_core/init' );
 	}
 
 	private function init_registries(): void {
 		Settings_Registry::get_instance()->register();
+	}
+
+	private function register_nav_menus(): void {
+		add_action(
+			'after_setup_theme',
+			function (): void {
+				register_nav_menus(
+					array(
+						'phantom_primary'   => __( 'Primary Menu', 'phantom-core' ),
+						'phantom_secondary' => __( 'Secondary Menu', 'phantom-core' ),
+						'phantom_footer'    => __( 'Footer Menu', 'phantom-core' ),
+						'phantom_mobile'    => __( 'Mobile Menu', 'phantom-core' ),
+					)
+				);
+			}
+		);
+	}
+
+	private function register_widget_areas(): void {
+		add_action(
+			'widgets_init',
+			function (): void {
+				$widget_areas = array(
+					array(
+						'id'          => 'phantom-sidebar-main',
+						'name'        => __( 'Main Sidebar', 'phantom-core' ),
+						'description' => __( 'Main blog sidebar', 'phantom-core' ),
+					),
+					array(
+						'id'          => 'phantom-sidebar-shop',
+						'name'        => __( 'Shop Sidebar', 'phantom-core' ),
+						'description' => __( 'WooCommerce shop sidebar', 'phantom-core' ),
+					),
+				);
+
+				for ( $i = 1; $i <= 4; $i++ ) {
+					$widget_areas[] = array(
+						'id'          => 'phantom-footer-' . $i,
+						'name'        => sprintf( __( 'Footer Widgets %d', 'phantom-core' ), $i ),
+						'description' => sprintf( __( 'Footer widget column %d', 'phantom-core' ), $i ),
+					);
+				}
+
+				foreach ( $widget_areas as $area ) {
+					register_sidebar(
+						array(
+							'id'            => $area['id'],
+							'name'          => $area['name'],
+							'description'   => $area['description'],
+							'before_widget' => '<section id="%1$s" class="widget %2$s">',
+							'after_widget'  => '</section>',
+							'before_title'  => '<h3 class="widget-title">',
+							'after_title'   => '</h3>',
+						)
+					);
+				}
+			}
+		);
 	}
 }

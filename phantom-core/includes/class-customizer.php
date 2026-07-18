@@ -25,6 +25,7 @@ class Customizer {
 		$this->panels = $this->define_panels();
 		add_action( 'customize_register', array( $this, 'register' ) );
 		add_action( 'customize_preview_init', array( $this, 'preview_js' ) );
+		add_action( 'customize_save_after', array( $this, 'sync_options' ) );
 	}
 
 	public function define_panels(): array {
@@ -159,13 +160,19 @@ class Customizer {
 
 		switch ( $type ) {
 			case 'color':
-				$wp_customize->add_control( 'wp_color_picker', $setting_id, array(
-					'label'       => $label,
-					'description' => $description,
-					'section'     => $section_id,
-					'settings'    => $setting_id,
-					'priority'    => $priority,
-				) );
+				$wp_customize->add_control(
+					new \WP_Customize_Color_Control(
+						$wp_customize,
+						$setting_id,
+						array(
+							'label'       => $label,
+							'description' => $description,
+							'section'     => $section_id,
+							'settings'    => $setting_id,
+							'priority'    => $priority,
+						)
+					)
+				);
 				break;
 
 			case 'bool':
@@ -348,13 +355,54 @@ class Customizer {
 	/**
 	 * Build inline CSS from saved settings for initial page render.
 	 */
+	/**
+	 * Sync individual phantom_* options into the phantom_options array
+	 * after Customizer saves. This bridges the gap between Customizer's
+	 * per-setting storage and the array-based phantom_options format
+	 * used by the Shell and inline CSS injection.
+	 */
+	public function sync_options(): void {
+		global $wpdb;
+		$rows = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT option_name, option_value FROM {$wpdb->options} WHERE option_name LIKE %s",
+				$wpdb->esc_like( 'phantom_' ) . '%'
+			)
+		);
+		$prefix = 'phantom_';
+		$options = get_option( 'phantom_options', array() );
+		$changed = false;
+		foreach ( $rows as $row ) {
+			if ( 'phantom_options' === $row->option_name ) {
+				continue;
+			}
+			$key = substr( $row->option_name, strlen( $prefix ) );
+			$value = maybe_unserialize( $row->option_value );
+			if ( ! isset( $options[ $key ] ) || $options[ $key ] !== $value ) {
+				$options[ $key ] = $value;
+				$changed = true;
+			}
+		}
+		if ( $changed ) {
+			update_option( 'phantom_options', $options );
+		}
+	}
+
 	public function get_inline_css(): string {
 		$options = get_option( 'phantom_options', array() );
 		$map     = $this->get_css_var_map();
 		$css     = '';
 		foreach ( $map as $key => $var ) {
+			$val = null;
 			if ( isset( $options[ $key ] ) && '' !== $options[ $key ] ) {
 				$val = $options[ $key ];
+			} else {
+				$individual = get_option( 'phantom_' . $key, null );
+				if ( null !== $individual && '' !== $individual ) {
+					$val = $individual;
+				}
+			}
+			if ( null !== $val ) {
 				if ( in_array( $key, Settings_Registry::get_px_keys(), true ) ) {
 					$val = is_numeric( $val ) ? $val . 'px' : $val;
 				}

@@ -43,6 +43,7 @@ require_once PHANTOM_CORE_PATH . 'includes/class-settings-registry.php';
 require_once PHANTOM_CORE_PATH . 'includes/class-core-plugin.php';
 require_once PHANTOM_CORE_PATH . 'includes/class-rest-controller.php';
 require_once PHANTOM_CORE_PATH . 'includes/class-customizer.php';
+require_once PHANTOM_CORE_PATH . 'includes/class-phantom-version-compatibility.php';
 require_once PHANTOM_CORE_PATH . 'admin/class-settings-page.php';
 
 $rest_path = PHANTOM_CORE_PATH . 'includes/class-rest-controller.php';
@@ -85,6 +86,14 @@ add_action(
 		Plugin::get_instance()->init();
 	},
 	5
+);
+
+add_action(
+	'plugins_loaded',
+	function (): void {
+		\PhantomCore\Version_Compatibility::get_instance()->init();
+	},
+	10
 );
 
 // Initialize Customizer after plugin is loaded

@@ -638,6 +638,7 @@ class Settings_Page {
 		}
 
 		if ( $changed ) {
+			\PhantomCore\Customizer::get_instance()->sync_options();
 			add_settings_error(
 				'phantom_core_messages',
 				'settings_updated',

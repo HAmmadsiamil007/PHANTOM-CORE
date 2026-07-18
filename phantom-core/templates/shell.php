@@ -71,16 +71,21 @@ class Shell {
         }
         $slug = trim( $path, '/' );
 
-        // Bypass: Let WordPress REST API, admin, wp-content pass through
-        if (
-            strpos( $slug, 'wp-json' ) === 0 ||
-            strpos( $slug, 'wp-admin' ) === 0 ||
-            strpos( $slug, 'wp-login' ) === 0 ||
-            strpos( $slug, 'xmlrpc' ) === 0 ||
-            isset( $_GET['rest_route'] ) ||
-            isset( $_GET['wc-ajax'] ) ||
-            preg_match( '/\.(php|css|js|png|jpg|jpeg|gif|ico|svg|webp|woff2?)(\/.*)?$/', $slug )
-        ) {
+		// Bypass: Let WordPress REST API, admin, system files, and static assets pass through
+		if (
+			strpos( $slug, 'wp-json' ) === 0 ||
+			strpos( $slug, 'wp-admin' ) === 0 ||
+			strpos( $slug, 'wp-login' ) === 0 ||
+			strpos( $slug, 'xmlrpc' ) === 0 ||
+			'robots.txt' === $slug ||
+			'sitemap.xml' === $slug ||
+			0 === strpos( $slug, 'feed/' ) ||
+			'feed' === $slug ||
+			0 === strpos( $slug, '.well-known/' ) ||
+			isset( $_GET['rest_route'] ) ||
+			isset( $_GET['wc-ajax'] ) ||
+			preg_match( '/\.(php|css|js|png|jpg|jpeg|gif|ico|svg|webp|woff2?)(\/.*)?$/', $slug )
+		) {
             status_header( 200 );
             return;
         }
@@ -151,6 +156,24 @@ class Shell {
 
 		// Inject Customizer CSS variables for initial page render
 		$html = $this->inject_customizer_css( $html );
+
+		// Inject frontend editor for admin users
+		$html = $this->inject_editor( $html );
+
+		// Plugin compatibility hooks — plugins can inject content before </head> and </body>
+		ob_start();
+		do_action( 'phantom_before_head_close' );
+		$head_hook = ob_get_clean();
+		if ( '' !== $head_hook ) {
+			$html = str_replace( '</head>', $head_hook . '</head>', $html );
+		}
+
+		ob_start();
+		do_action( 'phantom_before_body_close' );
+		$body_hook = ob_get_clean();
+		if ( '' !== $body_hook ) {
+			$html = str_replace( '</body>', $body_hook . '</body>', $html );
+		}
 
         // In Customizer preview, inject WordPress scripts into Phantom Core HTML
         if ( $is_customizer_preview ) {
@@ -266,6 +289,8 @@ class Shell {
             '<meta name="description" content="%s" />',
             esc_attr( $site_desc )
         );
+        // Canonical URL — use actual WordPress permalink
+        $meta .= sprintf( '<link rel="canonical" href="%s" />', esc_url( $current_url ) );
         // Open Graph
         $meta .= sprintf( '<meta property="og:title" content="%s" />', esc_attr( $title ) );
         $meta .= sprintf( '<meta property="og:description" content="%s" />', esc_attr( $site_desc ) );
@@ -277,30 +302,74 @@ class Shell {
         $meta .= '<meta name="twitter:card" content="summary_large_image" />';
         $meta .= sprintf( '<meta name="twitter:title" content="%s" />', esc_attr( $title ) );
         $meta .= sprintf( '<meta name="twitter:description" content="%s" />', esc_attr( $site_desc ) );
+        // Hreflang — use site language
+        $locale = get_locale();
+        $meta .= sprintf( '<link rel="alternate" href="%s" hreflang="%s" />', esc_url( $current_url ), esc_attr( $locale ) );
 
         // JSON-LD structured data
-        $json_ld = json_encode( array(
-            '@context' => 'https://schema.org',
-            '@graph'   => array(
-                array(
-                    '@type' => 'Organization',
-                    'name'  => $site_name,
-                    'url'   => $home_url,
-                ),
-                array(
-                    '@type'       => 'WebSite',
-                    'name'        => $site_name,
-                    'url'         => $home_url,
-                    'potentialAction' => array(
-                        '@type'       => 'SearchAction',
-                        'target'      => array(
-                            '@type'       => 'EntryPoint',
-                            'urlTemplate' => $home_url . '?s={search_term_string}',
-                        ),
-                        'query-input' => 'required name=search_term_string',
+        $json_ld_graph = array(
+            array(
+                '@type' => 'Organization',
+                'name'  => $site_name,
+                'url'   => $home_url,
+            ),
+            array(
+                '@type'       => 'WebSite',
+                'name'        => $site_name,
+                'url'         => $home_url,
+                'potentialAction' => array(
+                    '@type'       => 'SearchAction',
+                    'target'      => array(
+                        '@type'       => 'EntryPoint',
+                        'urlTemplate' => $home_url . '?s={search_term_string}',
                     ),
+                    'query-input' => 'required name=search_term_string',
                 ),
             ),
+        );
+
+        // Page-type-specific schema
+        if ( preg_match( '/^product/', $slug ) && function_exists( 'wc_get_product' ) ) {
+            $product_id = isset( $_GET['product_id'] ) ? (int) $_GET['product_id'] : 0;
+            if ( $product_id ) {
+                $product = wc_get_product( $product_id );
+                if ( $product ) {
+                    $json_ld_graph[] = array(
+                        '@type'       => 'Product',
+                        'name'        => $product->get_name(),
+                        'description' => $product->get_short_description(),
+                        'sku'         => $product->get_sku(),
+                        'offers'      => array(
+                            '@type'         => 'Offer',
+                            'price'         => (string) $product->get_price(),
+                            'priceCurrency' => get_woocommerce_currency(),
+                            'availability'  => $product->is_in_stock() ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+                        ),
+                    );
+                }
+            }
+        } elseif ( preg_match( '/^(blog|post|single-blog)/', $slug ) ) {
+            $post_id = isset( $_GET['post_id'] ) ? (int) $_GET['post_id'] : 0;
+            if ( $post_id ) {
+                $post = get_post( $post_id );
+                if ( $post ) {
+                    $json_ld_graph[] = array(
+                        '@type'       => 'BlogPosting',
+                        'headline'    => $post->post_title,
+                        'datePublished' => $post->post_date,
+                        'dateModified'  => $post->post_modified,
+                        'author'      => array(
+                            '@type' => 'Person',
+                            'name'  => get_the_author_meta( 'display_name', $post->post_author ),
+                        ),
+                    );
+                }
+            }
+        }
+
+        $json_ld = json_encode( array(
+            '@context' => 'https://schema.org',
+            '@graph'   => $json_ld_graph,
         ), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP );
 
         $meta .= sprintf( '<script type="application/ld+json">%s</script>', $json_ld );
@@ -326,24 +395,30 @@ class Shell {
      */
     private function inject_customizer_css( string $html ): string {
         $options = get_option( 'phantom_options', array() );
-        if ( empty( $options ) ) {
-            return $html;
-        }
         $map = $this->get_css_var_map();
         $css = '';
         foreach ( $map as $key => $var ) {
+            $val = null;
             if ( isset( $options[ $key ] ) && '' !== $options[ $key ] ) {
                 $val = $options[ $key ];
+            } else {
+                $individual = get_option( 'phantom_' . $key, null );
+                if ( null !== $individual && '' !== $individual ) {
+                    $val = $individual;
+                }
+            }
+            if ( null !== $val ) {
                 if ( in_array( $key, $this->get_px_keys(), true ) && is_numeric( $val ) ) {
                     $val .= 'px';
                 }
                 $css .= $var . ':' . esc_attr( $val ) . ';';
             }
         }
-        if ( '' === $css ) {
-            return $html;
-        }
-        return str_replace( '</head>', '<style id="phantom-customizer-css">:root{' . $css . '}</style></head>', $html );
+		if ( '' === $css ) {
+			return $html;
+		}
+		$css = $this->minify_css( $css );
+		return str_replace( '</head>', '<style id="phantom-customizer-css">:root{' . $css . '}</style></head>', $html );
     }
 
 	private function inject_images( string $html ): string {
@@ -383,6 +458,66 @@ class Shell {
 		return $html;
 	}
 
+	private function inject_editor( string $html ): string {
+		if ( ! is_user_logged_in() || ! current_user_can( 'edit_theme_options' ) ) {
+			return $html;
+		}
+
+		$ver = PHANTOM_CORE_VERSION;
+
+		// Add data-phantom-key attributes to known editable elements
+		$html = preg_replace(
+			'/(class="d-inline-block primary-text text-uppercase banner-span")/',
+			'$1 data-phantom-key="home_banner_heading"',
+			$html,
+			1
+		);
+		$html = preg_replace(
+			'/(<h1\s+class="font-size92")>/',
+			'$1 data-phantom-key="home_banner_title">',
+			$html,
+			1
+		);
+		$html = preg_replace(
+			'/(<p>)(Discover a world of fun and joy)/',
+			'<p data-phantom-key="home_banner_description">$2',
+			$html,
+			1
+		);
+		$html = preg_replace(
+			'/class="d-inline-block text-size-14(.*?footer-about-text)"/',
+			'class="d-inline-block text-size-14$1" data-phantom-key="footer_about_text"',
+			$html,
+			1
+		);
+		$html = preg_replace(
+			'/class="copyright(.*?)content(.*?)p"/',
+			'class="copyright$1content$2p" data-phantom-key="footer_copyright"',
+			$html,
+			1
+		);
+
+		// Editor CSS
+		$css_url = PHANTOM_CORE_URL . 'frontend/assets/css/phantom-editor.css?v=' . $ver;
+		$editor_css = '<link rel="stylesheet" id="phantom-editor-css" href="' . esc_url( $css_url ) . '" media="all" />';
+
+		// Editor JS
+		$js_url = PHANTOM_CORE_URL . 'frontend/assets/js/phantom-editor.js?v=' . $ver;
+		$editor_js = '<script src="' . esc_url( $js_url ) . '" id="phantom-editor-js"></script>';
+
+		// Add body class for JS detection
+		$html = preg_replace( '/<body(\s[^>]*)?>/', '<body class="phantom-editor-enabled"$1>', $html, 1 );
+
+		// REST API nonce for PUT/DELETE requests
+		$nonce = wp_create_nonce( 'wp_rest' );
+		$nonce_tag = '<meta name="wp-rest-nonce" content="' . esc_attr( $nonce ) . '" />';
+
+		$assets = $nonce_tag . "\n" . $editor_css . "\n" . $editor_js;
+		$html = str_replace( '</head>', $assets . '</head>', $html );
+
+		return $html;
+	}
+
 	private function inject_google_fonts( string $html ): string {
 		$options     = get_option( 'phantom_options', array() );
 		$body_font   = $options['typography_body_font'] ?? 'Archivo';
@@ -414,7 +549,17 @@ class Shell {
         return Settings_Registry::get_css_var_map();
     }
 
-    private function get_px_keys(): array {
+	private function get_px_keys(): array {
         return Settings_Registry::get_px_keys();
     }
+
+	/**
+	 * Minify CSS by stripping comments, whitespace, and newlines.
+	 */
+	private function minify_css( string $css ): string {
+		$css = preg_replace( '/\/\*.*?\*\//s', '', $css );
+		$css = preg_replace( '/\s*([{}:;,])\s*/', '$1', $css );
+		$css = preg_replace( '/\s{2,}/', ' ', $css );
+		return trim( $css );
+	}
 }

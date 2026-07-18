@@ -401,6 +401,8 @@ class Rest_Controller extends \WP_REST_Controller {
 			$updated[ $key ] = $registry->get( $key );
 		}
 
+		\PhantomCore\Customizer::get_instance()->sync_options();
+
 		delete_transient( 'phantom_page_data' );
 
 		return new \WP_REST_Response(
@@ -422,6 +424,7 @@ class Rest_Controller extends \WP_REST_Controller {
 		$value = $request->get_param( 'value' );
 		Settings_Registry::get_instance()->set( $key, $value );
 
+		\PhantomCore\Customizer::get_instance()->sync_options();
 		delete_transient( 'phantom_page_data' );
 
 		return new \WP_REST_Response( $this->format_entry( $key, $entry, true ), 200 );
@@ -437,6 +440,8 @@ class Rest_Controller extends \WP_REST_Controller {
 		$default = $entry['default'] ?? null;
 		delete_option( 'phantom_' . $key );
 		Settings_Registry::get_instance()->set( $key, $default );
+
+		\PhantomCore\Customizer::get_instance()->sync_options();
 
 		return new \WP_REST_Response(
 			array(
