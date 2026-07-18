@@ -278,6 +278,44 @@ class Rest_Controller extends \WP_REST_Controller {
 
 		register_rest_route(
 			$this->namespace,
+			'/woo/attributes',
+			array(
+				array(
+					'methods'             => \WP_REST_Server::READABLE,
+					'callback'            => array( $this, 'get_woo_attributes' ),
+					'permission_callback' => array( $this, 'permission_check' ),
+				),
+			)
+		);
+
+		register_rest_route(
+			$this->namespace,
+			'/woo/variations',
+			array(
+				array(
+					'methods'             => \WP_REST_Server::READABLE,
+					'callback'            => array( $this, 'get_woo_variations' ),
+					'permission_callback' => array( $this, 'permission_check' ),
+					'args'                => $this->get_woo_variations_args(),
+				),
+			)
+		);
+
+		register_rest_route(
+			$this->namespace,
+			'/woo/reviews',
+			array(
+				array(
+					'methods'             => \WP_REST_Server::READABLE,
+					'callback'            => array( $this, 'get_woo_reviews' ),
+					'permission_callback' => array( $this, 'permission_check' ),
+					'args'                => $this->get_woo_reviews_args(),
+				),
+			)
+		);
+
+		register_rest_route(
+			$this->namespace,
 			'/page-data',
 			array(
 				array(
@@ -1688,6 +1726,158 @@ class Rest_Controller extends \WP_REST_Controller {
 				'description'       => __( 'Product ID.', 'phantom-core' ),
 				'type'              => 'integer',
 				'required'          => true,
+				'sanitize_callback' => 'absint',
+			),
+		);
+	}
+
+	public function get_woo_attributes(): \WP_REST_Response {
+		if ( ! function_exists( 'wc_get_attribute_taxonomies' ) ) {
+			return new \WP_REST_Response(
+				array(
+					'code'    => 'woocommerce_inactive',
+					'message' => __( 'WooCommerce is not active.', 'phantom-core' ),
+				),
+				400
+			);
+		}
+
+		$attributes = wc_get_attribute_taxonomies();
+		$data       = array();
+
+		foreach ( $attributes as $attribute ) {
+			$data[] = array(
+				'id'           => $attribute->attribute_id,
+				'name'         => $attribute->attribute_label,
+				'slug'         => $attribute->attribute_name,
+				'type'         => $attribute->attribute_type,
+				'order_by'     => $attribute->attribute_orderby,
+				'has_archives' => (bool) $attribute->attribute_public,
+			);
+		}
+
+		return new \WP_REST_Response( $data, 200 );
+	}
+
+	public function get_woo_variations( \WP_REST_Request $request ): \WP_REST_Response {
+		if ( ! function_exists( 'wc_get_product' ) ) {
+			return new \WP_REST_Response(
+				array(
+					'code'    => 'woocommerce_inactive',
+					'message' => __( 'WooCommerce is not active.', 'phantom-core' ),
+				),
+				400
+			);
+		}
+
+		$product_id = absint( $request->get_param( 'product_id' ) );
+		if ( ! $product_id ) {
+			return new \WP_REST_Response(
+				array(
+					'code'    => 'missing_product_id',
+					'message' => __( 'Product ID is required.', 'phantom-core' ),
+				),
+				400
+			);
+		}
+
+		$product = wc_get_product( $product_id );
+		if ( ! $product ) {
+			return new \WP_REST_Response(
+				array(
+					'code'    => 'not_found',
+					'message' => __( 'Product not found.', 'phantom-core' ),
+				),
+				404
+			);
+		}
+
+		if ( ! $product->is_type( 'variable' ) ) {
+			return new \WP_REST_Response( array(), 200 );
+		}
+
+		$variations = $product->get_available_variations();
+		$data       = array();
+
+		foreach ( $variations as $variation ) {
+			$data[] = array(
+				'id'                => $variation['variation_id'],
+				'attributes'        => $variation['attributes'],
+				'price'             => $variation['display_price'],
+				'price_html'        => $variation['price_html'],
+				'regular_price'     => $variation['display_regular_price'],
+				'sale_price'        => $variation['display_price'] !== $variation['display_regular_price'] ? $variation['display_price'] : '',
+				'sku'               => $variation['sku'],
+				'in_stock'          => $variation['is_in_stock'],
+				'image'             => $variation['image']['url'] ?? '',
+				'weight'            => $variation['weight'],
+				'dimensions'        => $variation['dimensions'],
+				'description'       => $variation['variation_description'],
+			);
+		}
+
+		return new \WP_REST_Response( $data, 200 );
+	}
+
+	public function get_woo_reviews( \WP_REST_Request $request ): \WP_REST_Response {
+		if ( ! function_exists( 'wc_get_product' ) ) {
+			return new \WP_REST_Response(
+				array(
+					'code'    => 'woocommerce_inactive',
+					'message' => __( 'WooCommerce is not active.', 'phantom-core' ),
+				),
+				400
+			);
+		}
+
+		$product_id = absint( $request->get_param( 'product_id' ) );
+
+		$args = array(
+			'post_type' => 'product',
+			'status'    => 'approve',
+		);
+
+		if ( $product_id ) {
+			$args['post_id'] = $product_id;
+		}
+
+		$comments = get_comments( $args );
+		$data     = array();
+
+		foreach ( $comments as $comment ) {
+			$data[] = array(
+				'id'          => $comment->comment_ID,
+				'product_id'  => $comment->comment_post_ID,
+				'author'      => $comment->comment_author,
+				'email'       => $comment->comment_author_email,
+				'rating'      => get_comment_meta( $comment->comment_ID, 'rating', true ) ?: 0,
+				'title'       => get_comment_meta( $comment->comment_ID, 'title', true ) ?: '',
+				'content'     => $comment->comment_content,
+				'date'        => $comment->comment_date,
+				'verified'    => wc_review_is_from_verified_owner( $comment->comment_ID ),
+			);
+		}
+
+		return new \WP_REST_Response( $data, 200 );
+	}
+
+	private function get_woo_variations_args(): array {
+		return array(
+			'product_id' => array(
+				'description'       => __( 'Product ID to get variations for.', 'phantom-core' ),
+				'type'              => 'integer',
+				'required'          => true,
+				'sanitize_callback' => 'absint',
+			),
+		);
+	}
+
+	private function get_woo_reviews_args(): array {
+		return array(
+			'product_id' => array(
+				'description'       => __( 'Filter by product ID.', 'phantom-core' ),
+				'type'              => 'integer',
+				'required'          => false,
 				'sanitize_callback' => 'absint',
 			),
 		);

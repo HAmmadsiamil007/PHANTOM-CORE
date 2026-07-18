@@ -185,6 +185,141 @@ class Settings_Registry {
 		return $this->entries;
 	}
 
+	/**
+	 * Get the shared map of setting keys to CSS custom property names.
+	 *
+	 * Single source of truth for the Customizer inline CSS and Shell
+	 * SPA CSS injection. Every entry here becomes a `--var-name` that
+	 * can be referenced in frontend CSS via `var(--var-name)`.
+	 *
+	 * @return array<string, string> Setting key => CSS variable name (with -- prefix).
+	 */
+	public static function get_css_var_map(): array {
+		return array(
+			'container_width'              => '--container--width',
+			'content_width'                => '--content--width',
+			'sidebar_width'                => '--sidebar--width',
+			'base_font_size'               => '--base--font--size',
+			'base_line_height'             => '--base--line--height',
+			'body_font_family'             => '--body--font',
+			'heading_font_family'          => '--heading--font',
+			'body_font_weight'             => '--body--font--weight',
+			'heading_font_weight'          => '--heading--font--weight',
+			'primary_color'                => '--primary--color',
+			'secondary_color'              => '--secondary--color',
+			'accent_color'                 => '--accent--color',
+			'background_color'             => '--bg',
+			'text_color'                   => '--text--color',
+			'heading_color'                => '--heading--color',
+			'link_color'                   => '--link',
+			'link_hover_color'             => '--link--hover',
+			'border_radius'                => '--border--radius',
+			'button_padding_x'             => '--btn--pad--x',
+			'button_padding_y'             => '--btn--pad--y',
+			'header_bg'                    => '--header--bg',
+			'header_text_color'            => '--header--text',
+			'header_padding'               => '--header--padding',
+			'footer_bg'                    => '--footer--bg',
+			'footer_text_color'            => '--footer--text',
+			'footer_padding'               => '--footer--padding',
+			'gap'                          => '--gap',
+			'column_gap'                   => '--column--gap',
+			'row_gap'                      => '--row--gap',
+			'transition_speed'             => '--transition--speed',
+			'border_color'                 => '--border--color',
+			'border_width'                 => '--border--width',
+			'box_shadow'                   => '--box--shadow',
+			'header_fullwidth'             => '--header--fullwidth',
+			'footer_fullwidth'             => '--footer--fullwidth',
+			'sticky_header'                => '--sticky--header',
+			'header_height'                => '--header--height',
+			'header_transparent'           => '--header--transparent',
+			'mobile_breakpoint'            => '--mobile--breakpoint',
+			'tablet_breakpoint'            => '--tablet--breakpoint',
+			'custom_css'                   => '--custom--css',
+			'container_padding_x'          => '--container--pad--x',
+			'container_padding_y'          => '--container--pad--y',
+			'section_padding_x'            => '--section--pad--x',
+			'section_padding_y'            => '--section--pad--y',
+			'font_size_h1'                 => '--h1',
+			'font_size_h2'                 => '--h2',
+			'font_size_h3'                 => '--h3',
+			'font_size_h4'                 => '--h4',
+			'font_size_h5'                 => '--h5',
+			'font_size_h6'                 => '--h6',
+			'topbar_bg'                    => '--topbar--bg',
+			'topbar_text_color'            => '--topbar--text',
+			'menu_font_size'               => '--menu--font--size',
+			'menu_font_weight'             => '--menu--font--weight',
+			'submenu_bg'                   => '--submenu--bg',
+			'submenu_text_color'           => '--submenu--text',
+			'submenu_width'                => '--submenu--width',
+			'button_bg'                    => '--button--bg',
+			'button_text_color'            => '--button--text',
+			'button_hover_bg'              => '--button--hover--bg',
+			'button_hover_text_color'      => '--button--hover--text',
+			'input_bg'                     => '--input--bg',
+			'input_text_color'             => '--input--text',
+			'input_border_color'           => '--input--border',
+			'input_focus_border_color'     => '--input--focus--border',
+			'woo_primary'                  => '--woo--primary',
+			'woo_secondary'                => '--woo--secondary',
+			'woo_button_bg'                => '--woo--btn--bg',
+			'woo_button_text_color'        => '--woo--btn--text',
+			'woo_rating_color'             => '--woo--rating',
+			'woo_sale_badge_bg'            => '--woo--sale--badge--bg',
+			'woo_sale_badge_text'          => '--woo--sale--badge--text',
+			'article_bg'                   => '--article--bg',
+			'article_text_color'           => '--article--text',
+			'article_padding'              => '--article--padding',
+			'widget_bg'                    => '--widget--bg',
+			'widget_text_color'            => '--widget--text',
+			'widget_padding'               => '--widget--padding',
+			'border_style'                 => '--border--style',
+			'divider_style'                => '--divider--style',
+			'divider_color'                => '--divider--color',
+			'divider_width'                => '--divider--width',
+			'border_radius_button'         => '--border--radius--btn',
+			'border_radius_box'            => '--border--radius--box',
+			'border_radius_input'          => '--border--radius--input',
+			'shadow_button'                => '--shadow--btn',
+			'shadow_box'                   => '--shadow--box',
+			'shadow_input'                 => '--shadow--input',
+			'focus_ring_color'             => '--focus--ring',
+			'focus_ring_width'             => '--focus--ring--width',
+			'error_color'                  => '--error--color',
+			'warning_color'                => '--warning--color',
+			'success_color'                => '--success--color',
+			'info_color'                   => '--info--color',
+			'body_min_width'               => '--body--min--width',
+			'body_max_width'               => '--body--max--width',
+			'content_padding_x'            => '--content--pad--x',
+			'content_padding_y'            => '--content--pad--y',
+		);
+	}
+
+	/**
+	 * Get the list of setting keys whose values should be suffixed with 'px'
+	 * when output as CSS custom properties.
+	 *
+	 * @return array<int, string> Setting keys that require px suffixes.
+	 */
+	public static function get_px_keys(): array {
+		return array(
+			'base_font_size', 'border_radius', 'button_padding_x', 'button_padding_y',
+			'header_padding', 'footer_padding', 'gap', 'column_gap', 'row_gap',
+			'border_width', 'header_height', 'container_width', 'content_width',
+			'sidebar_width', 'mobile_breakpoint', 'tablet_breakpoint',
+			'container_padding_x', 'container_padding_y', 'section_padding_x',
+			'section_padding_y', 'font_size_h1', 'font_size_h2', 'font_size_h3',
+			'font_size_h4', 'font_size_h5', 'font_size_h6', 'menu_font_size',
+			'submenu_width', 'article_padding', 'widget_padding', 'divider_width',
+			'border_radius_button', 'border_radius_box', 'border_radius_input',
+			'focus_ring_width', 'body_min_width', 'body_max_width',
+			'content_padding_x', 'content_padding_y',
+		);
+	}
+
 	private function section_branding(): array {
 		return array(
 			'general_site_logo'            => array(
@@ -3428,7 +3563,7 @@ class Settings_Registry {
 				'sanitize' => 'sanitize_text_field',
 				'label'    => __( 'Three Column Title', 'phantom-core' ),
 			),
-			'three_colum_sidbar_title'  => array(
+			'three_column_sidebar_title'  => array(
 				'section'  => 'layout',
 				'type'     => 'string',
 				'default'  => 'Three Column Sidebar',
@@ -3442,7 +3577,7 @@ class Settings_Registry {
 				'sanitize' => 'sanitize_text_field',
 				'label'    => __( 'Two Column Title', 'phantom-core' ),
 			),
-			'six_colum_full_wide_title' => array(
+			'six_column_full_wide_title' => array(
 				'section'  => 'layout',
 				'type'     => 'string',
 				'default'  => 'Six Column',

@@ -339,62 +339,10 @@ class Shell {
     }
 
     private function get_css_var_map(): array {
-        return array(
-            'color_primary'              => '--primary--color',
-            'color_secondary'            => '--secondary--color',
-            'color_accent'               => '--accent--color',
-            'color_text'                 => '--text--color',
-            'color_heading'              => '--heading--color',
-            'color_header_bg'            => '--header--bg',
-            'color_footer_bg'            => '--footer--bg',
-            'color_border'               => '--border--color',
-            'color_sale'                 => '--sale--color',
-            'color_link'                 => '--link--color',
-            'color_link_hover'           => '--link--hover--color',
-            'color_background'           => '--color-background',
-            'typography_heading_font'    => '--heading--font',
-            'typography_body_font'       => '--body--font',
-            'typography_base_size'       => '--base--font--size',
-            'typography_line_height'     => '--line--height',
-            'typography_heading_weight'  => '--font--weight',
-            'typography_body_weight'     => '--font--weight',
-            'button_bg'                  => '--button--bg',
-            'button_text'                => '--button--text--color',
-            'button_bg_hover'            => '--button--hover--bg',
-            'button_text_hover'          => '--button--text-hover',
-            'button_radius'              => '--btn--border--radius',
-            'button_padding_y'           => '--btn--padding-y',
-            'button_padding_x'           => '--btn--padding-x',
-            'button_font_size'           => '--btn--font-size',
-            'container_width'            => '--container--width',
-            'container_gutter'           => '--container--gutter',
-            'content_width'              => '--content--width',
-            'content_gap'                => '--content--gap',
-            'sidebar_width'              => '--sidebar--width',
-            'widget_spacing'             => '--widget--spacing',
-            'announcement_bar_bg'        => '--announcement-bar-bg',
-            'announcement_bar_text_color' => '--announcement-bar-color',
-            'header_height'              => '--header--height',
-            'section_padding_y'          => '--section--padding-y',
-            'section_padding_x'          => '--section--padding-x',
-            'form_input_radius'          => '--form-input-radius',
-            'form_input_height'          => '--form-input-height',
-            'breakpoint_xl'              => '--breakpoint-xl',
-            'breakpoint_lg'              => '--breakpoint-lg',
-            'breakpoint_md'              => '--breakpoint-md',
-            'breakpoint_sm'              => '--breakpoint-sm',
-        );
+        return Settings_Registry::get_css_var_map();
     }
 
     private function get_px_keys(): array {
-        return array(
-            'typography_base_size', 'header_height',
-            'container_width', 'container_gutter', 'content_width', 'content_gap',
-            'sidebar_width', 'widget_spacing',
-            'button_radius', 'button_padding_y', 'button_padding_x', 'button_font_size',
-            'section_padding_y', 'section_padding_x',
-            'form_input_radius', 'form_input_height',
-            'breakpoint_xl', 'breakpoint_lg', 'breakpoint_md', 'breakpoint_sm',
-        );
+        return Settings_Registry::get_px_keys();
     }
 }

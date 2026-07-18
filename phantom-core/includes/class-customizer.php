@@ -141,8 +141,8 @@ class Customizer {
 					$setting_id = 'phantom_' . $key;
 					$wp_customize->add_setting( $setting_id, array(
 						'default'           => $entry['default'] ?? '',
-						'sanitize_callback' => $this->get_sanitize_callback( $entry ),
-						'transport'         => $this->get_transport( $entry ),
+					'sanitize_callback' => $this->get_sanitize_callback( $entry ),
+					'transport'         => $this->get_transport( $key, $entry ),
 						'capability'        => 'edit_theme_options',
 					) );
 
@@ -251,17 +251,10 @@ class Customizer {
 			true
 		);
 		$css_var_map = $this->get_css_var_map();
+		$all_px_keys = Settings_Registry::get_px_keys();
 		$px_keys     = array();
 		foreach ( array_keys( $css_var_map ) as $key ) {
-			if ( in_array( $key, array(
-				'typography_base_size', 'header_height',
-				'container_width', 'container_gutter', 'content_width', 'content_gap',
-				'sidebar_width', 'widget_spacing',
-				'button_radius', 'button_padding_y', 'button_padding_x', 'button_font_size',
-				'section_padding_y', 'section_padding_x',
-				'form_input_radius', 'form_input_height',
-				'breakpoint_xl', 'breakpoint_lg', 'breakpoint_md', 'breakpoint_sm',
-			), true ) ) {
+			if ( in_array( $key, $all_px_keys, true ) ) {
 				$px_keys[] = $key;
 			}
 		}
@@ -337,66 +330,19 @@ class Customizer {
 		return 'sanitize_text_field';
 	}
 
-	private function get_transport( array $entry ): string {
+	private function get_transport( string $key, array $entry ): string {
 		if ( isset( $entry['transport'] ) ) {
 			return $entry['transport'];
 		}
-		if ( ( $entry['type'] ?? '' ) === 'color' ) {
+		$map = Settings_Registry::get_css_var_map();
+		if ( isset( $map[ $key ] ) ) {
 			return 'postMessage';
 		}
 		return 'refresh';
 	}
 
-	/**
-	 * Map of setting keys (without phantom_ prefix) to CSS variable names.
-	 * Used by both PHP inline CSS output and JS live preview.
-	 */
 	public function get_css_var_map(): array {
-		return array(
-			'color_primary'              => '--primary--color',
-			'color_secondary'            => '--secondary--color',
-			'color_accent'               => '--accent--color',
-			'color_text'                 => '--text--color',
-			'color_heading'              => '--heading--color',
-			'color_header_bg'            => '--header--bg',
-			'color_footer_bg'            => '--footer--bg',
-			'color_border'               => '--border--color',
-			'color_sale'                 => '--sale--color',
-			'color_link'                 => '--link--color',
-			'color_link_hover'           => '--link--hover--color',
-			'color_background'           => '--color-background',
-			'typography_heading_font'    => '--heading--font',
-			'typography_body_font'       => '--body--font',
-			'typography_base_size'       => '--base--font--size',
-			'typography_line_height'     => '--line--height',
-			'typography_heading_weight'  => '--font--weight',
-			'typography_body_weight'     => '--font--weight',
-			'button_bg'                  => '--button--bg',
-			'button_text'                => '--button--text--color',
-			'button_bg_hover'            => '--button--hover--bg',
-			'button_text_hover'          => '--button--text-hover',
-			'button_radius'              => '--btn--border--radius',
-			'button_padding_y'           => '--btn--padding-y',
-			'button_padding_x'           => '--btn--padding-x',
-			'button_font_size'           => '--btn--font-size',
-			'container_width'            => '--container--width',
-			'container_gutter'           => '--container--gutter',
-			'content_width'              => '--content--width',
-			'content_gap'                => '--content--gap',
-			'sidebar_width'              => '--sidebar--width',
-			'widget_spacing'             => '--widget--spacing',
-			'announcement_bar_bg'        => '--announcement-bar-bg',
-			'announcement_bar_text_color' => '--announcement-bar-color',
-			'header_height'              => '--header--height',
-			'section_padding_y'          => '--section--padding-y',
-			'section_padding_x'          => '--section--padding-x',
-			'form_input_radius'          => '--form-input-radius',
-			'form_input_height'          => '--form-input-height',
-			'breakpoint_xl'              => '--breakpoint-xl',
-			'breakpoint_lg'              => '--breakpoint-lg',
-			'breakpoint_md'              => '--breakpoint-md',
-			'breakpoint_sm'              => '--breakpoint-sm',
-		);
+		return Settings_Registry::get_css_var_map();
 	}
 
 	/**
@@ -409,7 +355,7 @@ class Customizer {
 		foreach ( $map as $key => $var ) {
 			if ( isset( $options[ $key ] ) && '' !== $options[ $key ] ) {
 				$val = $options[ $key ];
-				if ( in_array( $key, array( 'typography_base_size', 'header_height', 'container_width', 'container_gutter', 'content_width', 'content_gap', 'sidebar_width', 'widget_spacing', 'button_radius', 'button_padding_y', 'button_padding_x', 'button_font_size', 'section_padding_y', 'section_padding_x', 'form_input_radius', 'form_input_height', 'breakpoint_xl', 'breakpoint_lg', 'breakpoint_md', 'breakpoint_sm' ), true ) ) {
+				if ( in_array( $key, Settings_Registry::get_px_keys(), true ) ) {
 					$val = is_numeric( $val ) ? $val . 'px' : $val;
 				}
 				$css .= $var . ':' . esc_attr( $val ) . ';';
