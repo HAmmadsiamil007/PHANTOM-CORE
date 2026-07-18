@@ -923,9 +923,9 @@ class Settings_Registry {
 			),
 			'home_banner_title'       => array(
 				'section'   => 'hero',
-				'type'      => 'string',
-				'default'   => 'Little Treasures, <br>Big Smiles!',
-				'sanitize'  => 'wp_kses_post',
+				'type'      => 'text',
+				'default'   => "Little Treasures,\nBig Smiles!",
+				'sanitize'  => 'sanitize_textarea_field',
 				'label'     => __( 'Hero Title', 'phantom-core' ),
 				'transport' => 'postMessage',
 			),
