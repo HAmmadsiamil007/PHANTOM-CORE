@@ -2754,11 +2754,20 @@ button.primary_btn:hover {
 .banner-con .banner-img1 {
     left: 110px;
     bottom: 0;
+    pointer-events: none;
+    z-index: 1;
 }
 
 .banner-con .banner-img2 {
     right: 87px;
     bottom: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.banner-con .center-context {
+    position: relative;
+    z-index: 2;
 }
 
 .banner-con .banner-inner-wrapper {

@@ -283,7 +283,7 @@ class Rest_Controller extends \WP_REST_Controller {
 				array(
 					'methods'             => \WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_woo_attributes' ),
-					'permission_callback' => array( $this, 'permission_check' ),
+					'permission_callback' => '__return_true',
 				),
 			)
 		);
@@ -295,7 +295,7 @@ class Rest_Controller extends \WP_REST_Controller {
 				array(
 					'methods'             => \WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_woo_variations' ),
-					'permission_callback' => array( $this, 'permission_check' ),
+					'permission_callback' => '__return_true',
 					'args'                => $this->get_woo_variations_args(),
 				),
 			)
@@ -308,7 +308,7 @@ class Rest_Controller extends \WP_REST_Controller {
 				array(
 					'methods'             => \WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_woo_reviews' ),
-					'permission_callback' => array( $this, 'permission_check' ),
+					'permission_callback' => '__return_true',
 					'args'                => $this->get_woo_reviews_args(),
 				),
 			)
@@ -780,16 +780,34 @@ class Rest_Controller extends \WP_REST_Controller {
 			);
 		}
 
-		$per_page = absint( $request->get_param( 'per_page' ) ?: 12 );
-		$page     = max( 1, absint( $request->get_param( 'page' ) ?: 1 ) );
-		$category = sanitize_text_field( $request->get_param( 'category' ) ?? '' );
-		$search   = sanitize_text_field( $request->get_param( 'search' ) ?? '' );
+		$per_page    = absint( $request->get_param( 'per_page' ) ?: 12 );
+		$page        = max( 1, absint( $request->get_param( 'page' ) ?: 1 ) );
+		$category    = sanitize_text_field( $request->get_param( 'category' ) ?? '' );
+		$search      = sanitize_text_field( $request->get_param( 'search' ) ?? '' );
+		$orderby     = sanitize_text_field( $request->get_param( 'orderby' ) ?? 'date' );
+		$order       = strtoupper( sanitize_text_field( $request->get_param( 'order' ) ?? 'DESC' ) );
+		$min_price   = $request->has_param( 'min_price' ) ? floatval( $request->get_param( 'min_price' ) ) : null;
+		$max_price   = $request->has_param( 'max_price' ) ? floatval( $request->get_param( 'max_price' ) ) : null;
+		$on_sale     = rest_sanitize_boolean( $request->get_param( 'on_sale' ) ?? false );
+		$stock_status = sanitize_text_field( $request->get_param( 'stock_status' ) ?? '' );
+		$featured    = rest_sanitize_boolean( $request->get_param( 'featured' ) ?? false );
+		$tag         = sanitize_text_field( $request->get_param( 'tag' ) ?? '' );
+
+		$valid_orderby = array( 'date', 'id', 'title', 'name', 'price', 'popularity', 'rating', 'rand' );
+		if ( ! in_array( $orderby, $valid_orderby, true ) ) {
+			$orderby = 'date';
+		}
+		if ( ! in_array( $order, array( 'ASC', 'DESC' ), true ) ) {
+			$order = 'DESC';
+		}
 
 		$args = array(
 			'post_type'      => 'product',
 			'posts_per_page' => $per_page,
 			'paged'          => $page,
 			'post_status'    => 'publish',
+			'orderby'        => $orderby,
+			'order'          => $order,
 		);
 
 		if ( ! empty( $category ) ) {
@@ -798,6 +816,59 @@ class Rest_Controller extends \WP_REST_Controller {
 
 		if ( ! empty( $search ) ) {
 			$args['s'] = $search;
+		}
+
+		if ( $featured ) {
+			$args['tax_query'][] = array(
+				'taxonomy' => 'product_visibility',
+				'field'    => 'name',
+				'terms'    => 'featured',
+			);
+		}
+
+		if ( ! empty( $tag ) ) {
+			$args['product_tag'] = $tag;
+		}
+
+		if ( ! empty( $stock_status ) ) {
+			$args['meta_query'][] = array(
+				'key'   => '_stock_status',
+				'value' => $stock_status,
+			);
+		}
+
+		if ( $on_sale ) {
+			$args['meta_query'][] = array(
+				'relation' => 'OR',
+				array(
+					'key'     => '_sale_price',
+					'value'   => 0,
+					'compare' => '>',
+					'type'    => 'NUMERIC',
+				),
+				array(
+					'key'     => '_min_variation_sale_price',
+					'value'   => 0,
+					'compare' => '>',
+					'type'    => 'NUMERIC',
+				),
+			);
+		}
+
+		// Price meta query needs special handling when combined with existing meta_query
+		if ( null !== $min_price || null !== $max_price ) {
+			$price_query = array( 'key' => '_price', 'type' => 'NUMERIC' );
+			if ( null !== $min_price && null !== $max_price ) {
+				$price_query['value'] = array( $min_price, $max_price );
+				$price_query['compare'] = 'BETWEEN';
+			} elseif ( null !== $min_price ) {
+				$price_query['value'] = $min_price;
+				$price_query['compare'] = '>=';
+			} elseif ( null !== $max_price ) {
+				$price_query['value'] = $max_price;
+				$price_query['compare'] = '<=';
+			}
+			$args['meta_query'][] = $price_query;
 		}
 
 		$query    = new \WP_Query( $args );
@@ -884,15 +955,18 @@ class Rest_Controller extends \WP_REST_Controller {
 			return new \WP_REST_Response( array( 'code' => 'missing_name', 'message' => __( 'Product name is required.', 'phantom-core' ) ), 400 );
 		}
 
-		$product = new \WC_Product_Simple();
+		$product = wc_get_product_object( $type );
 		$product->set_name( $name );
 		$product->set_status( 'publish' );
 		$product->set_catalog_visibility( 'visible' );
 		$product->set_description( $description );
 		$product->set_short_description( $short_desc );
-		$product->set_regular_price( $price );
-		if ( $sale_price ) {
-			$product->set_sale_price( $sale_price );
+
+		if ( in_array( $type, array( 'simple', 'external' ), true ) ) {
+			$product->set_regular_price( $price );
+			if ( $sale_price ) {
+				$product->set_sale_price( $sale_price );
+			}
 		}
 		if ( $sku ) {
 			$product->set_sku( $sku );
@@ -908,10 +982,6 @@ class Rest_Controller extends \WP_REST_Controller {
 			if ( $product_url ) {
 				$product->set_product_url( $product_url );
 			}
-		}
-
-		if ( $type !== 'simple' ) {
-			$product = new \WC_Product_Simple();
 		}
 
 		$product_id = $product->save();
@@ -1467,26 +1537,48 @@ class Rest_Controller extends \WP_REST_Controller {
 			}
 		}
 
+		$categories_raw = wp_get_post_terms( $product->get_id(), 'product_cat' );
+		$categories     = array();
+		if ( is_array( $categories_raw ) ) {
+			foreach ( $categories_raw as $cat ) {
+				$categories[] = array(
+					'id'          => $cat->term_id,
+					'name'        => $cat->name,
+					'slug'        => $cat->slug,
+					'description' => $cat->description,
+					'image'       => function_exists( 'get_term_meta' ) ? wp_get_attachment_image_url( get_term_meta( $cat->term_id, 'thumbnail_id', true ), 'large' ) ?: '' : '',
+				);
+			}
+		}
+
 		$data = array(
-			'id'            => $product->get_id(),
-			'name'          => $product->get_name(),
-			'slug'          => $product->get_slug(),
-			'price'         => $product->get_price(),
-			'price_html'    => $product->get_price_html(),
-			'regular_price' => $product->get_regular_price(),
-			'sale_price'    => $product->get_sale_price(),
-			'on_sale'       => $product->is_on_sale(),
-			'is_featured'   => $product->is_featured(),
-			'in_stock'      => $product->is_in_stock(),
-			'rating'        => $product->get_average_rating(),
-			'review_count'  => $product->get_review_count(),
-			'image'         => wp_get_attachment_image_url( $image_id, 'large' ) ?: wc_placeholder_img_src(),
-			'gallery'       => $gallery,
-			'url'           => $product->get_permalink(),
-			'type'          => $product->get_type(),
-			'sku'           => $product->get_sku(),
-			'categories'    => wp_get_post_terms( $product->get_id(), 'product_cat', array( 'fields' => 'names' ) ),
+			'id'             => $product->get_id(),
+			'name'           => $product->get_name(),
+			'slug'           => $product->get_slug(),
+			'price'          => $product->get_price(),
+			'price_html'     => $product->get_price_html(),
+			'regular_price'  => $product->get_regular_price(),
+			'sale_price'     => $product->get_sale_price(),
+			'on_sale'        => $product->is_on_sale(),
+			'is_featured'    => $product->is_featured(),
+			'in_stock'       => $product->is_in_stock(),
+			'stock_status'   => $product->get_stock_status(),
+			'stock_quantity' => $product->get_stock_quantity(),
+			'backorders'     => $product->get_backorders(),
+			'rating'         => $product->get_average_rating(),
+			'review_count'   => $product->get_review_count(),
+			'image'          => wp_get_attachment_image_url( $image_id, 'large' ) ?: wc_placeholder_img_src(),
+			'gallery'        => $gallery,
+			'url'            => $product->get_permalink(),
+			'type'           => $product->get_type(),
+			'sku'            => $product->get_sku(),
+			'categories'     => $categories,
 		);
+
+		if ( $full ) {
+			$data['cross_sell_ids'] = $product->get_cross_sell_ids();
+			$data['up_sell_ids']    = $product->get_upsell_ids();
+		}
 
 		if ( $full ) {
 			$data['description']      = $product->get_description();
@@ -1837,16 +1929,14 @@ class Rest_Controller extends \WP_REST_Controller {
 
 		$product_id = absint( $request->get_param( 'product_id' ) );
 
-		$args = array(
-			'post_type' => 'product',
-			'status'    => 'approve',
+		$comment_query = new \WP_Comment_Query(
+			array(
+				'post_type' => 'product',
+				'status'    => 'approve',
+				'post_id'   => $product_id ?: 0,
+			)
 		);
-
-		if ( $product_id ) {
-			$args['post_id'] = $product_id;
-		}
-
-		$comments = get_comments( $args );
+		$comments = $comment_query->comments;
 		$data     = array();
 
 		foreach ( $comments as $comment ) {
