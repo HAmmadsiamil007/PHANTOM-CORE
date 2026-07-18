@@ -97,7 +97,7 @@
   // Logos
   wp.customize('phantom_general_site_logo', function (value) {
     value.bind(function (newval) {
-      var el = document.querySelector('.navbar-brand img.logo, .header-logo img, img[data-phantom="site_logo"]');
+      var el = document.querySelector('.navbar-brand img.logo, .header-logo img, img[data-phantom="site_logo"], figure.logo img');
       if (el) el.src = newval;
     });
   });
@@ -105,6 +105,22 @@
     value.bind(function (newval) {
       var el = document.querySelector('.footer-logo img');
       if (el) el.src = newval;
+    });
+  });
+
+  // Hero Banner Image
+  wp.customize('phantom_hero_banner_image', function (value) {
+    value.bind(function (newval) {
+      var el = document.querySelector('.banner-img1');
+      if (el) el.src = newval;
+    });
+  });
+
+  // Favicon
+  wp.customize('phantom_branding_favicon', function (value) {
+    value.bind(function (newval) {
+      var link = document.querySelector('link[rel="icon"]');
+      if (link) link.href = newval;
     });
   });
 

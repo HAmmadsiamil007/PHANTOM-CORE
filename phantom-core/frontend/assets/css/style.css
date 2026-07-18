@@ -116,6 +116,40 @@ h6 {
     --bg--light6: #f6f6f6;
 }
 
+/* Semantic color vars (Customizer-controlled) */
+:root {
+    --color-primary: var(--primary--color);
+    --color-secondary: var(--secondary--color);
+    --color-accent: var(--accent--color);
+    --color-text: var(--text--color);
+    --color-heading: var(--text--color2);
+    --color-background: #ffffff;
+    --color-header-bg: #ffffff;
+    --color-footer-bg: #222222;
+    --color-link: #705b53;
+    --color-link-hover: #c19a6b;
+    --color-border: var(--border--color);
+    --color-sale: #e74c3c;
+    --color-light-bg: var(--light--bg--color);
+    --color-grey: var(--grey--color);
+    --color-success: #76a22c;
+    --color-error: #dc3545;
+    --color-warning: #ffc107;
+    --color-info: #17a2b8;
+    --color-gradient-start: var(--pink--color);
+    --color-gradient-end: var(--mango--color);
+    --color-featured-badge: #ff6b35;
+    --color-rating: var(--mango--color);
+    --button-bg: var(--primary--color);
+    --button-text: #ffffff;
+    --button-bg-hover: #5a29a6;
+    --button-text-hover: #ffffff;
+    --button-radius: 4px;
+    --button-padding-y: 12px;
+    --button-padding-x: 24px;
+    --button-font-size: 14px;
+}
+
 .gradient-overlay {
     /* background-image: linear-gradient(to left, var(--pink--color) 0%, var(--mango--color) 100%); */
     background-image: linear-gradient(to left, rgba(244, 202, 95, 0.2) 0%, rgba(244, 192, 254, 0.2) 100%);

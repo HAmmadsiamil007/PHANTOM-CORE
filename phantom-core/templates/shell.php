@@ -146,6 +146,9 @@ class Shell {
 			$html = $this->inject_google_fonts( $html );
 		}
 
+		// Inject custom images (logo, hero banner, favicon)
+		$html = $this->inject_images( $html );
+
 		// Inject Customizer CSS variables for initial page render
 		$html = $this->inject_customizer_css( $html );
 
@@ -342,6 +345,43 @@ class Shell {
         }
         return str_replace( '</head>', '<style id="phantom-customizer-css">:root{' . $css . '}</style></head>', $html );
     }
+
+	private function inject_images( string $html ): string {
+		$options = get_option( 'phantom_options', array() );
+
+		$logo = $options['general_site_logo'] ?? '';
+		if ( '' !== $logo ) {
+			$html = str_replace( 'assets/images/logo.png', esc_url( $logo ), $html );
+		}
+
+		$footer_logo = $options['footer_logo'] ?? '';
+		if ( '' !== $footer_logo ) {
+			$html = str_replace( 'assets/images/footer-logo.png', esc_url( $footer_logo ), $html );
+		}
+
+		$banner_img = $options['hero_banner_image'] ?? '';
+		if ( '' !== $banner_img ) {
+			$html = str_replace( 'assets/images/banner-img1.png', esc_url( $banner_img ), $html );
+		}
+
+		$favicon = $options['branding_favicon'] ?? '';
+		if ( '' !== $favicon ) {
+			$favicon_url = esc_url( $favicon );
+			$html = preg_replace(
+				'/<link[^>]+rel="(?:apple-touch-icon|icon)"[^>]+href="[^"]+"/i',
+				'<link rel="icon" type="image/x-icon" href="' . $favicon_url . '" sizes="32x32"',
+				$html,
+				1
+			);
+		}
+
+		$img2 = $options['home_banner_img1'] ?? '';
+		if ( '' !== $img2 ) {
+			$html = str_replace( 'assets/images/banner-img2.png', esc_url( $img2 ), $html );
+		}
+
+		return $html;
+	}
 
 	private function inject_google_fonts( string $html ): string {
 		$options     = get_option( 'phantom_options', array() );
