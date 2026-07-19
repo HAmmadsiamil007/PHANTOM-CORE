@@ -13,15 +13,16 @@
           var row = $('<div class="ast-color-group-item"></div>');
           var label = $('<label class="ast-color-group-label">' + child.label + '</label>');
           var input = $('<input type="text" class="ast-color-picker" value="' + (child.value || '') + '" />');
-          row.append(label).append(input);
+          var hidden = $('<input type="hidden" data-customize-setting-link="' + child.setting + '" value="' + (child.value || '') + '" />');
+          row.append(label).append(input).append(hidden);
           container.append(row);
 
           input.wpColorPicker({
             change: function () {
-              control.setting.set(input.val());
+              hidden.val(input.val()).trigger('change');
             },
             clear: function () {
-              control.setting.set('');
+              hidden.val('').trigger('change');
             }
           });
         });

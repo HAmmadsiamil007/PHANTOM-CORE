@@ -23,6 +23,10 @@
       fields.find('.ast-bg-color').wpColorPicker({
         change: function () { control.setting.set(collectValue()); }
       });
+
+      fields.on('change', 'input, select', function () {
+        control.setting.set(collectValue());
+      });
     }
   });
 

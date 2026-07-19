@@ -58,11 +58,17 @@ require_once PHANTOM_CORE_PATH . 'includes/class-customizer.php';
 require_once PHANTOM_CORE_PATH . 'includes/class-custom-css.php';
 require_once PHANTOM_CORE_PATH . 'includes/class-phantom-global-palette.php';
 require_once PHANTOM_CORE_PATH . 'includes/class-phantom-version-compatibility.php';
+require_once PHANTOM_CORE_PATH . 'includes/class-phantom-font-families.php';
 require_once PHANTOM_CORE_PATH . 'includes/partial-renderers.php';
 require_once PHANTOM_CORE_PATH . 'includes/custom-css/colors.php';
 require_once PHANTOM_CORE_PATH . 'includes/custom-css/typography.php';
 require_once PHANTOM_CORE_PATH . 'includes/custom-css/header.php';
 require_once PHANTOM_CORE_PATH . 'includes/custom-css/footer.php';
+require_once PHANTOM_CORE_PATH . 'includes/custom-css/layout.php';
+require_once PHANTOM_CORE_PATH . 'includes/custom-css/buttons.php';
+require_once PHANTOM_CORE_PATH . 'includes/custom-css/blog.php';
+require_once PHANTOM_CORE_PATH . 'includes/custom-css/product.php';
+require_once PHANTOM_CORE_PATH . 'includes/custom-css/responsive.php';
 require_once PHANTOM_CORE_PATH . 'admin/class-settings-page.php';
 
 $rest_path = PHANTOM_CORE_PATH . 'includes/class-rest-controller.php';
@@ -78,8 +84,8 @@ if ( file_exists( $settings_page_path ) ) {
 $cache_path = PHANTOM_CORE_PATH . 'includes/Engine/Cache.php';
 if ( file_exists( $cache_path ) ) {
 	require_once $cache_path;
+	\PhantomCore\Engine\Cache::get_instance()->init();
 }
-\PhantomCore\Engine\Cache::get_instance()->init();
 
 $shell_path = PHANTOM_CORE_PATH . 'templates/shell.php';
 if ( file_exists( $shell_path ) ) {
@@ -146,21 +152,7 @@ function phantom_enqueue_google_fonts(): void {
 	$body_font   = $options['typography_body_font'] ?? 'Archivo';
 	$heading_font = $options['typography_heading_font'] ?? 'Playfair Display';
 
-	$fonts = array();
-	if ( $body_font && 'Archivo' !== $body_font ) {
-		$fonts[] = rawurlencode( $body_font ) . ':wght@100;200;300;400;500;600;700;800;900';
-	}
-	if ( $heading_font && 'Playfair Display' !== $heading_font ) {
-		$fonts[] = rawurlencode( $heading_font ) . ':wght@100;200;300;400;500;600;700;800;900';
-	}
-
-	if ( empty( $fonts ) ) {
-		$fonts[] = 'Archivo:wght@100;200;300;400;500;600;700;800;900';
-		$fonts[] = 'Playfair+Display:wght@100;200;300;400;500;600;700;800;900';
-	}
-
-	$family = implode( '&family=', $fonts );
-	$url    = 'https://fonts.googleapis.com/css2?family=' . $family . '&display=swap';
+	$url = \Phantom_Font_Families::instance()->get_font_enqueue_url( $body_font, $heading_font );
 
 	wp_enqueue_style(
 		'phantom-google-fonts',

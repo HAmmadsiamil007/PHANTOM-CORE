@@ -1082,13 +1082,13 @@ div.country-selector>div.list>div.item {
 
 .coming-soon-con {
     flex-grow: 1;
-    min-height: 100vh;
+    min-height: 100dvh;
 }
 
 /* Login Form Page Style  */
 
 .login-form {
-    min-height: 100vh;
+    min-height: 100dvh;
     /* background-image: url(../images/login-signup-bg.png);
     background-repeat: no-repeat;
     background-size: cover;

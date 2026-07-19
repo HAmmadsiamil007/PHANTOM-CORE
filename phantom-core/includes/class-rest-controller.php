@@ -45,6 +45,19 @@ class Rest_Controller extends \WP_REST_Controller {
 
 		register_rest_route(
 			$this->namespace,
+			'/settings/batch',
+			array(
+				array(
+					'methods'             => \WP_REST_Server::CREATABLE,
+					'callback'            => array( $this, 'batch_update_settings' ),
+					'permission_callback' => array( $this, 'settings_permission_check' ),
+					'args'                => $this->get_batch_update_args(),
+				),
+			)
+		);
+
+		register_rest_route(
+			$this->namespace,
 			'/settings/(?P<key>[\w-]+)',
 			array(
 				array(
@@ -88,6 +101,18 @@ class Rest_Controller extends \WP_REST_Controller {
 					'methods'             => \WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_options' ),
 					'permission_callback' => array( $this, 'settings_permission_check' ),
+				),
+			)
+		);
+
+		register_rest_route(
+			$this->namespace,
+			'/options/persistent',
+			array(
+				array(
+					'methods'             => \WP_REST_Server::READABLE,
+					'callback'            => array( $this, 'get_persistent_options' ),
+					'permission_callback' => '__return_true',
 				),
 			)
 		);
@@ -468,6 +493,57 @@ class Rest_Controller extends \WP_REST_Controller {
 		);
 	}
 
+	public function batch_update_settings( \WP_REST_Request $request ): \WP_REST_Response {
+		$items = $request->get_param( 'items' );
+		if ( ! is_array( $items ) || empty( $items ) ) {
+			return new \WP_REST_Response(
+				array(
+					'code'    => 'invalid_items',
+					'message' => __( 'The items parameter must be a non-empty array of {key, value} objects.', 'phantom-core' ),
+				),
+				400
+			);
+		}
+
+		$registry = Settings_Registry::get_instance();
+		$updated  = array();
+		$errors   = array();
+
+		foreach ( $items as $index => $item ) {
+			if ( ! is_array( $item ) || ! isset( $item['key'] ) ) {
+				$errors[] = sprintf(
+					__( 'Item at index %d is missing a key.', 'phantom-core' ),
+					$index
+				);
+				continue;
+			}
+			$key = sanitize_key( $item['key'] );
+			if ( ! $registry->has( $key ) ) {
+				$errors[] = sprintf(
+					/* translators: %s: setting key */
+					__( 'Unknown setting key: %s', 'phantom-core' ),
+					$key
+				);
+				continue;
+			}
+			$value = array_key_exists( 'value', $item ) ? $item['value'] : null;
+			$registry->set( $key, $value );
+			$updated[ $key ] = $registry->get( $key );
+		}
+
+		\PhantomCore\Customizer::get_instance()->sync_options();
+		delete_transient( 'phantom_page_data' );
+		\Phantom_Custom_CSS::flush_cache();
+
+		return new \WP_REST_Response(
+			array(
+				'updated' => $updated,
+				'errors'  => $errors,
+			),
+			empty( $errors ) ? 200 : 207
+		);
+	}
+
 	public function update_setting( \WP_REST_Request $request ): \WP_REST_Response {
 		$key   = sanitize_key( $request->get_param( 'key' ) );
 		$entry = $this->get_entry_or_error( $key );
@@ -546,6 +622,21 @@ class Rest_Controller extends \WP_REST_Controller {
 		foreach ( $entries as $key => $entry ) {
 			$section = $entry['section'] ?? '';
 			if ( in_array( $section, array( 'typography', 'colors', 'buttons', 'layout', 'spacing', 'header', 'footer' ), true ) ) {
+				$options[ $key ] = $registry->get( $key );
+			}
+		}
+
+		return new \WP_REST_Response( $options, 200 );
+	}
+
+	public function get_persistent_options(): \WP_REST_Response {
+		$registry = Settings_Registry::get_instance();
+		$entries  = $registry->get_entries();
+
+		$options = array();
+		foreach ( $entries as $key => $entry ) {
+			$section = $entry['section'] ?? '';
+			if ( in_array( $section, array( 'typography', 'colors', 'buttons', 'layout', 'spacing', 'header', 'footer', 'branding' ), true ) ) {
 				$options[ $key ] = $registry->get( $key );
 			}
 		}
@@ -1834,6 +1925,23 @@ class Rest_Controller extends \WP_REST_Controller {
 				'description' => __( 'Object of key-value pairs to update.', 'phantom-core' ),
 				'type'        => 'object',
 				'required'    => true,
+			),
+		);
+	}
+
+	private function get_batch_update_args(): array {
+		return array(
+			'items' => array(
+				'description' => __( 'Array of {key, value} objects to update.', 'phantom-core' ),
+				'type'        => 'array',
+				'required'    => true,
+				'items'       => array(
+					'type'       => 'object',
+					'properties' => array(
+						'key'   => array( 'type' => 'string' ),
+						'value' => array(),
+					),
+				),
 			),
 		);
 	}

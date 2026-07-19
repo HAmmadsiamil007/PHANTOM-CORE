@@ -4147,6 +4147,13 @@ class Settings_Registry {
 
 	private function section_search(): array {
 		return array(
+			'enable_search'       => array(
+				'label'    => __( 'Enable Search', 'phantom-core' ),
+				'type'     => 'bool',
+				'default'  => true,
+				'section'  => 'search',
+				'priority' => 1,
+			),
 			'search_ajax_enable'  => array(
 				'section'  => 'search',
 				'type'     => 'ast-toggle',

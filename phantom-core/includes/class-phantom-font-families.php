@@ -58,4 +58,28 @@ class Phantom_Font_Families {
 		}
 		return '"' . $font_family . '", sans-serif';
 	}
+
+	public function get_font_enqueue_url( string $body_font = 'Archivo', string $heading_font = 'Playfair Display', array $subsets = array() ): string {
+		$fonts = array();
+		if ( $body_font && 'Archivo' !== $body_font ) {
+			$fonts[] = rawurlencode( $body_font ) . ':wght@100;200;300;400;500;600;700;800;900';
+		}
+		if ( $heading_font && 'Playfair Display' !== $heading_font ) {
+			$fonts[] = rawurlencode( $heading_font ) . ':wght@100;200;300;400;500;600;700;800;900';
+		}
+
+		if ( empty( $fonts ) ) {
+			$fonts[] = 'Archivo:wght@100;200;300;400;500;600;700;800;900';
+			$fonts[] = 'Playfair+Display:wght@100;200;300;400;500;600;700;800;900';
+		}
+
+		$family = implode( '&family=', $fonts );
+		$url    = 'https://fonts.googleapis.com/css2?family=' . $family . '&display=swap';
+
+		if ( ! empty( $subsets ) ) {
+			$url .= '&subset=' . implode( ',', array_map( 'sanitize_text_field', $subsets ) );
+		}
+
+		return $url;
+	}
 }

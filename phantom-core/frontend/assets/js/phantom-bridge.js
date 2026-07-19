@@ -64,16 +64,17 @@
       }
 
       var self = this;
+      var nonce = (window.PhantomData && window.PhantomData.nonce) || (document.querySelector('meta[name="wp-rest-nonce"]') || {}).content || '';
       return fetch('/index.php?rest_route=/phantom/v1/settings/' + encodeURIComponent(key), {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'X-WP-Nonce': nonce },
         body: JSON.stringify({ value: value }),
         credentials: 'same-origin'
       }).then(function (r) {
         if (r.status === 401) {
           return fetch('/index.php?rest_route=/phantom/v1/settings/' + encodeURIComponent(key), {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'X-WP-Nonce': nonce },
             body: JSON.stringify({ value: value }),
             credentials: 'same-origin'
           });
@@ -136,9 +137,10 @@
         if (!changes.hasOwnProperty(key)) continue;
         self._data[key] = changes[key];
       }
+      var nonce = (window.PhantomData && window.PhantomData.nonce) || (document.querySelector('meta[name="wp-rest-nonce"]') || {}).content || '';
       return fetch('/index.php?rest_route=/phantom/v1/settings', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'X-WP-Nonce': nonce },
         body: JSON.stringify({ settings: changes }),
         credentials: 'same-origin'
       }).then(function (r) {

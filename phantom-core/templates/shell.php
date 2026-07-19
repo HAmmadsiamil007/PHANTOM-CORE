@@ -177,6 +177,11 @@ class Shell {
         // Read HTML
         $html = file_get_contents( $html_file );
 
+        // Inject loading state for SPA transitions
+        $loading_html = '<div id="phantom-loading" role="status" aria-hidden="true" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg-color,#fff);z-index:9999;align-items:center;justify-content:center;transition:opacity .3s"><div style="width:40px;height:40px;border:3px solid var(--border-color,#e5e7eb);border-top-color:var(--accent-color,#6366f1);border-radius:50%;animation:phantom-spin .8s linear infinite"></div></div>';
+        $html = preg_replace( '/<body[^>]*>/', '$0' . "\n" . $loading_html, $html, 1 );
+        $html = str_replace( '</head>', '<style id="phantom-loading-css">@keyframes phantom-spin{to{transform:rotate(360deg)}}</style></head>', $html );
+
         // Server-side SEO injection
         $html = $this->inject_seo( $html, $slug, $template );
 
@@ -526,7 +531,8 @@ class Shell {
 			return $html;
 		}
 		$css = $this->minify_css( $css );
-		return str_replace( '</head>', '<style id="phantom-customizer-css">:root{' . $css . '}</style></head>', $html );
+		$extra_css = \Phantom_Custom_CSS::instance()->render_style();
+		return str_replace( '</head>', '<style id="phantom-customizer-css">:root{' . $css . '}</style>' . $extra_css . '</head>', $html );
     }
 
 	private function inject_images( string $html ): string {
@@ -555,6 +561,15 @@ class Shell {
 				'<link rel="icon" type="image/x-icon" href="' . $favicon_url . '" sizes="32x32"',
 				$html,
 				1
+			);
+		}
+
+		if ( false === strpos( $html, 'rel="icon"' ) && false === strpos( $html, "rel='icon'" ) ) {
+			$default_favicon = PHANTOM_CORE_URL . 'frontend/assets/images/favicon.svg';
+			$html = str_replace(
+				'</head>',
+				'<link rel="icon" type="image/svg+xml" href="' . esc_url( $default_favicon ) . '" sizes="any">' . "\n" . '</head>',
+				$html
 			);
 		}
 
