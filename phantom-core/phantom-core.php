@@ -59,7 +59,6 @@ require_once PHANTOM_CORE_PATH . 'includes/class-custom-css.php';
 require_once PHANTOM_CORE_PATH . 'includes/class-phantom-global-palette.php';
 require_once PHANTOM_CORE_PATH . 'includes/class-phantom-version-compatibility.php';
 require_once PHANTOM_CORE_PATH . 'includes/class-phantom-font-families.php';
-require_once PHANTOM_CORE_PATH . 'includes/class-phantom-fonts.php';
 require_once PHANTOM_CORE_PATH . 'includes/class-phantom-webfont-loader.php';
 require_once PHANTOM_CORE_PATH . 'includes/partial-renderers.php';
 require_once PHANTOM_CORE_PATH . 'includes/custom-css/colors.php';

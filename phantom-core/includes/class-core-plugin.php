@@ -23,7 +23,6 @@ class Plugin {
 		$this->register_nav_menus();
 		$this->register_widget_areas();
 		\Phantom_Global_Palette::instance()->init();
-		\Phantom_Custom_CSS::instance();
 		do_action( 'phantom_core/init' );
 	}
 

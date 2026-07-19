@@ -637,8 +637,12 @@ class Shell {
 		$css_url = PHANTOM_CORE_URL . 'frontend/assets/css/phantom-editor.css?v=' . $ver;
 		$editor_css = '<link rel="stylesheet" id="phantom-editor-css" href="' . esc_url( $css_url ) . '" media="all" />';
 
-		// Add body class for JS detection
-		$html = preg_replace( '/<body(\s[^>]*)?>/', '<body class="phantom-editor-enabled"$1>', $html, 1 );
+		// Add body class for JS detection — append to existing class or add new
+		if ( preg_match( '/<body\s+class="([^"]*)"/', $html ) ) {
+			$html = preg_replace( '/(<body\s+class=")([^"]*)(")/', '$1$2 phantom-editor-enabled$3', $html, 1 );
+		} else {
+			$html = preg_replace( '/<body(\s[^>]*)?>/', '<body class="phantom-editor-enabled"$1>', $html, 1 );
+		}
 
 		// REST API nonce for PUT/DELETE requests
 		$nonce = wp_create_nonce( 'wp_rest' );
@@ -679,10 +683,10 @@ class Shell {
 		$heading_font = $options['typography_heading_font'] ?? 'Playfair Display';
 
 		$fonts = array();
-		if ( 'Archivo' !== $body_font ) {
+		if ( $body_font ) {
 			$fonts[] = rawurlencode( $body_font ) . ':wght@100;200;300;400;500;600;700;800;900';
 		}
-		if ( 'Playfair Display' !== $heading_font ) {
+		if ( $heading_font ) {
 			$fonts[] = rawurlencode( $heading_font ) . ':wght@100;200;300;400;500;600;700;800;900';
 		}
 

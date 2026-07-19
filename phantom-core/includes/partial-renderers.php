@@ -10,26 +10,19 @@
 defined( 'ABSPATH' ) || exit;
 
 function phantom_render_header_partial(): void {
-	get_template_part( 'template-parts/header/layout' );
+	echo '<div class="phantom-partial-header">' . esc_html__( 'Header', 'phantom-core' ) . '</div>';
 }
 
 function phantom_render_footer_partial(): void {
-	get_template_part( 'template-parts/footer/layout' );
+	echo '<div class="phantom-partial-footer">' . esc_html__( 'Footer', 'phantom-core' ) . '</div>';
 }
 
 function phantom_render_blog_partial(): void {
-	if ( have_posts() ) {
-		while ( have_posts() ) {
-			the_post();
-			get_template_part( 'template-parts/blog/content', get_post_format() );
-		}
-	} else {
-		get_template_part( 'template-parts/blog/content', 'none' );
-	}
+	echo '<div class="phantom-partial-blog">' . esc_html__( 'Blog posts will appear here.', 'phantom-core' ) . '</div>';
 }
 
 function phantom_render_search_partial(): void {
-	get_template_part( 'template-parts/search/results' );
+	echo '<div class="phantom-partial-search">' . esc_html__( 'Search results will appear here.', 'phantom-core' ) . '</div>';
 }
 
 function phantom_render_nav_partial(): void {
