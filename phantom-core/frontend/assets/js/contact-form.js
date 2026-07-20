@@ -24,9 +24,9 @@ $(function () {
 		});
 		submitSignupFormNow = function (e) {
 			var t = e.serialize();
-			var apiUrl = (window.phantomData && window.phantomData.rest_url) ? window.phantomData.rest_url.replace(/\/+$/, '') : '/wp-json';
+			var apiUrl = (window.phantomData && window.phantomData.rest_url) ? window.phantomData.rest_url.replace(/\/+$/, '') : (window.wpApiSettings && window.wpApiSettings.root ? window.wpApiSettings.root.replace(/\/+$/, '') + '/phantom/v1' : '/index.php?rest_route=/phantom/v1');
 			$.ajax({
-				url: apiUrl + '/phantom/v1/contact',
+				url: apiUrl + '/contact',
 				type: "POST",
 				data: t,
 				dataType: "json",

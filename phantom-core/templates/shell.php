@@ -587,6 +587,8 @@ class Shell {
 		$favicon = $options['branding_favicon'] ?? '';
 		if ( '' !== $favicon ) {
 			$favicon_url = esc_url( $favicon );
+			// Dynamic copyright year
+			$html = preg_replace( '/\b2025\b/', date( 'Y' ), $html );
 			$html = preg_replace(
 				'/<link[^>]+rel="(?:apple-touch-icon|icon)"[^>]+href="[^"]+"/i',
 				'<link rel="icon" type="image/x-icon" href="' . $favicon_url . '" sizes="32x32"',
@@ -684,6 +686,7 @@ class Shell {
 		}
 		$data['_cssVarMap'] = $css_map;
 		$data['plugin_url'] = PHANTOM_CORE_URL;
+		$data['site_name']    = get_bloginfo( 'name' );
 		$data['can_edit']     = is_user_logged_in() && current_user_can( 'edit_theme_options' );
 		$data['api_nonce']     = wp_create_nonce( 'phantom_api' );
 		$data['auth_nonce']    = wp_create_nonce( 'phantom_auth' );

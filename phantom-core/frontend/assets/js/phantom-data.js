@@ -482,7 +482,8 @@
       el.setAttribute('aria-label', 'Product details');
     }
 
-    document.title = (p.name || 'Product') + ' | Claudia';
+    var siteName = (window.phantomData && window.phantomData.name) || (window.PhantomData && window.PhantomData.site_name) || 'Claudia';
+    document.title = (p.name || 'Product') + ' | ' + siteName;
 
     // Name
     const nameEl = el.querySelector('.heading4.archivo-font');
@@ -1403,7 +1404,8 @@
       const el = document.querySelector('[data-phantom-post]');
       if (!el) return;
 
-      document.title = (p.title || '') + ' | Claudia Kids Collection';
+      var siteName = (window.phantomData && window.phantomData.name) || (window.PhantomData && window.PhantomData.site_name) || 'Claudia';
+      document.title = (p.title || '') + ' | ' + siteName;
 
       // Title
       const titleEl = el.querySelector('.content1 h4, .news-heading, .blog-detail-heading, h2, h1');

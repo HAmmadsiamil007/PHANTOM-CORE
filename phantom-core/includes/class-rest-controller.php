@@ -1033,9 +1033,16 @@ class Rest_Controller extends \WP_REST_Controller {
 		$slug = sanitize_title( $request->get_param( 'slug' ) );
 		$post = get_page_by_path( $slug, OBJECT, 'post' );
 
+		if ( $post && 'publish' !== $post->post_status ) {
+			$post = null;
+		}
+
 		// Fallback: try numeric ID
 		if ( ! $post && is_numeric( $slug ) ) {
 			$post = get_post( (int) $slug );
+			if ( $post && 'publish' !== $post->post_status ) {
+				$post = null;
+			}
 		}
 
 		if ( ! $post ) {
@@ -1081,6 +1088,10 @@ class Rest_Controller extends \WP_REST_Controller {
 	public function get_page_by_slug( \WP_REST_Request $request ): \WP_REST_Response {
 		$slug = sanitize_title( $request->get_param( 'slug' ) );
 		$page = get_page_by_path( $slug, OBJECT, 'page' );
+
+		if ( $page && 'publish' !== $page->post_status ) {
+			$page = null;
+		}
 
 		if ( ! $page ) {
 			return $this->wp_error( 'not_found', __( 'Page not found.', 'phantom-core' ), 404 );
@@ -1510,7 +1521,7 @@ class Rest_Controller extends \WP_REST_Controller {
 		$id      = absint( $request->get_param( 'id' ) );
 		$product = wc_get_product( $id );
 
-		if ( ! $product ) {
+		if ( ! $product || 'publish' !== $product->get_status() ) {
 			return $this->wp_error( 'not_found', __( 'Product not found.', 'phantom-core' ), 404 );
 		}
 
@@ -2305,13 +2316,11 @@ class Rest_Controller extends \WP_REST_Controller {
 				'description'       => __( 'Minimum price filter.', 'phantom-core' ),
 				'type'              => 'number',
 				'sanitize_callback' => 'floatval',
-				'default'           => 0,
 			),
 			'max_price' => array(
 				'description'       => __( 'Maximum price filter.', 'phantom-core' ),
 				'type'              => 'number',
 				'sanitize_callback' => 'floatval',
-				'default'           => 0,
 			),
 			'on_sale' => array(
 				'description'       => __( 'Filter products on sale.', 'phantom-core' ),
