@@ -153,6 +153,7 @@ class Customizer {
 					}
 					$wp_customize->add_setting( $setting_id, array(
 						'default'           => $default,
+						'type'              => 'option',
 						'sanitize_callback' => $this->get_sanitize_callback( $entry ),
 						'transport'         => $this->get_transport( $key, $entry ),
 						'capability'        => 'edit_theme_options',

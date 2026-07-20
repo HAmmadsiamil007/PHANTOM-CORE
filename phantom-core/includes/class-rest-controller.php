@@ -322,6 +322,16 @@ class Rest_Controller extends \WP_REST_Controller {
 							'required'          => false,
 							'type'              => 'object',
 							'default'           => array(),
+							'sanitize_callback' => function ( $value ) {
+								if ( ! is_array( $value ) ) {
+									return array();
+								}
+								$sanitized = array();
+								foreach ( $value as $key => $val ) {
+									$sanitized[ sanitize_key( $key ) ] = sanitize_text_field( (string) $val );
+								}
+								return $sanitized;
+							},
 						),
 					),
 				),
@@ -455,6 +465,12 @@ class Rest_Controller extends \WP_REST_Controller {
 					'callback'            => array( $this, 'get_woo_reviews' ),
 					'permission_callback' => '__return_true',
 					'args'                => $this->get_woo_reviews_args(),
+				),
+				array(
+					'methods'             => \WP_REST_Server::CREATABLE,
+					'callback'            => array( $this, 'submit_woo_review' ),
+					'permission_callback' => function () { return is_user_logged_in(); },
+					'args'                => $this->get_submit_review_args(),
 				),
 			)
 		);
@@ -2635,6 +2651,84 @@ class Rest_Controller extends \WP_REST_Controller {
 		$response->header( 'X-WP-TotalPages', (string) (int) ceil( $total / $per_page ) );
 		$this->set_cache_headers( $response, 600 );
 		return $response;
+	}
+
+	public function submit_woo_review( \WP_REST_Request $request ): \WP_REST_Response|\WP_Error {
+		if ( ! function_exists( 'wc_get_product' ) ) {
+			return $this->wp_error( 'woocommerce_inactive', __( 'WooCommerce is not active.', 'phantom-core' ), 400 );
+		}
+		$product_id    = absint( $request->get_param( 'product_id' ) );
+		$reviewer      = sanitize_text_field( $request->get_param( 'reviewer' ) );
+		$reviewer_email = sanitize_email( $request->get_param( 'reviewer_email' ) );
+		$review_text   = sanitize_textarea_field( $request->get_param( 'review' ) );
+		$rating        = absint( $request->get_param( 'rating' ) );
+
+		if ( ! $product_id || ! wc_get_product( $product_id ) ) {
+			return $this->wp_error( 'invalid_product', __( 'Invalid product.', 'phantom-core' ), 400 );
+		}
+		if ( ! $reviewer || ! $reviewer_email || ! $review_text ) {
+			return $this->wp_error( 'missing_fields', __( 'Reviewer name, email, and review text are required.', 'phantom-core' ), 400 );
+		}
+		if ( $rating < 1 || $rating > 5 ) {
+			return $this->wp_error( 'invalid_rating', __( 'Rating must be between 1 and 5.', 'phantom-core' ), 400 );
+		}
+
+		$comment_data = array(
+			'comment_post_ID'      => $product_id,
+			'comment_author'       => $reviewer,
+			'comment_author_email' => $reviewer_email,
+			'comment_content'      => $review_text,
+			'comment_type'         => 'review',
+			'comment_approved'     => wc_review_is_moderated() ? 0 : 1,
+		);
+		$comment_id = wp_insert_comment( $comment_data );
+		if ( ! $comment_id ) {
+			return $this->wp_error( 'review_failed', __( 'Failed to submit review.', 'phantom-core' ), 500 );
+		}
+		update_comment_meta( $comment_id, 'rating', $rating );
+
+		return new \WP_REST_Response(
+			array( 'id' => $comment_id, 'message' => __( 'Review submitted.', 'phantom-core' ) ),
+			201
+		);
+	}
+
+	private function get_submit_review_args(): array {
+		return array(
+			'product_id'     => array(
+				'description'       => __( 'Product ID.', 'phantom-core' ),
+				'type'              => 'integer',
+				'required'          => true,
+				'sanitize_callback' => 'absint',
+			),
+			'reviewer'       => array(
+				'description'       => __( 'Reviewer name.', 'phantom-core' ),
+				'type'              => 'string',
+				'required'          => true,
+				'sanitize_callback' => 'sanitize_text_field',
+			),
+			'reviewer_email' => array(
+				'description'       => __( 'Reviewer email.', 'phantom-core' ),
+				'type'              => 'string',
+				'format'            => 'email',
+				'required'          => true,
+				'sanitize_callback' => 'sanitize_email',
+			),
+			'review'         => array(
+				'description'       => __( 'Review text.', 'phantom-core' ),
+				'type'              => 'string',
+				'required'          => true,
+				'sanitize_callback' => 'sanitize_textarea_field',
+			),
+			'rating'         => array(
+				'description'       => __( 'Rating 1-5.', 'phantom-core' ),
+				'type'              => 'integer',
+				'required'          => true,
+				'minimum'           => 1,
+				'maximum'           => 5,
+				'sanitize_callback' => 'absint',
+			),
+		);
 	}
 
 	private function get_woo_variations_args(): array {

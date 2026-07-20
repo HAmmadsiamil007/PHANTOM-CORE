@@ -7,9 +7,9 @@
 | WordPress Core | 100+ | WP native (Users, Posts, Pages, Media, etc.) |
 | WooCommerce | 250+ | WC native admin |
 | Phantom Theme Settings | **555 settings** | Customizer + Admin Page + REST API |
-| Customizer Panels | 14 panels, 49 sections | `/wp-admin/customize.php` |
+| Customizer Panels | 15 panels, 44 sections | `/wp-admin/customize.php` |
 | Admin Page Tabs | 15 tabs | `/wp-admin/themes.php?page=phantom-core-settings` |
-| CSS Custom Properties | 65 design tokens | Injected as `<style id="phantom-customizer-css">` |
+| CSS Custom Properties | 90 design tokens | Injected as `<style id="phantom-customizer-css">` |
 | REST Endpoints | 34 routes | `/wp-json/phantom/v1` |
 | **Total Controls** | **~900+** | Three independent access paths |
 
@@ -20,7 +20,7 @@
 ### Method 1: WordPress Customizer (Visual)
 **URL:** `/wp-admin/customize.php`
 
-14 Panels with 49 sections. Best for visual editing with live preview.
+15 Panels with 44 sections. Best for visual editing with live preview.
 
 **Live preview works for:**
 - ✅ All `color` type settings → instant update via `postMessage`
@@ -153,44 +153,56 @@ container_width    → --container--width
 button_radius      → --button--radius
 ```
 
-### Complete 65 CSS Variable Map
+### Complete 90 CSS Variable Map
 
 | Group | Count | Vars |
 |-------|-------|------|
-| Header | 10 | `--header--bg`, `--header--text`, `--header--padding`, `--header--padding--x`, `--header--padding--y`, `--header--fullwidth`, `--sticky--header`, `--header--height`, `--header--transparent`, `--submenu--width` |
-| Navigation | 2 | `--menu--font--size`, `--menu--font--weight` |
+| Container | 3 | `--container--width`, `--content--width`, `--sidebar--width` |
+| General | 9 | `--layout--columns`, `--boxed--width`, `--gap`, `--column--gap`, `--row--gap`, `--section--pad--y`, `--section--pad--x`, `--container--gutter`, `--field--outline` |
+| Typography | 17 | `--font--body`, `--font--body--weight`, `--font--heading`, `--font--heading--weight`, `--base--font--size`, `--body--line--height`, `--letter--spacing`, `--text--case`, `--typography--h1--size`...`--typography--h6--size`, `--typography--h1--height`...`--typography--h6--height` |
+| Colors | 12 | `--primary--color`, `--secondary--color`, `--accent--color`, `--text--color`, `--heading--color`, `--bg--color`, `--link--color`, `--link--hover--color`, `--border--color`, `--sale--color`, `--info--color`, `--featured--badge--color` |
+| Gradients | 2 | `--gradient--start--color`, `--gradient--end--color` |
+| Header | 10 | `--header--bg`, `--header--text`, `--header--padding`, `--header--padding--x`, `--header--padding--y`, `--header--fullwidth`, `--sticky--header`, `--header--height`, `--header--mobile--height`, `--header--border--width` |
+| Navigation | 4 | `--menu--font--size`, `--menu--font--weight`, `--nav--menu--height`, `--nav--submenu--width` |
+| Hero | 5 | `--hero--height`, `--hero--overlay--color`, `--hero--overlay--opacity`, `--hero--bg`, `--hero--text` |
 | Footer | 5 | `--footer--bg`, `--footer--text`, `--footer--padding`, `--footer--fullwidth`, `--footer--heading` |
-| Typography | 8 | `--heading--font`, `--body--font`, `--base--font--size`, `--heading--font--weight`, `--body--font--weight`, `--body--line--height`, `--letter--spacing`, `--text--case` |
-| Colors | 12 | `--primary--color`, `--secondary--color`, `--accent--color`, `--text--color`, `--heading--color`, `--bg--color`, `--header--bg--color`, `--footer--bg--color`, `--link--color`, `--link--hover--color`, `--border--color`, `--sale--color` |
 | Buttons | 8 | `--btn--bg`, `--btn--text`, `--btn--hover--bg`, `--btn--hover--text`, `--border--radius`, `--btn--pad--y`, `--btn--pad--x`, `--btn--font--size` |
 | Forms | 2 | `--input--radius`, `--input--height` |
-| Spacing | 6 | `--section--pad--y`, `--section--pad--x`, `--gap`, `--column--gap`, `--row--gap` |
-| Layout | 5 | `--container--width`, `--boxed--width`, `--content--width`, `--sidebar--width`, `--columns` |
-| Responsive | 4 | breakpoint vars (mobile, tablet, desktop) |
-| Announcement | 2 | `--announcement--bg`, `--announcement--text--color` |
-| Misc | 1 | `--custom--css` |
+| Announcement | 3 | `--announcement--bg`, `--announcement--text--color`, `--announcement--enable` |
+| Product | 5 | `--product--card--bg`, `--product--sale--badge--bg`, `--product--featured--badge--bg`, `--product--image--radius`, `--product--card--gap` |
+| Preloader | 3 | `--preloader--bg`, `--preloader--color`, `--preloader--enable` |
+| Misc | 3 | `--custom--css`, `--woo--button--bg`, `--woo--button--text` |
 
-### 22 Numeric PX Keys
+### 43 Numeric PX Keys
 These get `px` appended automatically:
 ```
-header-padding, header-padding-y, header-padding-x, header-height,
-submenu-width, menu-font-size, base-font-size, button-radius,
-button-padding-y, button-padding-x, button-font-size, input-radius,
-input-height, section-padding-y, section-padding-x, gap,
-column-gap, row-gap, container-width, boxed-width,
-content-width, sidebar-width
+button-padding-x, button-padding-y, button-radius,
+header-padding-x, header-padding-y, header-border-width,
+header-mobile-height, header-height, container-width, content-width,
+sidebar-width, breakpoint-xl, breakpoint-lg, breakpoint-md, breakpoint-sm,
+section-padding-x, section-padding-y, menu-font-size, button-font-size,
+widget-spacing, container-gutter, content-gap, element-margin-bottom,
+home-section-spacing, typography-base-size, typography-body-spacing,
+typography-heading-spacing, typography-h1-size, typography-h1-height,
+typography-h2-size, typography-h2-height, typography-h3-size,
+typography-h3-height, typography-h4-size, typography-h4-height,
+typography-h5-size, typography-h5-height, typography-h6-size,
+typography-h6-height, form-input-height, layout-columns,
+nav-menu-height, nav-submenu-width
 ```
 
 ### ⚠️ CSS Var Map Duplication
 
-The CSS var maps and px key lists are duplicated in 2 files:
+The CSS var maps and px key lists are centralized in one file:
 
-| File | Method | What's Duplicated |
-|------|--------|-------------------|
-| `includes/class-customizer.php` | `get_css_var_map()` (~line 460) | 65 var-to-setting mappings |
-| `templates/shell.php` | `inject_css_variables()` (~line 676) | 65 var mappings + 22 px keys |
+| File | Method | What's Defined |
+|------|--------|----------------|
+| `includes/class-settings-registry.php` | `get_css_var_map()` (~line 208) | 90 var-to-setting mappings |
+| `includes/class-settings-registry.php` | `get_px_keys()` (~line 309) | 43 px keys |
+| `includes/class-customizer.php` | `get_css_var_map()` | 90 var mappings (duplicate from registry) |
+| `includes/class-custom-css.php` | CSS generation | Consumes the registry's var maps |
 
-**Any CSS var change must be applied in BOTH files.** There is no shared source of truth.
+**If adding a CSS var, add to `class-settings-registry.php` first**, then sync `class-customizer.php`. The custom-css engine automatically picks up registry changes.
 
 ---
 

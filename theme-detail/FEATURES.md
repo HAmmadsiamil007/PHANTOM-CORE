@@ -221,7 +221,7 @@ Each page type has its own settings section:
 
 ---
 
-## 5. Customizer Panels (14 panels, 49 sections)
+## 5. Customizer Panels (15 panels, 44 sections)
 
 | Panel | Sections | Live Preview |
 |-------|----------|-------------|
@@ -249,8 +249,8 @@ WordPress Core:     ████████████████████
 WooCommerce:        ██████████████░░░░░░  70% (basic, missing attributes/variations)
 Theme Settings:     ██████████████░░░░░░  70% (555 settings, gaps in premium features)
 Customizer:         ██████████████░░░░░░  70% (well structured, limited live preview)
-CSS Variables:      ██████████████████░░  85% (65 vars, all verified working)
-Live Preview:       █████░░░░░░░░░░░░░░░  40% (only colors + 7 hero settings postMessage)
+CSS Variables:      ████████████████████  95% (90 vars, all verified working)
+Live Preview:       █████░░░░░░░░░░░░░░░  40% (colors via postMessage, most require refresh)
 Accessibility:      ██████░░░░░░░░░░░░░░  30% (minimal)
 Animations:         ██████░░░░░░░░░░░░░░  30% (basic loader only)
 Performance:        ██████░░░░░░░░░░░░░░  30% (basic toggles)

@@ -12,7 +12,7 @@ PHP Backend (NEVER change this)
   │
   ├─ Shell.php: Routes URL → Loads HTML template
   │     ├─ Matches URL to internal route
-  │     ├─ Injects 65 CSS vars as <style>
+  │     ├─ Injects 90 CSS vars as <style>
   │     ├─ Injects SEO meta tags
   │     ├─ Injects phantomData JS config object
   │     ├─ Injects phantom-data.js
@@ -22,7 +22,7 @@ PHP Backend (NEVER change this)
   │     └─ 34 endpoints: settings, menus, products, posts, cart, auth
   │
   └─ class-customizer.php: CSS var generation
-        └─ 65 CSS vars injected into every page
+        └─ 90 CSS vars injected into every page
 
 Frontend (100% replaceable)
   │
@@ -286,7 +286,7 @@ console.log(window.phantomData.rest_url);
 - [ ] Show current templates in `frontend/`
 - [ ] List all `data-phantom` attributes and their types
 - [ ] Map all 34 REST API endpoints
-- [ ] Note all 65 CSS var usages in CSS files
+- [ ] Note all 90 CSS var usages in CSS files
 - [ ] Identify hardcoded vs dynamic content
 
 ### Phase 2: Build New Templates

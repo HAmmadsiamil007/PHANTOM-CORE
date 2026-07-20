@@ -1,4 +1,4 @@
-$(function () {
+jQuery(function ($) {
     $('.popup-vimeo').magnificPopup({
         disableOn: 700,
         type: 'iframe',
@@ -8,13 +8,3 @@ $(function () {
         fixedContentPos: false
     });
 });
-
-// $(function () {
-//     $('.popup-youtube').magnificPopup({
-//         type: 'iframe',
-//         mainClass: 'mfp-fade',
-//         removalDelay: 160,
-//         preloader: false,
-//         fixedContentPos: false
-//     });
-// });

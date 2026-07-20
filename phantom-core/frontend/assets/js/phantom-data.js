@@ -333,7 +333,7 @@
       delSpan.appendChild(del);
       priceDiv.appendChild(delSpan);
     } else {
-      priceDiv.textContent = stripHtml(priceHtml);
+      priceDiv.innerHTML = priceHtml;
     }
     textWrapper.appendChild(priceDiv);
     content.appendChild(textWrapper);
@@ -482,7 +482,7 @@
       el.setAttribute('aria-label', 'Product details');
     }
 
-    var siteName = (window.phantomData && window.phantomData.name) || (window.PhantomData && window.PhantomData.site_name) || 'Claudia';
+    var siteName = (window.phantomData && window.phantomData.name) || (window.PhantomData && window.PhantomData.site_name) || 'Site';
     document.title = (p.name || 'Product') + ' | ' + siteName;
 
     // Name
@@ -536,7 +536,7 @@
     if (skuEl) skuEl.textContent = p.sku || 'N/A';
 
     const catEl = el.querySelector('.guranted-safe-checkout .safe-types div:nth-child(2) .d-inline-block.font-weight-600');
-    if (catEl) catEl.textContent = (p.categories || []).join(', ') || 'N/A';
+    if (catEl) catEl.textContent = (p.categories || []).map(function(c){ return c.name || c; }).join(', ') || 'N/A';
 
     // Add to cart button
     const atcBtn = el.querySelector('.quatity_button_wrapper a.primary_btn');
@@ -1268,6 +1268,7 @@
       if (btn) btn.textContent = 'Processing...';
 
       fetch('/?wc-ajax=checkout', { method: 'POST', credentials: 'same-origin', body: fd }).then(function (r) {
+        if (!r.ok) throw new Error('Checkout request failed: ' + r.status);
         return r.json();
       }).then(function (data) {
         if (btn) btn.textContent = 'Next';
@@ -1292,6 +1293,7 @@
   function initShipping() {
     var shippingList = document.getElementById('shipping-methods-list');
     if (!shippingList) return;
+    var savedMethod = sessionStorage.getItem('phantom_shipping_method');
     fetchJSON('/cart/shipping-methods', { method: 'POST' }).then(function (data) {
       if (!data || !data.methods || data.methods.length === 0) {
         shippingList.innerHTML = '<p>No shipping methods available.</p>';
@@ -1306,10 +1308,11 @@
         radio.name = 'shipping_method';
         radio.value = method.id;
         radio.className = 'shipping-method-radio';
-        if (method.id === data.selected) {
+        if (savedMethod === method.id || (method.id === data.selected && savedMethod !== method.id)) {
           radio.checked = true;
         }
         radio.addEventListener('change', function () {
+          sessionStorage.setItem('phantom_shipping_method', this.value);
           injectCheckoutSummary();
         });
         label.appendChild(radio);
@@ -1404,7 +1407,7 @@
       const el = document.querySelector('[data-phantom-post]');
       if (!el) return;
 
-      var siteName = (window.phantomData && window.phantomData.name) || (window.PhantomData && window.PhantomData.site_name) || 'Claudia';
+      var siteName = (window.phantomData && window.phantomData.name) || (window.PhantomData && window.PhantomData.site_name) || 'Site';
       document.title = (p.title || '') + ' | ' + siteName;
 
       // Title

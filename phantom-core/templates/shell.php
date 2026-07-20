@@ -141,7 +141,7 @@ class Shell {
         if ( preg_match( '/^product\/(.+)$/', $slug, $matches ) ) {
             $this->is_product_page = true;
             $template = 'product-detail.html';
-            $product_slug = sanitize_title( $matches[1] );
+            $product_slug = sanitize_title( urldecode( $matches[1] ) );
             $product_query = new \WP_Query( array(
                 'name'             => $product_slug,
                 'post_type'        => 'product',
@@ -163,7 +163,7 @@ class Shell {
         // Handle post detail pages
         elseif ( preg_match( '/^blog\/(.+)$/', $slug, $matches ) ) {
             $template = 'single-blog.html';
-            $post_slug = sanitize_title( $matches[1] );
+            $post_slug = sanitize_title( urldecode( $matches[1] ) );
             $post_query = new \WP_Query( array(
                 'name'             => $post_slug,
                 'post_type'        => 'post',
@@ -285,6 +285,9 @@ class Shell {
 
         // Security headers
         header( 'Content-Type: text/html; charset=UTF-8' );
+        if ( ! $is_customizer_preview && is_ssl() ) {
+            header( 'Strict-Transport-Security: max-age=31536000; includeSubDomains' );
+        }
         if ( ! $is_customizer_preview ) {
             header( "Content-Security-Policy: default-src 'self' https: data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' https: data:; font-src 'self' https:; connect-src 'self' https:; frame-src 'self' https:;" );
         } else {
@@ -543,7 +546,7 @@ class Shell {
 
         // WooCommerce nonces for AJAX cart/checkout
         if ( function_exists( 'wp_create_nonce' ) ) {
-            $wc_nonce = wp_create_nonce( 'wc_store_api' );
+            $wc_nonce = wp_create_nonce( 'woocommerce-process_checkout' );
             $meta .= sprintf( '<meta name="wc-nonce" content="%s" />', esc_attr( $wc_nonce ) );
         }
 

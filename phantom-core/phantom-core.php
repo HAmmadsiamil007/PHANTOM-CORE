@@ -6,6 +6,8 @@
  * Version:           1.5.0
  * Requires at least: 6.4
  * Requires PHP:      8.1
+ * WC requires at least: 9.0
+ * WC tested up to:      9.5
  * Author:            Phantom
  * Text Domain:       phantom-core
  * Domain Path:       /languages
@@ -19,16 +21,18 @@ namespace PhantomCore;
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'PHANTOM_CORE_VERSION', '1.5.0' );
+define( 'PHANTOM_CORE_VERSION', '1.5.1' );
 define( 'PHANTOM_CORE_FILE', __FILE__ );
 define( 'PHANTOM_CORE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'PHANTOM_CORE_URL', plugin_dir_url( __FILE__ ) );
 
-load_plugin_textdomain(
-	'phantom-core',
-	false,
-	dirname( plugin_basename( __FILE__ ) ) . '/languages'
-);
+add_action( 'init', function (): void {
+	load_plugin_textdomain(
+		'phantom-core',
+		false,
+		dirname( plugin_basename( __FILE__ ) ) . '/languages'
+	);
+} );
 
 spl_autoload_register(
 	function ( string $class ): void {
@@ -124,6 +128,7 @@ add_action(
 			add_theme_support( 'wc-product-gallery-lightbox' );
 			add_theme_support( 'wc-product-gallery-slider' );
 		}
+		add_theme_support( 'post-thumbnails' );
 	},
 	10
 );
@@ -157,6 +162,11 @@ register_deactivation_hook(
 	function (): void {
 		flush_rewrite_rules();
 	}
+);
+
+register_uninstall_hook(
+	__FILE__,
+	'PhantomCore\\phantom_uninstall'
 );
 
 add_action( 'admin_notices', function () {
@@ -246,3 +256,20 @@ add_filter( 'woocommerce_locate_template', function ( string $template, string $
 	}
 	return $template;
 }, 10, 3 );
+
+/**
+ * Clean up plugin data on uninstall.
+ */
+function phantom_uninstall(): void {
+	$options = array(
+		'phantom_core_settings',
+		'phantom_core_version',
+		'phantom_customizer_css',
+		'theme_mods_phantom',
+		'phantom_font_families',
+		'phantom_webfonts_loader',
+	);
+	foreach ( $options as $option ) {
+		delete_option( $option );
+	}
+}

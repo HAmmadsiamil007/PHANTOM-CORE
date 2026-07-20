@@ -32,12 +32,12 @@ Phantom Core is a **decoupled WordPress framework** that replaces the traditiona
                     │  ┌─────▼──────────────────▼────────┐   │
                     │  │     Shell SPA Router             │   │
                     │  │  template_redirect · 31 routes   │   │
-                    │  │  SEO · 65 CSS vars · Security    │   │
+                    │  │  SEO · 90 CSS vars · Security    │   │
                     │  └────────────────┬─────────────────┘   │
                     │                   │                     │
                     │  ┌────────────────▼─────────────────┐   │
                     │  │    Customizer · CSS Engine       │   │
-                    │  │  14 panels · 49 sections         │   │
+                    │  │  15 panels · 44 sections         │   │
                     │  │  13 controls · 8 CSS modules     │   │
                     │  └──────────────────────────────────┘   │
                     └────────────────────────────────────────────────┘
@@ -48,7 +48,7 @@ Phantom Core is a **decoupled WordPress framework** that replaces the traditiona
                     │  31 Static HTML Templates                      │
                     │  phantom-data.js (REST consumer)               │
                     │  Swup.js (SPA transitions)                     │
-                    │  65 CSS custom properties                      │
+                    │  90 CSS custom properties                      │
                     └────────────────────────────────────────────────┘
 ```
 
@@ -62,13 +62,13 @@ Phantom Core is a **decoupled WordPress framework** that replaces the traditiona
 | Settings | **555** (44 sections) |
 | REST Routes | **34** under `phantom/v1` |
 | HTML Templates | **31** |
-| Customizer | **14 panels**, **49 sections** |
+| Customizer | **15 panels**, **44 sections** |
 | Custom Controls | **13** |
-| CSS Modules | **8** (65 CSS vars) |
+| CSS Modules | **8** (90 CSS vars) |
 | PHP Files | **38** (12,506 lines) |
 | Frontend JS | **24** files (7,815 lines) |
-| PHPUnit Tests | **23** (4,206 assertions) |
-| Backend Health | **98/100** |
+| PHPUnit Tests | **23** (4,464 assertions) |
+| Backend Health | **100/100** |
 | Security | **100/100** |
 | WooCommerce | Full integration |
 
