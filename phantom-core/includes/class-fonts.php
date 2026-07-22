@@ -53,13 +53,16 @@ class Fonts {
 		return $map;
 	}
 
-	public function get_enqueue_url( string $body_font = 'Archivo', string $heading_font = 'Playfair Display' ): string {
+	public function get_enqueue_url( $fonts = array() ): string {
 		$options = get_option( 'phantom_options', array() );
 		$subsets = array();
 		if ( ! empty( $options['font_subset'] ) && is_array( $options['font_subset'] ) ) {
 			$subsets = array_map( 'sanitize_text_field', $options['font_subset'] );
 		}
-		return \Phantom_Font_Families::instance()->get_font_enqueue_url( $body_font, $heading_font, $subsets );
+		if ( is_string( $fonts ) ) {
+			$fonts = func_num_args() > 1 ? array( $fonts, func_get_arg( 1 ) ) : array( $fonts );
+		}
+		return \Phantom_Font_Families::instance()->get_font_enqueue_url( $fonts, $subsets );
 	}
 
 	public function get_local_fonts(): array {

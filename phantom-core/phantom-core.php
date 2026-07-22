@@ -184,11 +184,27 @@ add_action( 'admin_notices', function () {
  * Enqueue Google Fonts based on selected typography settings.
  */
 function phantom_enqueue_google_fonts(): void {
-	$options     = get_option( 'phantom_options', array() );
-	$body_font   = $options['typography_body_font'] ?? 'Archivo';
-	$heading_font = $options['typography_heading_font'] ?? 'Playfair Display';
+	$options = get_option( 'phantom_options', array() );
+	$fonts   = array();
 
-	$url = \Phantom_Font_Families::instance()->get_font_enqueue_url( $body_font, $heading_font );
+	$fonts[] = $options['typography_body_font'] ?? 'Archivo';
+
+	$heading_font = $options['typography_heading_font'] ?? '';
+	if ( '' !== $heading_font ) {
+		$fonts[] = $heading_font;
+	}
+
+	$headings = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' );
+	foreach ( $headings as $h ) {
+		$key = 'typography_' . $h . '_font';
+		if ( ! empty( $options[ $key ] ) ) {
+			$fonts[] = $options[ $key ];
+		}
+	}
+
+	$fonts = array_unique( array_filter( $fonts ) );
+
+	$url = \Phantom_Font_Families::instance()->get_font_enqueue_url( $fonts );
 
 	wp_enqueue_style(
 		'phantom-google-fonts',
