@@ -10,9 +10,18 @@
 (function (root) {
   'use strict';
 
+  function needsPx(key) {
+    return bridge._cssVarPxKeys && bridge._cssVarPxKeys.indexOf(key) !== -1;
+  }
+
+  function addPx(value) {
+    return /^\d+(\.\d+)?$/.test(String(value)) ? String(value) + 'px' : String(value);
+  }
+
   var bridge = {
     _data: {},
     _cssVarMap: {},
+    _cssVarPxKeys: [],
     _listeners: {},
     _styleEl: null,
     _initialized: false,
@@ -27,6 +36,7 @@
       opts = opts || {};
       var data = root.PhantomData || opts.data || {};
       this._cssVarMap = opts.cssVarMap || data._cssVarMap || {};
+      this._cssVarPxKeys = opts.cssVarPxKeys || data._cssVarPxKeys || [];
 
       this._data = {};
       for (var key in data) {
@@ -48,7 +58,8 @@
         if (!cssVars.hasOwnProperty(key)) continue;
         var val = this._data[key];
         if (val === undefined || val === null) continue;
-        rootEl.style.setProperty(cssVars[key], String(val));
+        var cssVal = needsPx(key) ? addPx(val) : String(val);
+        rootEl.style.setProperty(cssVars[key], cssVal);
       }
 
       var existing = document.getElementById('phantom-bridge-style');
@@ -66,7 +77,8 @@
 
       var cssVar = this._cssVarMap[key];
       if (cssVar) {
-        document.documentElement.style.setProperty(cssVar, String(value));
+        var cssVal = needsPx(key) ? addPx(value) : String(value);
+        document.documentElement.style.setProperty(cssVar, cssVal);
       }
 
       var self = this;

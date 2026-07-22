@@ -3,7 +3,7 @@
  * Plugin Name:       Phantom Core Framework
  * Plugin URI:        https://phantom.test
  * Description:       Core REST API layer for Phantom — settings registry, theme options, customizer, import/export, caching. Backend only — no frontend code.
- * Version:           1.5.1
+ * Version:           1.5.3
  * Requires at least: 6.4
  * Requires PHP:      7.4
  * WC requires at least: 9.0
@@ -21,7 +21,7 @@ namespace PhantomCore;
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'PHANTOM_CORE_VERSION', '1.5.2' );
+define( 'PHANTOM_CORE_VERSION', '1.5.3' );
 define( 'PHANTOM_CORE_FILE', __FILE__ );
 define( 'PHANTOM_CORE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'PHANTOM_CORE_URL', plugin_dir_url( __FILE__ ) );

@@ -621,6 +621,7 @@ class Shell {
 	private function inject_bridge( string $html ): string {
 		$entries = Settings_Registry::get_instance()->get_entries();
 		$css_map = Settings_Registry::get_instance()->get_css_var_map();
+		$all_px_keys = Settings_Registry::get_px_keys();
 
 		$data = array();
 		$prefix = 'phantom_';
@@ -629,6 +630,7 @@ class Shell {
 			$data[ $key ] = get_option( $option_key, $entry['default'] ?? '' );
 		}
 		$data['_cssVarMap'] = $css_map;
+		$data['_cssVarPxKeys'] = array_values( array_intersect( $all_px_keys, array_keys( $css_map ) ) );
 		$data['plugin_url'] = PHANTOM_CORE_URL;
 		$data['site_name']    = get_bloginfo( 'name' );
 		$data['can_edit']     = is_user_logged_in() && current_user_can( 'edit_theme_options' );

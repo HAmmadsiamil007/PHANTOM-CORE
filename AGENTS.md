@@ -1,7 +1,7 @@
 # Phantom Core Framework — Agent Instructions
 
 ## Project State
-- **Version**: 1.5.0
+- **Version**: 1.5.3
 - **Plugin**: `phantom-core` — decoupled WordPress framework with static HTML SPA architecture
 - **Settings**: 555 across 44 sections
 - **Customizer**: 15 panels, 25+ sections, 13 custom control types
