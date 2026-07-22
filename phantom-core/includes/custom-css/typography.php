@@ -74,15 +74,15 @@ add_filter(
 
 			$spacing = get_option( 'phantom_' . $prefix . 'spacing', '' );
 			if ( '' === $spacing ) {
-				$spacing = get_option( 'phantom_typography_heading_spacing', '0' );
+				$spacing = get_option( 'phantom_typography_heading_spacing', 0 );
 			}
 			if ( isset( $map[ $prefix . 'spacing' ] ) ) {
 				$output .= "\t" . $map[ $prefix . 'spacing' ] . ': ' . esc_attr( floatval( $spacing ) ) . "px;\n";
 			}
 
 			if ( isset( $map[ $prefix . 'case' ] ) ) {
-				$case = get_option( 'phantom_' . $prefix . 'case', 'none' );
-				if ( 'none' === $case || '' === $case ) {
+				$case = get_option( 'phantom_' . $prefix . 'case', '' );
+				if ( '' === $case ) {
 					$case = get_option( 'phantom_typography_heading_case', 'none' );
 				}
 				$output .= "\t" . $map[ $prefix . 'case' ] . ': ' . esc_attr( $case ) . ";\n";

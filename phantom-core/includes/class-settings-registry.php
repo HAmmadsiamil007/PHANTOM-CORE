@@ -3097,8 +3097,8 @@ class Settings_Registry {
 	private function section_typography(): array {
 		$font_families = \PhantomCore\Fonts::instance()->get_all_fonts();
 		$inherit_fonts = array( '' => '— Inherit —' ) + $font_families;
-		$weights = array(
-			''   => '— Inherit —',
+		$weights_inherit = array(
+			''    => '— Inherit —',
 			'100' => '100 Thin',
 			'200' => '200 Extra Light',
 			'300' => '300 Light',
@@ -3108,6 +3108,24 @@ class Settings_Registry {
 			'700' => '700 Bold',
 			'800' => '800 Extra Bold',
 			'900' => '900 Black',
+		);
+		$weights = array(
+			'100' => '100 Thin',
+			'200' => '200 Extra Light',
+			'300' => '300 Light',
+			'400' => '400 Regular',
+			'500' => '500 Medium',
+			'600' => '600 Semi Bold',
+			'700' => '700 Bold',
+			'800' => '800 Extra Bold',
+			'900' => '900 Black',
+		);
+		$cases_inherit = array(
+			''           => '— Inherit —',
+			'none'       => 'None',
+			'uppercase'  => 'Uppercase',
+			'capitalize' => 'Capitalize',
+			'lowercase'  => 'Lowercase',
 		);
 		$cases = array(
 			'none'       => 'None',
@@ -3253,7 +3271,7 @@ class Settings_Registry {
 				'section' => 'typography',
 				'type'    => 'select',
 				'default' => '',
-				'choices' => $weights,
+				'choices' => $weights_inherit,
 				'sanitize' => 'sanitize_text_field',
 				'label'   => __( $label . ' Font Weight', 'phantom-core' ),
 			);
@@ -3268,7 +3286,7 @@ class Settings_Registry {
 			$settings[ 'typography_' . $h . '_spacing' ] = array(
 				'section' => 'typography',
 				'type'    => 'float',
-				'default' => 0,
+				'default' => '',
 				'min'     => -5,
 				'max'     => 20,
 				'step'    => 0.5,
@@ -3278,8 +3296,8 @@ class Settings_Registry {
 			$settings[ 'typography_' . $h . '_case' ] = array(
 				'section' => 'typography',
 				'type'    => 'select',
-				'default' => 'none',
-				'choices' => $cases,
+				'default' => '',
+				'choices' => $cases_inherit,
 				'sanitize' => 'sanitize_text_field',
 				'label'   => __( $label . ' Text Case', 'phantom-core' ),
 			);
